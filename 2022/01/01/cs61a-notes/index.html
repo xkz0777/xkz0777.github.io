@@ -1,0 +1,2419 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="CS61A Notes, xkz">
+    <meta name="description" content="Notes for taking the course CS61A su20">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>CS61A Notes | xkz</title>
+    <link rel="icon" type="image/jpeg" href="/dog.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+   <style>
+    body{
+       background-image: url(/medias/background2.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/favicon.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">xkz</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/favicon.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">xkz</div>
+        <div class="logo-desc">
+            
+            xkz&#39;s blog
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/cs61a_notes.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">CS61A Notes</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Python/">
+                                <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Python/" class="post-category">
+                                Python
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-01-01
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-01-30
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    7.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    45 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1>CS61A Notes</h1>
+<p>This is my notes for <a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61a/su20/">CS61A su20</a>(Also the first blog in 2022!).</p>
+<p>Still updating…</p>
+<h1>CS61A Notes</h1>
+<h2 id="Docstring">Docstring</h2>
+<p>A docstring is a string literal that occurs as the first statement in a module, function, class, or method definition. Such a docstring becomes the <code>__doc__</code> attribute of that object.</p>
+<ul>
+<li>The doc string line should begin with a capital letter and end with a period.</li>
+<li>The first line should be a short description (summary).</li>
+<li>If there are more lines in the documentation string, <strong>the second line should be blank, visually separating the summary from the rest of the description.</strong></li>
+<li>The following lines should be one or more paragraphs describing the object’s calling conventions, its side effects, etc.</li>
+</ul>
+<p>There is a plugin called <code>Python Docstring Generator</code> that can generate docstring templates.</p>
+<h2 id="Command-Line-Options">Command Line Options</h2>
+<p><code>-i</code>: The <code>-i</code> option runs your Python script, then opens an interactive session. In an interactive session, you run Python code line by line and get immediate feedback instead of running an entire file all at once.</p>
+<p><code>-m doctest &lt;filename&gt;</code>: Runs doctests <strong>in a particular file</strong>. Doctests are surrounded by triple quotes (<code>"""</code>) within functions. <code>-v</code> shows the details.</p>
+<h2 id="About-ok">About ok</h2>
+<p>In 61A, we use a program called Ok for autograding labs, homeworks, and projects.</p>
+<p><code>python3 ok -q &lt;function&gt;</code> is a way to test a single function in this course. We can add <code>-i</code> option to open an interactive terminal to investigate a failing test for question.</p>
+<p>The best way to look at an environment diagram to investigate a failing test for question is to add <code>--trace</code> option</p>
+<p>To prevent the ok autograder from interpreting print statements as output, print with ‘DEBUG:’ at the front of the outputted line.</p>
+<h2 id="Expressions-and-Statements-in-Python">Expressions and Statements in Python</h2>
+<p>A sequence of <strong>operands and operators</strong>, like <code>a + b - 5</code>, is called an expression. Expression will be evaluated by the Python interpreter.</p>
+<h3 id="Primitive-expressions">Primitive expressions</h3>
+<p>A primitive expression requires only a single evaluation step.  Literals, such as numbers and strings, evaluate to themselves. Names require a single lookup step.</p>
+<h3 id="Arithmetic-expressions">Arithmetic expressions</h3>
+<p>Arithmetic expressions in Python are very similar to ones we’ve seen in other math contexts.</p>
+<h3 id="Assignment-statements">Assignment statements</h3>
+<p>An assignment statement assigns a certain value to a variable name.</p>
+<p>To execute an assignment statement:</p>
+<ol>
+<li>Evaluate the expression on the right-hand-side of the statement to obtain a value.</li>
+<li>Write the variable name and the expression’s value in the current frame.</li>
+</ol>
+<h3 id="Logical-Expression">Logical Expression</h3>
+<p>In Python, only <code>False</code>, <code>0</code>, <code>''</code>, <code>None</code> are considered as <code>False</code> in Python. Anything else is considered to be <code>True</code>.</p>
+<p>Python includes the boolean operators <code>and</code>, <code>or</code>, and <code>not</code>. These operatorsare used to combine and manipulate boolean values.</p>
+<p><code>and</code> evaluates expressions in order and <strong>stops evaluating (short-circuits) once it reaches the first false value, and then returns it.</strong> If all values evaluate to a true value, the last value is returned.</p>
+<p><code>or</code> short-circuits at the first true value and returns it. If all values evaluate toa false value, the last value is returned.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token number">2</span> <span class="token keyword">and</span> <span class="token number">3</span>
+<span class="token number">3</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">or</span> <span class="token number">999</span>
+<span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="def-Statements">def Statements</h3>
+<p>def statements <strong>create function objects and bind them to a name</strong>. To diagram def statements, record the function name and bind the function object to the name. It’s also important to write the <strong>parent frame of the function,</strong> which is <strong>where the function is defined.</strong></p>
+<h3 id="Call-expressions">Call expressions</h3>
+<p>Call expressions, such as <code>square(2)</code>, apply functions to arguments. When executing call expressions, we <strong>create a new frame</strong> in our diagram to keep track of local variables:</p>
+<ol>
+<li>
+<p>Evaluate the <strong>operator</strong>, which should <strong>evaluate to a function</strong>.</p>
+</li>
+<li>
+<p>Evaluate the operands <strong>from left to right</strong>. (Unlike assignment statement)</p>
+</li>
+<li>
+<p>Draw a new frame, labelling it with the following:</p>
+<ul>
+<li>
+<p>A unique index (f1, f2, f3, …)</p>
+</li>
+<li>
+<p>The intrinsic name of the function, which is the name of the function object itself. For example, if the function object is func square(x) [parent=Global], the intrinsic name is square.</p>
+</li>
+<li>
+<p>The parent frame ([parent=Global])</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Bind the formal parameters to the argument values obtained in step 2 (e.g. bind x to 3).</p>
+</li>
+<li>
+<p>Evaluate the body of the function in this new frame until a return value is obtained. Write down the return value in the frame.</p>
+</li>
+</ol>
+<p>If a function does not have a return value, it <strong>implicitly returns None</strong>. In that case, the “Return value” box should contain None.</p>
+<h3 id="Lambda-expressions">Lambda expressions</h3>
+<p>A lambda expression <strong>evaluates to a function</strong>, called a lambda function. For example, <code>lambda y:  x + y</code> is a lambda expression, and can be read as a function that takes in one parameter <code>y</code> and returns <code>x + y</code>. A lambda expression by itself evaluates to a function but <strong>does not bind it to a name</strong>. Also note that the return expression of this function is not evaluated until the lambda is called. This is similar to how defining a new function using a def statement does not execute the function’s body until it is later called.</p>
+<h2 id="Higher-Order-Function">Higher Order Function</h2>
+<p>Higher-order-function is a function that takes in another function as argument or returns a function. We can implement a general function like this:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">improve</span><span class="token punctuation">(</span>update<span class="token punctuation">,</span> close<span class="token punctuation">,</span> guess<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">while</span> <span class="token keyword">not</span> close<span class="token punctuation">(</span>guess<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        guess <span class="token operator">=</span> update<span class="token punctuation">(</span>guess<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> guess<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>This <code>improve</code> function is a general expression of <strong>repetitive refinement</strong>. It doesn’t specify what problem is being solved: those details are left to the <code>update</code> and <code>close</code> functions passed in as arguments.</p>
+<p>We can use this function to compute the golden ratio. The golden ratio, often called “phi”, can be computed by repeatedly summing the inverse of any positive number with 1, and that it is one less than its square.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">approx_eq</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> tolerance<span class="token operator">=</span><span class="token number">1e-15</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token builtin">abs</span><span class="token punctuation">(</span>x <span class="token operator">-</span> y<span class="token punctuation">)</span> <span class="token operator">&lt;</span> tolerance
+    
+<span class="token keyword">def</span> <span class="token function">golden_close</span><span class="token punctuation">(</span>guess<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> approx_eq<span class="token punctuation">(</span>guess <span class="token operator">*</span> guess<span class="token punctuation">,</span> guess <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">golden_update</span><span class="token punctuation">(</span>guess<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    &gt;&gt;&gt; improve(golden_update, golden_close)
+    1.6180339887498951
+    '''</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token operator">/</span>guess <span class="token operator">+</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Newton’s method:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">newton_update</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> df<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">return</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x <span class="token operator">-</span> f<span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">/</span> df<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">find_zero</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> df<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    near_zero <span class="token operator">=</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> approx_eq<span class="token punctuation">(</span>f<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> improve<span class="token punctuation">(</span>newton_update<span class="token punctuation">(</span>f<span class="token punctuation">,</span> df<span class="token punctuation">)</span><span class="token punctuation">,</span> near_zero<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>The reason why we define the function <code>near_zero</code> inside <code>find_zero</code> is to make it compatible with improve. Because the <code>close</code> argument is supposed to take in only one argument.</p>
+<p>Now we can calculate the nth root:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">nth_root</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    &gt;&gt;&gt; nth_root(3, 8)
+    2.0
+    '''</span>
+    f <span class="token operator">=</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> <span class="token builtin">pow</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> n<span class="token punctuation">)</span>
+    df <span class="token operator">=</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> n <span class="token operator">*</span> <span class="token builtin">pow</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> find_zero<span class="token punctuation">(</span>f<span class="token punctuation">,</span> df<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>One important application of HOFs is converting a function that takes multiple arguments into a chain of functions that each take a single argument. This is known as <code>currying</code>. For example, the function below converts the pow function into its curried form:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">curried_pow</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">h</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token builtin">pow</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Self-Reference">Self Reference</h2>
+<p>An interesting consequence of the way environment work is that a function can refer to its own name within its body. For example:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">print_sum</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">add_next</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> print_sum<span class="token punctuation">(</span>x <span class="token operator">+</span> y<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> add_next<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Every time function <code>print_sum</code> being called, it will return <code>add_next</code>, in which x memorizes the previous sum. When <code>add_next</code> is looking for the value of x, it will look up to its parent frame, which is a feature of closure.</p>
+<h2 id="Closure">Closure</h2>
+<p>In programming languages, a closure, also lexical closure(词法闭包) or function closure(函数闭包), is a technique for implementing lexically scoped name binding in a language with <strong>first-class functions</strong>. Operationally, a closure is a record <strong>storing a function together with an environment</strong>. The environment is a mapping <strong>associating each free variable of the function (variables that are used locally, but defined in an enclosing scope)</strong> with the value or reference to which the name was bound when the closure was created. Unlike a plain function, a closure allows the function to access those captured variables <strong>through the closure’s copies of their values or references</strong>, even when the function is invoked outside their scope.</p>
+<h2 id="Difference-between-eval-and-exec">Difference between <code>eval</code> and <code>exec</code></h2>
+<p><code>eval</code> accepts <strong>only a single expression</strong>, <code>exec</code> <strong>can take a code block</strong> that has Python statements: loops, try: except:, class and function/method definitions and so on.</p>
+<p><strong>An expression in Python is whatever you can have as the value in a variable assignment</strong>:</p>
+<p><code>a_variable = (anything you can put within these parentheses is an expression)</code></p>
+<p><code>eval</code> <strong>returns the value of the given expression</strong>, whereas <code>exec</code> ignores the return value from its code, and <strong>always returns None</strong>.</p>
+<h2 id="Recursion">Recursion</h2>
+<p>An interesting example from the lecture:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">cascade</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> n <span class="token operator">&gt;=</span> <span class="token number">10</span><span class="token punctuation">:</span>
+        cascade<span class="token punctuation">(</span>n<span class="token operator">//</span><span class="token number">10</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+        
+<span class="token keyword">def</span> <span class="token function">inverse_cascade</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    grow<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+    shrink<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">f_then_g</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> g<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> n<span class="token punctuation">:</span>
+        f<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+        g<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+
+grow <span class="token operator">=</span> <span class="token keyword">lambda</span> n<span class="token punctuation">:</span> f_then_g<span class="token punctuation">(</span>grow<span class="token punctuation">,</span> <span class="token keyword">print</span><span class="token punctuation">,</span> n <span class="token operator">//</span> <span class="token number">10</span><span class="token punctuation">)</span>
+shrink <span class="token operator">=</span> <span class="token keyword">lambda</span> n<span class="token punctuation">:</span> f_then_g<span class="token punctuation">(</span><span class="token keyword">print</span><span class="token punctuation">,</span> shrink<span class="token punctuation">,</span> n <span class="token operator">//</span> <span class="token number">10</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>When using recursion, we should avoid redundancy. For example, in hw04, function <code>min_depth</code> is defined as follow:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">min_depth</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""A simple function to return the distance between t's root and its closest leaf"""</span>
+    <span class="token keyword">if</span> is_leaf<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token number">0</span> <span class="token comment"># Base case---the distance between a node and itself is zero</span>
+    h <span class="token operator">=</span> <span class="token builtin">float</span><span class="token punctuation">(</span><span class="token string">'inf'</span><span class="token punctuation">)</span> <span class="token comment"># Python's version of infinity</span>
+    <span class="token keyword">for</span> b <span class="token keyword">in</span> branches<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> is_leaf<span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token number">1</span> <span class="token comment"># !!!</span>
+        h <span class="token operator">=</span> <span class="token builtin">min</span><span class="token punctuation">(</span>h<span class="token punctuation">,</span> <span class="token number">1</span> <span class="token operator">+</span> min_depth<span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>It still works without the line flagged with <code>!!!</code>, so we’d better remove this line to eliminate redundancy.</p>
+<p>The example above is called arms-length recursion. Arms-length recursion is not only redundant but often complicates our code and obscures the functionality of recursive functions, making writing recursive functions much more difficult. We always want our recursive case to be handling one and only one recursive level. We may or may not be checking your code periodically for things like this.</p>
+<h3 id="Tree-Recursion">Tree Recursion</h3>
+<p>Tree recursion appears whenever executing the body of a recursive function makes more than one recursive call. Tree recursion can be very time-consuming for it can be highly repetitive. Memoization is an extremely useful technique for speeding up the running time.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">memo</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    cached <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token keyword">def</span> <span class="token function">memoized</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> args <span class="token keyword">not</span> <span class="token keyword">in</span> cache<span class="token punctuation">:</span>
+        	cache<span class="token punctuation">[</span>args<span class="token punctuation">]</span> <span class="token operator">=</span> f<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> cache<span class="token punctuation">[</span>args<span class="token punctuation">]</span>
+
+    <span class="token keyword">return</span> memoized<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>The special syntax <code>*args</code> in function definitions is used to pass a variable number of arguments to a function. <code>**kwargs</code> has a similar effect. Look at the following examples to see how they differ.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    Add the arguments and return the summation
+
+    Returns:
+        Summation of arguments
+        
+    &gt;&gt;&gt; add(1, 2, 3)
+    Data type of argument: &lt;class 'tuple'&gt;
+    6
+    '''</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Data type of argument:"</span><span class="token punctuation">,</span> <span class="token builtin">type</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">intro</span><span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    Print out introduction of a person
+    
+    &gt;&gt;&gt; intro(Firstname="Charles", Lastname="Wood", Age=22, Phone="+861008611")
+    Data type of argument: &lt;class 'dict'&gt;
+    Firstname is Charles
+    Lastname is Wood
+    Age is 22
+    Phone is +861008611
+    '''</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Data type of argument:"</span><span class="token punctuation">,</span> <span class="token builtin">type</span><span class="token punctuation">(</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> key<span class="token punctuation">,</span> value <span class="token keyword">in</span> kwargs<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"{} is {}"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>The parameter name does not have to be args or kwargs.</p>
+<h2 id="List">List</h2>
+<h3 id="Sequence-Unpacking">Sequence Unpacking</h3>
+<p>We have a nested list <code>pair</code>:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">pairs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>we can do:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> x<span class="token punctuation">,</span> y <span class="token keyword">in</span> pairs<span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="List-Comprehension">List Comprehension</h3>
+<p>Syntax:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token punctuation">[</span><span class="token operator">&lt;</span><span class="token builtin">map</span> exp<span class="token operator">&gt;</span> <span class="token keyword">for</span> <span class="token operator">&lt;</span>name<span class="token operator">&gt;</span> <span class="token keyword">in</span> <span class="token operator">&lt;</span><span class="token builtin">iter</span> exp<span class="token operator">&gt;</span> <span class="token keyword">if</span> <span class="token operator">&lt;</span><span class="token builtin">filter</span> exp<span class="token operator">&gt;</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Pay attention to the square brackets!</p>
+<h3 id="Slicing">Slicing</h3>
+<p>Slicing will create a new list, so when we need to copy a list <code>lst</code>, we can use <code>lst[:]</code> or <code>list(lst)</code>.</p>
+<p>When the slicing index is out of bound of list, it won’t cause any trouble. Instead we’ll get an empty list. (Unlike element selection, which will throw an IndexError)</p>
+<h3 id="Zip">Zip</h3>
+<p>The <code>zip()</code> function returns a <strong>zip object</strong>, which is an iterator of tuples where the first item in each passed iterator is paired together, and then the second item in each passed iterator are paired together etc.</p>
+<p>If the passed iterators have different lengths, the iterator <strong>with the least items decides the length</strong> of the new iterator.</p>
+<h2 id="Debugging">Debugging</h2>
+<h3 id="assersion">assersion</h3>
+<p>Use assersion when you know a good invariant, which check that code meets an existing understanding.</p>
+<p>Syntax: <code>assert &lt;exp&gt;, 'Something goes wrong'</code></p>
+<h3 id="Doctest-Print-debugging-and-Interactive-debugging">Doctest, Print debugging and Interactive debugging</h3>
+<p>Introduced before.</p>
+<h3 id="Error-Types">Error Types</h3>
+<ul>
+<li>
+<p>SyntaxError</p>
+</li>
+<li>
+<p>IndentationError</p>
+</li>
+<li>
+<p>TypeError</p>
+<p>xxx object is not callable: accidentally called a non-function as if it were a function.</p>
+<p>NoneType: forgot return statement in a function</p>
+</li>
+<li>
+<p>NameError or UnboundLocalError</p>
+<p>A typo in the name in the description</p>
+<p>Or Maybe shadowed a variable from the global frame in a local frame:</p>
+  <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">return</span> x <span class="token operator">**</span> <span class="token number">2</span>
+
+<span class="token keyword">def</span> <span class="token function">g</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	y <span class="token operator">=</span> f<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+	<span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+		<span class="token keyword">return</span> y <span class="token operator">+</span> x
+	<span class="token keyword">return</span> f<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h3 id="Tracebacks">Tracebacks</h3>
+<p>Components:</p>
+<ol>
+<li>The error message itself</li>
+<li>Lines #s on the way to the error</li>
+<li>What’s on those lines</li>
+</ol>
+<p>Most recent call is at the bottom. Look at each line, bottom to top and see which one might be causing the error.</p>
+<h2 id="Trees">Trees</h2>
+<h3 id="Abstraction">Abstraction</h3>
+<h4 id="Recursive-description-wooden-trees">Recursive description (wooden trees)</h4>
+<ul>
+<li>A tree has a root and a list of branches.</li>
+<li>Each branch is a tree.</li>
+<li>A tree with zero branches is called a leaf.</li>
+</ul>
+<h4 id="Relative-description-family-trees">Relative description (family trees)</h4>
+<ul>
+<li>Each location in a tree is called a node.</li>
+<li>Each node has a label value.</li>
+<li>One node can be the parent/child of another.</li>
+</ul>
+<h3 id="Implementation">Implementation</h3>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">tree</span><span class="token punctuation">(</span>label<span class="token punctuation">,</span> branches<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+	&gt;&gt;&gt; tree(3, [tree(1), tree(2, [tree(1), tree(1)])])
+	[3, [1], [2, [1], [1]]]
+    '''</span>
+    <span class="token keyword">for</span> branch <span class="token keyword">in</span> branches<span class="token punctuation">:</span>
+		<span class="token keyword">assert</span> is_tree<span class="token punctuation">(</span>branch<span class="token punctuation">)</span>
+	<span class="token keyword">return</span> <span class="token punctuation">[</span>label<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token builtin">list</span><span class="token punctuation">(</span>branches<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">label</span><span class="token punctuation">(</span>tree<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> tree<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">branches</span><span class="token punctuation">(</span>tree<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> tree<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">is_tree</span><span class="token punctuation">(</span>tree<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">if</span> <span class="token builtin">type</span><span class="token punctuation">(</span>tree<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token builtin">list</span> <span class="token keyword">or</span> <span class="token builtin">len</span><span class="token punctuation">(</span>tree<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">:</span>
+		<span class="token keyword">return</span> <span class="token boolean">False</span>
+	<span class="token keyword">for</span> branch <span class="token keyword">in</span> branches<span class="token punctuation">(</span>tree<span class="token punctuation">)</span><span class="token punctuation">:</span>
+		<span class="token keyword">if</span> <span class="token keyword">not</span> is_tree<span class="token punctuation">(</span>branch<span class="token punctuation">)</span><span class="token punctuation">:</span>
+			<span class="token keyword">return</span> <span class="token boolean">False</span>
+	<span class="token keyword">return</span> <span class="token boolean">True</span>
+
+<span class="token keyword">def</span> <span class="token function">is_leaf</span><span class="token punctuation">(</span>tree<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">return</span> <span class="token keyword">not</span> branches<span class="token punctuation">(</span>tree<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Tree-Processing">Tree Processing</h3>
+<p>We often use recursion to process a tree. Processing a leaf is often the base case of a tree processing function. The recursive case typically makes a recursive call on each branch, then aggregates.</p>
+<p>Several built-in functions take iterable arguments and aggregate them into a value.</p>
+<ul>
+<li>
+<p><code>sum(iterable[, start]) -&gt; value</code></p>
+<p>start has default value 0. Note that iterable doesn’t have to be iterators. Lists and tuples are also iterable.</p>
+</li>
+<li>
+<p><code>max(iterable[, key=func]) -&gt; value</code></p>
+</li>
+<li>
+<p><code>max(a, b, c, ...[, key=func]) -&gt; value</code></p>
+<p>With a single iterable argument, return its largest item.</p>
+<p>With two or more arguments, return the largest argument.</p>
+</li>
+<li>
+<p><code>all(iterable) -&gt; bool</code></p>
+<p>Return True if bool(x) is True for all values x in the iterable. If the iterable is empty, return True.</p>
+<p><code>min</code>, <code>any(iterable) -&gt; bool</code> has similar function.</p>
+</li>
+</ul>
+<p>For example:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">count_leaves</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token triple-quoted-string string">'''Count the leaves of a tree.'''</span>
+	<span class="token keyword">if</span> is_leaf<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+		<span class="token keyword">return</span> <span class="token number">1</span>
+	<span class="token keyword">else</span><span class="token punctuation">:</span>
+		<span class="token keyword">return</span> <span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">[</span>count_leaves<span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token keyword">for</span> b <span class="token keyword">in</span> branches<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>A function that creates a tree from another tree is typically also recursive</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">increment_leaves</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token triple-quoted-string string">'''Return a tree like t but with leaf values incremented.'''</span>
+	<span class="token keyword">if</span> is_leaf<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+		<span class="token keyword">return</span> tree<span class="token punctuation">(</span>label<span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token keyword">else</span><span class="token punctuation">:</span>
+		bs <span class="token operator">=</span> <span class="token punctuation">[</span>increment_leaves<span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token keyword">for</span> b <span class="token keyword">in</span> branches<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">]</span>
+		<span class="token keyword">return</span> tree<span class="token punctuation">(</span>label<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">,</span> bs<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">increment</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token triple-quoted-string string">'''Return a tree like t but with all node values incremented.'''</span>
+	<span class="token keyword">return</span> tree<span class="token punctuation">(</span>label<span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>increment<span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token keyword">for</span> b <span class="token keyword">in</span> branches<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><code>increment</code> doesn’t have a base case, but it still works because when <code>t</code> is a leaf, <code>branches(t)</code> will be an empty list (slicing index out of range) and the recursion will stop automatically.</p>
+<h2 id="Mutation">Mutation</h2>
+<h3 id="Tuples">Tuples</h3>
+<p>Tuples are Immutable Sequences, Immutable values are protected from mutation.</p>
+<p>An immutable sequence may still change if it contains a mutable value as an element. For example:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">s <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span>  <span class="token comment"># Error</span>
+s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span>  <span class="token comment"># Ok</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="Sameness-and-Change">Sameness and Change</h3>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span>
+b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span>
+a <span class="token operator">==</span> b  <span class="token comment"># True (Equality, a and b evaluates to equal values)</span>
+a <span class="token keyword">is</span> b  <span class="token comment"># False</span>
+a <span class="token operator">=</span> b
+a <span class="token keyword">is</span> b  <span class="token comment"># True (Identity, a and b evaluates to the same object)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Mutable-Default-Arguments-are-Dangerous">Mutable Default Arguments are Dangerous</h3>
+<p>A default argument value is part of a function value, not generated by a call:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>s<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+	s<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+	<span class="token keyword">return</span> <span class="token builtin">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+
+f<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 1</span>
+f<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 2</span>
+f<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<img src="../../../Courses/Online/CS61A/images/CS61A Notes/image-20220122115819577.png" alt="image-20220122115819577" style="zoom:50%;">
+<h3 id="Nonlocal-Statements">Nonlocal Statements</h3>
+<p>Syntax: <code>nonlocal &lt;name&gt;</code></p>
+<p>Effect: Future assignments to that name change its pre-existing binding in the first non-local frame of the current environment in which that name is bound.</p>
+<p>Names listed in a nonlocal statement <strong>must refer to pre-existing bindings in an enclosing scope.</strong></p>
+<p>Names listed in a nonlocal statement <strong>must not collide with pre-existing bindings in the local scope.</strong></p>
+<p><strong>Mutable values can be changed without a nonlocal statement.</strong></p>
+<h2 id="Iterators-and-Generators">Iterators and Generators</h2>
+<h3 id="Iterators">Iterators</h3>
+<p>A container can provide an iterator that provides access to its elements in order.</p>
+<p><code>iter(iterable)</code>: Return an iterator over the elements of an iterable value.</p>
+<p><code>next(iterator):</code> Return the next element in an iterator.</p>
+<h4 id="Views-of-a-Dictionary">Views of a Dictionary</h4>
+<p>A dictionary, its keys, its values, and its items are all iterable values.</p>
+<p>An <strong>iterable value</strong> is any value that <strong>can be passed to iter</strong> to produce an iterator.</p>
+<p>An iterator is returned from iter and can be passed to next; all iterators are mutable.</p>
+<p><strong>The order of items in a dictionary is the order in which they were added</strong> (Python 3.6+)</p>
+<p>Historically, items appeared in an arbitrary order (Python 3.5 and earlier).</p>
+<p>An dictionary object has methods <code>keys</code>, <code>values</code> and <code>items</code>. We can use them to iterate through a dictionary.</p>
+<h4 id="Built-in-Functions-for-Iteration">Built-in Functions for Iteration</h4>
+<p>Many built-in Python sequence operations return iterators that <strong>compute results lazily</strong>.</p>
+<ul>
+<li><code>map(func, iterable)</code>: Iterate over func(x) for x in iterable</li>
+<li><code>filter(func, iterable)</code>: Iterate over x in iterable if func(x)</li>
+<li><code>zip(first_iter, second_iter)</code>: Iterate over co-indexed (x, y) pairs</li>
+<li><code>reversed(sequence)</code>: Iterate over x in a sequence in reverse order</li>
+</ul>
+<p>To view the contents of an iterator, place the resulting elements into a container:</p>
+<ul>
+<li>list(iterable): Create a list containing all x in iterable</li>
+<li>tuple(iterable): Create a tuple containing all x in iterable</li>
+<li>sorted(iterable): Create a sorted list containing x in iterable</li>
+</ul>
+<h3 id="Generators">Generators</h3>
+<p>A <strong>generator function</strong> is a function that <strong>yields values instead of returning them</strong>.</p>
+<p>A normal function returns once; a generator function can yield multiple times.</p>
+<p>When a generator function is called, it <strong>returns a generator that iterates over its yields</strong>.</p>
+<p>A <code>yield from</code> statement yields all values from an iterator or iterable.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">a_then_b</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">for</span> x <span class="token keyword">in</span> a<span class="token punctuation">:</span>
+		<span class="token keyword">yield</span> x
+	<span class="token keyword">for</span> x <span class="token keyword">in</span> b<span class="token punctuation">:</span>
+		<span class="token keyword">yield</span> x
+
+<span class="token comment"># Using yield from</span>
+<span class="token keyword">def</span> <span class="token function">a_then_b</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">yield</span> <span class="token keyword">from</span> a
+	<span class="token keyword">yield</span> <span class="token keyword">from</span> b<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>yield from</code> also makes generators recursively yileds from itself like the recursion in normal functions:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">countdown</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">if</span> k <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">:</span>
+		<span class="token keyword">yield</span> k
+	<span class="token keyword">yield</span> <span class="token keyword">from</span> countdown<span class="token punctuation">(</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Objects">Objects</h2>
+<h3 id="Class-Statements">Class Statements</h3>
+<p>When a class is called:</p>
+<p>1.A new instance of that class is created:</p>
+<p>2.The <code>__init__</code> method of the class is called <strong>with the new object as its first argument (named self)</strong>, along with any additional arguments provided in the call expression.</p>
+<h3 id="Methods">Methods</h3>
+<p>Methods are functions defined in the suite of a class statement. These def statements create function objects as always,<br>
+but <strong>their names are bound as attributes of the class</strong>.</p>
+<p>Every methods are defined with at least one arguments: self. Dot notation automatically supplies the first argument to a method.</p>
+<h3 id="Attributes">Attributes</h3>
+<p>Using <code>getattr</code>, we can look up an attribute using a string</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token builtin">getattr</span><span class="token punctuation">(</span>tom_account<span class="token punctuation">,</span> <span class="token string">'balance'</span><span class="token punctuation">)</span>  <span class="token comment"># 10</span>
+<span class="token builtin">hasattr</span><span class="token punctuation">(</span>tom_account<span class="token punctuation">,</span> <span class="token string">'deposit'</span><span class="token punctuation">)</span>  <span class="token comment"># True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><code>getattr</code> and dot expressions look up a name <strong>in the same way</strong>.</p>
+<p>Class attributes are “shared” across all instances of a class because they are attributes of the class, not the instance.</p>
+<p>Instance attributes are set in <code>__init__</code> method.</p>
+<h3 id="Inheritance">Inheritance</h3>
+<p>Syntax:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token operator">&lt;</span>Name<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>Base Class<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token operator">&lt;</span>suite<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>Conceptually, the new subclass inherits attributes of its base class.</p>
+<p>The subclass may override certain inherited attributes.</p>
+<p>Using inheritance, we implement a subclass by specifying its differences from the the base class.</p>
+<h3 id="Looking-Up-Attribute-Names-on-Classes">Looking Up Attribute Names on Classes</h3>
+<p>To look up a name in a class:</p>
+<ol>
+<li>If it names an attribute in the class, return the attribute value.</li>
+<li>Otherwise, look up the name in the base class, if there is one.</li>
+</ol>
+<p>Note that <strong>base class attributes aren’t copied into subclasses!</strong></p>
+<h3 id="Inheritance-and-Composition">Inheritance and Composition</h3>
+<p>Inheritance is best for representing “<strong>is-a</strong>” relationships.</p>
+<p>E.g., a checking account is a specific type of account. So, CheckingAccount inherits from Account.</p>
+<p>Composition is best for representing “<strong>has-a</strong>” relationships.</p>
+<p>E.g., a bank has a collection of bank accounts it manages. So, A bank has a list of accounts as an attribute.</p>
+<h2 id="Linked-List">Linked List</h2>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Link</span><span class="token punctuation">:</span>
+    empty <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> first<span class="token punctuation">,</span> rest<span class="token operator">=</span>empty<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">assert</span> rest <span class="token keyword">is</span> Link<span class="token punctuation">.</span>empty <span class="token keyword">or</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>rest<span class="token punctuation">,</span> Link<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>first <span class="token operator">=</span> first
+        self<span class="token punctuation">.</span>rest <span class="token operator">=</span> rest<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Property-Methods">Property Methods</h3>
+<p>In some cases, we want the value of instance attributes to be computed on demand.</p>
+<p>For example, if we want to access the second element of a linked list like this:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">s <span class="token operator">=</span> Link<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> Link<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> Link<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+s<span class="token punctuation">.</span>second  <span class="token comment"># Suppose to get 2</span>
+
+s<span class="token punctuation">.</span>second <span class="token operator">=</span> <span class="token number">6</span>  <span class="token comment"># Can be modified by assignment</span>
+s  <span class="token comment"># 1, 6, 3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Of course we can add a second attribute to <code>Link</code> class, but the second element is stored in the linked list itself, so the best way is to make it behave like a function.</p>
+<p>The <code>@property</code> decorator on a method designates that it will be called whenever it is looked up on an instance.<br>
+A <code>&lt;attribute&gt;.setter</code> decorator on a method designates that it will be called whenever that attribute is assigned.</p>
+<p><code>&lt;attribute&gt;</code> <strong>must be an existing property method.</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token decorator annotation punctuation">@property</span>
+<span class="token keyword">def</span> <span class="token function">second</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> self<span class="token punctuation">.</span>rest<span class="token punctuation">.</span>first
+
+<span class="token decorator annotation punctuation">@second<span class="token punctuation">.</span>setter</span>
+<span class="token keyword">def</span> <span class="token function">second</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    self<span class="token punctuation">.</span>rest<span class="token punctuation">.</span>first <span class="token operator">=</span> value<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>These two functions will be called implicitly.</p>
+<h2 id="Interface">Interface</h2>
+<h3 id="String-Representations">String Representations</h3>
+<p>An object value should behave like the kind of data it is meant to represent.</p>
+<p>In Python, all objects produce two string representations:</p>
+<ul>
+<li>The <code>str</code> is legible to humans</li>
+<li>The <code>repr</code> is legible to the Python interpreter</li>
+</ul>
+<p>The <code>str</code> and <code>repr</code> strings are often the same, but not always.</p>
+<p>The <code>repr</code> function returns a Python expression (a string) that evaluates to an equal object. For most object types, <code>eval(repr(object)) == object</code>.</p>
+<p>Some objects do not have a simple Python-readable string:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token builtin">repr</span><span class="token punctuation">(</span><span class="token builtin">min</span><span class="token punctuation">)</span>
+<span class="token string">'&lt;built-in function min&gt;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>The result of calling <code>str</code> on the value of an expression <strong>is what Python prints using the <code>print</code> function.</strong></p>
+<h3 id="Polymorphic-Functions">Polymorphic Functions</h3>
+<p>Polymorphic function: A function that applies to many (poly) different forms (morph) of data.</p>
+<p><code>str</code> and <code>repr</code> are both polymorphic; they apply to any object.</p>
+<p><code>repr</code> invokes a zero-argument method <code>__repr__</code> on its argument</p>
+<p><code>str</code> invokes a zero-argument method <code>__str__</code> on its argument</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> self<span class="token punctuation">.</span>rest <span class="token keyword">is</span> <span class="token keyword">not</span> Link<span class="token punctuation">.</span>empty<span class="token punctuation">:</span>
+        rest_repr <span class="token operator">=</span> <span class="token string">', '</span> <span class="token operator">+</span> <span class="token builtin">repr</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>rest<span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        rest_repr <span class="token operator">=</span> <span class="token string">''</span>
+    <span class="token keyword">return</span> <span class="token string">'Link('</span> <span class="token operator">+</span> <span class="token builtin">repr</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>first<span class="token punctuation">)</span> <span class="token operator">+</span> rest_repr <span class="token operator">+</span> <span class="token string">')'</span>
+
+<span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    string <span class="token operator">=</span> <span class="token string">'&lt;'</span>
+    <span class="token keyword">while</span> self<span class="token punctuation">.</span>rest <span class="token keyword">is</span> <span class="token keyword">not</span> Link<span class="token punctuation">.</span>empty<span class="token punctuation">:</span>
+        string <span class="token operator">+=</span> <span class="token builtin">str</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>first<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">' '</span>
+        self <span class="token operator">=</span> self<span class="token punctuation">.</span>rest
+    <span class="token keyword">return</span> string <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>first<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'&gt;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>repr</code> and <code>str</code> can be implemented like this:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">repr</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token builtin">type</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">.</span>__repr__<span class="token punctuation">(</span>x<span class="token punctuation">)</span>  <span class="token comment"># An instance attribute called __repr__ is ignored! Only class attributes are found</span>
+
+<span class="token keyword">def</span> <span class="token function">str</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    t <span class="token operator">=</span> <span class="token builtin">type</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token builtin">hasattr</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> <span class="token string">'__str__'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> t<span class="token punctuation">.</span>__str__<span class="token punctuation">(</span>x<span class="token punctuation">)</span>  <span class="token comment"># An instance attribute called __str__ is ignored</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token builtin">repr</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>  <span class="token comment"># If no __str__ attribute is found, uses repr string</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Interfaces">Interfaces</h3>
+<p>Message passing: Objects interact by looking up attributes on each other (passing messages)。</p>
+<p>The attribute look-up rules <strong>allow different data types to respond to the same message</strong>.</p>
+<p>A shared message (attribute name) that elicits similar behavior from different object.</p>
+<p>Certain names are special because they have built-in behavior. These names <strong>always start and end with two underscores.</strong></p>
+<p>For example: <code>__add__</code> method is invoked to add one object to another.</p>
+<p>Adding instances of user-defined classes invokes either the <code>__add__</code> or <code>__radd__</code> method.</p>
+<p>A polymorphic function might take two or more arguments of different types.</p>
+<p>Type Dispatching: Inspect the type of an argument in order to select behavior.</p>
+<p>Type Coercion: Convert one value to match the type of another.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Ratio</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""A mutable ratio.
+
+    &gt;&gt;&gt; f = Ratio(9, 15)
+    &gt;&gt;&gt; f
+    Ratio(9, 15)
+    &gt;&gt;&gt; print(f)
+    9/15
+
+    &gt;&gt;&gt; Ratio(1, 3) + Ratio(1, 6)
+    Ratio(1, 2)
+    &gt;&gt;&gt; f + 1
+    Ratio(8, 5)
+    &gt;&gt;&gt; 1 + f
+    Ratio(8, 5)
+    &gt;&gt;&gt; 1.4 + f
+    2.0
+    """</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">,</span> d<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>numer <span class="token operator">=</span> n
+        self<span class="token punctuation">.</span>denom <span class="token operator">=</span> d
+    
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f'Ratio(</span><span class="token interpolation"><span class="token punctuation">{</span>self<span class="token punctuation">.</span>numer<span class="token punctuation">}</span></span><span class="token string">, </span><span class="token interpolation"><span class="token punctuation">{</span>self<span class="token punctuation">.</span>denom<span class="token punctuation">}</span></span><span class="token string">)'</span></span>
+    
+    <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f'</span><span class="token interpolation"><span class="token punctuation">{</span>self<span class="token punctuation">.</span>numer<span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>self<span class="token punctuation">.</span>denom<span class="token punctuation">}</span></span><span class="token string">'</span></span>
+    
+    <span class="token keyword">def</span> <span class="token function">__add__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>other<span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># type dispatching</span>
+            n <span class="token operator">=</span> self<span class="token punctuation">.</span>numer <span class="token operator">+</span> self<span class="token punctuation">.</span>denom
+            d <span class="token operator">=</span> self<span class="token punctuation">.</span>denom
+        <span class="token keyword">elif</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>other<span class="token punctuation">,</span> Ratio<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            n <span class="token operator">=</span> self<span class="token punctuation">.</span>numer <span class="token operator">*</span> other<span class="token punctuation">.</span>denom <span class="token operator">+</span> self<span class="token punctuation">.</span>denom <span class="token operator">*</span> other<span class="token punctuation">.</span>numer
+            d <span class="token operator">=</span> self<span class="token punctuation">.</span>denom <span class="token operator">*</span> other<span class="token punctuation">.</span>denom
+        <span class="token keyword">elif</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>other<span class="token punctuation">,</span> <span class="token builtin">float</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># type coersion</span>
+            <span class="token keyword">return</span> <span class="token builtin">float</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">+</span> other
+        g <span class="token operator">=</span> gcd<span class="token punctuation">(</span>n<span class="token punctuation">,</span> d<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> Ratio<span class="token punctuation">(</span>n <span class="token operator">//</span> g<span class="token punctuation">,</span> d <span class="token operator">//</span> g<span class="token punctuation">)</span>
+    
+    __radd__ <span class="token operator">=</span> __add__
+    
+    <span class="token keyword">def</span> <span class="token function">__float__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>numer <span class="token operator">/</span> self<span class="token punctuation">.</span>denom<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Tree-class">Tree class</h2>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Tree</span><span class="token punctuation">:</span>
+	<span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> label<span class="token punctuation">,</span> branches<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+		self<span class="token punctuation">.</span>label <span class="token operator">=</span> label
+		<span class="token keyword">for</span> branch <span class="token keyword">in</span> branches<span class="token punctuation">:</span>
+			<span class="token keyword">assert</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>branch<span class="token punctuation">,</span> Tree<span class="token punctuation">)</span>
+		self<span class="token punctuation">.</span>branches <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>branches<span class="token punctuation">)</span>
+        
+<span class="token keyword">def</span> <span class="token function">fib_tree</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">if</span> n <span class="token operator">==</span> <span class="token number">0</span> <span class="token keyword">or</span> n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+		<span class="token keyword">return</span> Tree<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+	<span class="token keyword">else</span><span class="token punctuation">:</span>
+		left <span class="token operator">=</span> fib_tree<span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span>
+		right <span class="token operator">=</span> fib_tree<span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+		fib_n <span class="token operator">=</span> left<span class="token punctuation">.</span>label <span class="token operator">+</span> right<span class="token punctuation">.</span>label
+		<span class="token keyword">return</span> Tree<span class="token punctuation">(</span>fib_n<span class="token punctuation">,</span> <span class="token punctuation">[</span>left<span class="token punctuation">,</span> right<span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Modular-design">Modular design</h2>
+<p>A great example: restaurant search engine.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> json
+
+
+<span class="token keyword">def</span> <span class="token function">search</span><span class="token punctuation">(</span>query<span class="token punctuation">,</span> ranking<span class="token operator">=</span><span class="token keyword">lambda</span> r<span class="token punctuation">:</span> <span class="token operator">-</span>r<span class="token punctuation">.</span>stars<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""A restaurant search engine.
+
+    &gt;&gt;&gt; results = search("Thai")
+    &gt;&gt;&gt; results
+    [&lt;Thai Basil Cuisine&gt;, &lt;Thai Noodle II&gt;, &lt;Jasmine Thai&gt;, &lt;Berkeley Thai House&gt;, &lt;Viengvilay Thai Cuisine&gt;]
+    &gt;&gt;&gt; for r in results:
+    ...     print(r.name, 'shares reviewers with', r.similar(3))
+    Thai Basil Cuisine shares reviewers with [&lt;Gypsy's Trattoria Italiano&gt;, &lt;Top Dog&gt;, &lt;Smart Alec's Intelligent Food&gt;]
+    Thai Noodle II shares reviewers with [&lt;La Cascada Taqueria&gt;, &lt;Cafe Milano&gt;, &lt;Chinese Express&gt;]
+    Jasmine Thai shares reviewers with [&lt;Hummingbird Cafe&gt;, &lt;La Burrita 2&gt;, &lt;The Stuffed Inn&gt;]
+    Berkeley Thai House shares reviewers with [&lt;Smart Alec's Intelligent Food&gt;, &lt;Thai Basil Cuisine&gt;, &lt;Top Dog&gt;]
+    Viengvilay Thai Cuisine shares reviewers with [&lt;La Val's Pizza&gt;, &lt;Thai Basil Cuisine&gt;, &lt;La Burrita 2&gt;]
+    """</span>
+    results <span class="token operator">=</span> <span class="token punctuation">[</span>r <span class="token keyword">for</span> r <span class="token keyword">in</span> Restaurant<span class="token punctuation">.</span><span class="token builtin">all</span> <span class="token keyword">if</span> query <span class="token keyword">in</span> r<span class="token punctuation">.</span>name<span class="token punctuation">]</span>
+    <span class="token keyword">return</span> <span class="token builtin">sorted</span><span class="token punctuation">(</span>results<span class="token punctuation">,</span> key<span class="token operator">=</span>ranking<span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">num_shared_reviewers</span><span class="token punctuation">(</span>restaurant<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> fast_overlap<span class="token punctuation">(</span>restaurant<span class="token punctuation">.</span>reviewers<span class="token punctuation">,</span> other<span class="token punctuation">.</span>reviewers<span class="token punctuation">)</span>
+    <span class="token comment"># return len([r for r in restaurant.reviewers if r in other.reviewers])</span>
+
+
+<span class="token keyword">def</span> <span class="token function">fast_overlap</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Return the overlap between sorted S and sorted T.
+
+    &gt;&gt;&gt; fast_overlap([2, 3, 5, 6, 7], [1, 4, 5, 6, 7, 8])
+    3
+    """</span>
+    count<span class="token punctuation">,</span> i<span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span>
+    <span class="token keyword">while</span> i <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token keyword">and</span> j <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> t<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
+            count<span class="token punctuation">,</span> i<span class="token punctuation">,</span> j <span class="token operator">=</span> count <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> j <span class="token operator">+</span> <span class="token number">1</span>
+        <span class="token keyword">elif</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;</span> t<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
+            i <span class="token operator">+=</span> <span class="token number">1</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            j <span class="token operator">+=</span> <span class="token number">1</span>
+    <span class="token keyword">return</span> count
+
+
+<span class="token keyword">class</span> <span class="token class-name">Restaurant</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""A restaurant."""</span>
+    <span class="token builtin">all</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> stars<span class="token punctuation">,</span> reviewers<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+        self<span class="token punctuation">.</span>stars <span class="token operator">=</span> stars
+        self<span class="token punctuation">.</span>reviewers <span class="token operator">=</span> reviewers
+        Restaurant<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">similar</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> k<span class="token punctuation">,</span> similarity<span class="token operator">=</span>num_shared_reviewers<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token string">"Return the K most similar restaurants to SELF, using SIMILARITY for comparison."</span>
+        others <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>Restaurant<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">)</span>
+        others<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>self<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token builtin">sorted</span><span class="token punctuation">(</span>others<span class="token punctuation">,</span> key<span class="token operator">=</span><span class="token keyword">lambda</span> r<span class="token punctuation">:</span> <span class="token operator">-</span>similarity<span class="token punctuation">(</span>self<span class="token punctuation">,</span> r<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span>k<span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">'&lt;'</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">'&gt;'</span>
+
+
+<span class="token keyword">def</span> <span class="token function">load_reviews</span><span class="token punctuation">(</span>reviews_file<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    reviewers_by_restaurant <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">for</span> line <span class="token keyword">in</span> <span class="token builtin">open</span><span class="token punctuation">(</span>reviews_file<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        r <span class="token operator">=</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>line<span class="token punctuation">)</span>
+        business_id <span class="token operator">=</span> r<span class="token punctuation">[</span><span class="token string">'business_id'</span><span class="token punctuation">]</span>
+        <span class="token keyword">if</span> business_id <span class="token keyword">not</span> <span class="token keyword">in</span> reviewers_by_restaurant<span class="token punctuation">:</span>
+            reviewers_by_restaurant<span class="token punctuation">[</span>business_id<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        reviewers_by_restaurant<span class="token punctuation">[</span>business_id<span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span>r<span class="token punctuation">[</span><span class="token string">'user_id'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> reviewers_by_restaurant
+
+
+<span class="token keyword">def</span> <span class="token function">load_restaurants</span><span class="token punctuation">(</span>reviewers_by_restaurant<span class="token punctuation">,</span> restaurants_file<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> line <span class="token keyword">in</span> <span class="token builtin">open</span><span class="token punctuation">(</span>restaurants_file<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        b <span class="token operator">=</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>line<span class="token punctuation">)</span>
+        reviewers <span class="token operator">=</span> reviewers_by_restaurant<span class="token punctuation">.</span>get<span class="token punctuation">(</span>b<span class="token punctuation">[</span><span class="token string">'business_id'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        Restaurant<span class="token punctuation">(</span>b<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> b<span class="token punctuation">[</span><span class="token string">'stars'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token builtin">sorted</span><span class="token punctuation">(</span>reviewers<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+load_restaurants<span class="token punctuation">(</span>load_reviews<span class="token punctuation">(</span><span class="token string">'reviews.json'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'restaurants.json'</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'&gt;'</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">' '</span><span class="token punctuation">)</span>
+    results <span class="token operator">=</span> search<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> r <span class="token keyword">in</span> results<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>name<span class="token punctuation">,</span> <span class="token string">'shares reviewers with'</span><span class="token punctuation">,</span> r<span class="token punctuation">.</span>similar<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Sets">Sets</h2>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> s <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'one'</span><span class="token punctuation">,</span> <span class="token string">'two'</span><span class="token punctuation">,</span> <span class="token string">'three'</span><span class="token punctuation">,</span> <span class="token string">'four'</span><span class="token punctuation">,</span> <span class="token string">'four'</span><span class="token punctuation">}</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> s
+<span class="token punctuation">{</span><span class="token string">'three'</span><span class="token punctuation">,</span> <span class="token string">'one'</span><span class="token punctuation">,</span> <span class="token string">'four'</span><span class="token punctuation">,</span> <span class="token string">'two'</span><span class="token punctuation">}</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token string">'three'</span> <span class="token keyword">in</span> s
+<span class="token boolean">True</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span class="token number">4</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> s<span class="token punctuation">.</span>union<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">'one'</span><span class="token punctuation">,</span> <span class="token string">'five'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span><span class="token string">'three'</span><span class="token punctuation">,</span> <span class="token string">'five'</span><span class="token punctuation">,</span> <span class="token string">'one'</span><span class="token punctuation">,</span> <span class="token string">'four'</span><span class="token punctuation">,</span> <span class="token string">'two'</span><span class="token punctuation">}</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> s<span class="token punctuation">.</span>intersection<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">'six'</span><span class="token punctuation">,</span> <span class="token string">'five'</span><span class="token punctuation">,</span> <span class="token string">'four'</span><span class="token punctuation">,</span> <span class="token string">'three'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span><span class="token string">'three'</span><span class="token punctuation">,</span> <span class="token string">'four'</span><span class="token punctuation">}</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> s
+<span class="token punctuation">{</span><span class="token string">'three'</span><span class="token punctuation">,</span> <span class="token string">'one'</span><span class="token punctuation">,</span> <span class="token string">'four'</span><span class="token punctuation">,</span> <span class="token string">'two'</span><span class="token punctuation">}</span>
+<span class="token number">13</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Scheme">Scheme</h2>
+<h3 id="Expressions">Expressions</h3>
+<h4 id="Atomic-Expressions">Atomic Expressions</h4>
+<p>Just like in Python, atomic, or primitive, expressions in Scheme take a single step to evaluate. These include numbers, booleans, symbols.</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; <span class="token number">1234</span>    <span class="token comment">; integer</span>
+<span class="token number">1234</span>
+scm&gt; <span class="token number">123.4</span>   <span class="token comment">; real number</span>
+<span class="token number">123.4</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="Symbols">Symbols</h4>
+<p>Out of these, the symbol type is the only one we didn’t encounter in Python. A symbol acts a lot like a Python name, but not exactly. Specifically, a symbol in Scheme is also a type of value. On the other hand, in Python, names only serve as expressions; a Python expression can never evaluate to a name.</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; quotient      <span class="token comment">; A name bound to a built-in procedure</span>
+#<span class="token punctuation">[</span>quotient<span class="token punctuation">]</span>
+scm&gt; <span class="token symbol">'quotient</span>     <span class="token comment">; An expression that evaluates to a symbol</span>
+quotient
+scm&gt; <span class="token symbol">'hello-world!</span>
+hello-world!<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="Booleans">Booleans</h4>
+<p>In Scheme, all values except the special boolean value <code>#f</code> are interpreted as true values (unlike Python, where there are some false-y values like <code>0</code>). Our particular version of the Scheme interpreter allows you to write <code>True</code> and <code>False</code> in place of <code>#t</code> and <code>#f</code>. This is not standard.</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; <span class="token boolean">#t</span>
+<span class="token boolean">#t</span>
+scm&gt; <span class="token boolean">#f</span>
+<span class="token boolean">#f</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="Call-expressions-2">Call expressions</h4>
+<p>Like Python, the operator in a Scheme call expression comes before all the operands. Unlike Python, <strong>the operator is included within the parentheses and the operands are separated by spaces rather than with commas.</strong> However, evaluation of a Scheme call expression follows the exact same rules as in Python:</p>
+<ol>
+<li>Evaluate the operator. It should evaluate to a <strong>procedure</strong>.</li>
+<li>Evaluate the operands, left to right.</li>
+<li>Apply the procedure to the evaluated operands.</li>
+</ol>
+<p>Here are some examples using built-in procedures:</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; <span class="token punctuation">(</span><span class="token operator">+</span> <span class="token number">1</span> <span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token number">3</span>
+scm&gt; <span class="token punctuation">(</span><span class="token operator">-</span> <span class="token number">10</span> <span class="token punctuation">(</span><span class="token operator">/</span> <span class="token number">6</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token number">7</span>
+scm&gt; <span class="token punctuation">(</span><span class="token builtin">modulo</span> <span class="token number">35</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token number">3</span>
+scm&gt; <span class="token punctuation">(</span><span class="token builtin">even?</span> <span class="token punctuation">(</span><span class="token builtin">quotient</span> <span class="token number">45</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token boolean">#t</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="if-Expressions">if Expressions</h4>
+<p>The <code>if</code> special form allows us to evaluate one of two expressions based on a predicate. It takes in two required arguments and an optional third argument:</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">if</span> &lt;predicate&gt; &lt;if-true&gt; <span class="token punctuation">[</span><span class="token function">if-false</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>The Scheme <code>if</code> expression, given that it is an expression, <strong>evaluates to some value</strong>. However, the Python <code>if</code> statement <strong>simply directs the flow of the program.</strong></p>
+<p>Another difference between the two is that it’s possible to add more lines of code into the suites of the Python <code>if</code> statement, while a Scheme <code>if</code> expression <strong>expects just a single expression for each of the true result and the false result.</strong></p>
+<p>One final difference is that in Scheme, you cannot write <code>elif</code> cases. If you want to have multiple cases using the <code>if</code> expression, you would need multiple branched <code>if</code> expressions.</p>
+<h4 id="cond-Expressions">cond Expressions</h4>
+<p>Using nested <code>if</code> expressions doesn’t seem like a very practical way to take care of multiple cases. Instead, we can use the <code>cond</code> special form, a general conditional expression similar to a multi-clause if/elif/else conditional expression in Python. <code>cond</code> takes in an arbitrary number of arguments known as <strong>clauses</strong>. <strong>A clause is written as a list containing two expressions: <code>(&lt;p&gt; &lt;e&gt;)</code>.</strong></p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">cond</span>
+    <span class="token punctuation">(</span><span class="token function">&lt;p1&gt;</span> &lt;e1&gt;<span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token function">&lt;p2&gt;</span> &lt;e2&gt;<span class="token punctuation">)</span>
+    ...
+    <span class="token punctuation">(</span><span class="token function">&lt;pn&gt;</span> &lt;en&gt;<span class="token punctuation">)</span>
+    <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token keyword">else</span> &lt;else-expression&gt;<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>The first expression in each clause is a predicate. The second expression in the clause is the return expression corresponding to its predicate. The optional <code>else</code> clause has no predicate.</p>
+<p>The rules of evaluation are as follows:</p>
+<ol>
+<li>Evaluate the predicates <code>&lt;p1&gt;</code>, <code>&lt;p2&gt;</code>, …, <code>&lt;pn&gt;</code> in order until you reach one that evaluates to a truth-y value.</li>
+<li>If you reach a predicate that evaluates to a truth-y value, evaluate and return the corresponding expression in the clause.</li>
+<li>If none of the predicates are truth-y and there is an <code>else</code> clause, evaluate and return <code>&lt;else-expression&gt;</code>.</li>
+</ol>
+<h3 id="Lists">Lists</h3>
+<p>Scheme lists are very similar to the linked lists. A Scheme list is constructed with a series of pairs, which are created with the constructor <code>cons</code>. It require that the <code>cdr</code> is either another list or <code>nil</code>, an empty list. A list is displayed in the interpreter as a sequence of values (similar to the <code>__str__</code> representation of a <code>Link</code> object).</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; <span class="token punctuation">(</span><span class="token keyword">define</span> a <span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token number">1</span> <span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token number">2</span> <span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token number">3</span> nil<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">; Assign the list to the name a</span>
+a
+scm&gt; a
+<span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span>
+scm&gt; <span class="token punctuation">(</span><span class="token builtin">car</span> a<span class="token punctuation">)</span>
+<span class="token number">1</span>
+scm&gt; <span class="token punctuation">(</span><span class="token builtin">cdr</span> a<span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span>
+scm&gt; <span class="token punctuation">(</span><span class="token builtin">car</span> <span class="token punctuation">(</span><span class="token builtin">cdr</span> <span class="token punctuation">(</span><span class="token builtin">cdr</span> a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>There are a few other ways to create lists. <strong>The <code>list</code> procedure</strong> takes in an arbitrary number of arguments and constructs a list with the values of these arguments:</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; <span class="token punctuation">(</span><span class="token builtin">list</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span>
+scm&gt; <span class="token punctuation">(</span><span class="token builtin">list</span> <span class="token number">1</span> <span class="token punctuation">(</span><span class="token builtin">list</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token number">1</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token number">4</span><span class="token punctuation">)</span>
+scm&gt; <span class="token punctuation">(</span><span class="token builtin">list</span> <span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token number">1</span> <span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token number">2</span> nil<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token number">3</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token number">3</span> <span class="token number">4</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Note that all of the operands in this expression are evaluated before being put into the resulting list.</p>
+<p>We can also use the quote form to create a list, which will construct the exact list that is given. Unlike with the <code>list</code> procedure, the argument to <code>'</code> is not evaluated.</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; <span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span>
+scm&gt; <span class="token punctuation">'</span><span class="token punctuation">(</span>cons <span class="token number">1</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">; Argument to quote is not evaluated</span>
+<span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token number">1</span> <span class="token number">2</span><span class="token punctuation">)</span>
+scm&gt; <span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token number">1</span> <span class="token punctuation">(</span><span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>There are a few other built-in procedures in Scheme that are used for lists.</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; <span class="token punctuation">(</span><span class="token builtin">null?</span> nil<span class="token punctuation">)</span>                <span class="token comment">; Checks if a value is the empty list</span>
+True
+scm&gt; <span class="token punctuation">(</span><span class="token builtin">append</span> <span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">; Concatenates two lists</span>
+<span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span><span class="token punctuation">)</span>
+scm&gt; <span class="token punctuation">(</span><span class="token builtin">length</span> <span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>      <span class="token comment">; Returns the number of elements in a list</span>
+<span class="token number">5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Define-procedures">Define procedures</h3>
+<p>The special form <code>define</code> is used to define variables and functions in Scheme. There are two versions of the <code>define</code> special form. To define variables, we use the <code>define</code> form with the following syntax:</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define</span> &lt;name&gt; &lt;expression&gt;<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>The rules to evaluate this expression are</p>
+<ol>
+<li>Evaluate the <code>&lt;expression&gt;</code>.</li>
+<li>Bind its value to the <code>&lt;name&gt;</code> in the current frame.</li>
+<li>Return <code>&lt;name&gt;</code>.</li>
+</ol>
+<p>The second version of <code>define</code> is used to define procedures:</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">&lt;name&gt;</span> &lt;param1&gt; &lt;param2&gt; ...<span class="token punctuation">)</span> &lt;body&gt; <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>To evaluate this expression:</p>
+<ol>
+<li><strong>Create a lambda procedure with the given parameters</strong> and <code>&lt;body&gt;</code>.</li>
+<li>Bind the procedure to the <code>&lt;name&gt;</code> in the current frame.</li>
+<li>Return <code>&lt;name&gt;</code>.</li>
+</ol>
+<p>The following two expressions are equivalent:</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; <span class="token punctuation">(</span><span class="token keyword">define</span> foo <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">x y</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">+</span> x y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+foo
+scm&gt; <span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">foo</span> x y<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">+</span> x y<span class="token punctuation">)</span><span class="token punctuation">)</span>
+foo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Lambdas">Lambdas</h3>
+<p>All Scheme procedures are lambda procedures. To create a lambda procedure, we can use the <code>lambda</code> special form:</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">&lt;param1&gt; &lt;param2&gt; ...</span><span class="token punctuation">)</span> &lt;body&gt;<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>This expression will create and return a function with the given parameters and body, but it will not alter the current environment.</p>
+<p>The function will <strong>simply return the value of the last expression in the body.</strong></p>
+<h3 id="Sierpinski’s-Triangle">Sierpinski’s Triangle</h3>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">line</span> len<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token function">fd</span> len<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">repeat</span> k fn<span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token function">fn</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">&gt;</span> k <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token function">repeat</span> <span class="token punctuation">(</span><span class="token operator">-</span> k <span class="token number">1</span><span class="token punctuation">)</span> fn<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">pentagram</span> len<span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token function">repeat</span> <span class="token number">5</span> <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token function">line</span> len<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token function">rt</span> <span class="token number">144</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">tri</span> fn<span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token function">repeat</span> <span class="token number">3</span> <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token function">fn</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token function">lt</span> <span class="token number">120</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">sier</span> d len<span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token function">tri</span> <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">=</span> d <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token function">fd</span> len<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token function">leg</span> d len<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">leg</span> d len<span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token function">sier</span> <span class="token punctuation">(</span><span class="token operator">-</span> d <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">/</span> len <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token function">penup</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token function">fd</span> len<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token function">pendown</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">(</span><span class="token function">rt</span> <span class="token number">90</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token function">speed</span> <span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token function">sier</span> <span class="token number">6</span> <span class="token number">400</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Intersting-problems-in-Homework-and-Lab">Intersting problems in Homework and Lab</h2>
+<h3 id="HW02">HW02</h3>
+<h4 id="count-cond">count_cond</h4>
+<p>(True + True == 2)</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">count_cond</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Returns a function with one parameter N that counts all the numbers from
+    1 to N that satisfy the two-argument predicate function Condition, where
+    the first argument for Condition is N and the second argument is the
+    number from 1 to N.
+
+    &gt;&gt;&gt; count_factors = count_cond(lambda n, i: n % i == 0)
+    &gt;&gt;&gt; count_factors(2)   # 1, 2
+    2
+    &gt;&gt;&gt; count_factors(4)   # 1, 2, 4
+    3
+    &gt;&gt;&gt; count_factors(12)  # 1, 2, 3, 4, 6, 12
+    6
+
+    &gt;&gt;&gt; is_prime = lambda n, i: count_factors(i) == 2
+    &gt;&gt;&gt; count_primes = count_cond(is_prime)
+    &gt;&gt;&gt; count_primes(2)    # 2
+    1
+    &gt;&gt;&gt; count_primes(3)    # 2, 3
+    2
+    &gt;&gt;&gt; count_primes(4)    # 2, 3
+    2
+    &gt;&gt;&gt; count_primes(5)    # 2, 3, 5
+    3
+    &gt;&gt;&gt; count_primes(20)   # 2, 3, 5, 7, 11, 13, 17, 19
+    8
+    """</span>
+    <span class="token string">"*** YOUR CODE HERE ***"</span>
+
+    <span class="token keyword">def</span> <span class="token function">count_fn</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">[</span>condition<span class="token punctuation">(</span>n<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> count_fn<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="make-repeater">make repeater</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">accumulate</span><span class="token punctuation">(</span>combiner<span class="token punctuation">,</span> base<span class="token punctuation">,</span> n<span class="token punctuation">,</span> term<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    i <span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token keyword">while</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">:</span>
+        base <span class="token operator">=</span> combiner<span class="token punctuation">(</span>term<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> base<span class="token punctuation">)</span>
+        i <span class="token operator">+=</span> <span class="token number">1</span>
+    <span class="token keyword">return</span> base
+
+<span class="token keyword">def</span> <span class="token function">compose1</span><span class="token punctuation">(</span>func1<span class="token punctuation">,</span> func2<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Return a function f, such that f(x) = func1(func2(x))."""</span>
+    <span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> func1<span class="token punctuation">(</span>func2<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> f
+
+<span class="token keyword">def</span> <span class="token function">make_repeater</span><span class="token punctuation">(</span>func<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Return the function that computes the nth application of func.
+
+    &gt;&gt;&gt; add_three = make_repeater(increment, 3)
+    &gt;&gt;&gt; add_three(5)
+    8
+    &gt;&gt;&gt; make_repeater(triple, 5)(1) # 3 * 3 * 3 * 3 * 3 * 1
+    243
+    &gt;&gt;&gt; make_repeater(square, 2)(5) # square(square(5))
+    625
+    &gt;&gt;&gt; make_repeater(square, 4)(5) # square(square(square(square(5))))
+    152587890625
+    &gt;&gt;&gt; make_repeater(square, 0)(5) # Yes, it makes sense to apply the function zero times!
+    5
+    """</span>
+    <span class="token string">"*** YOUR CODE HERE ***"</span>
+    <span class="token keyword">return</span> accumulate<span class="token punctuation">(</span>compose1<span class="token punctuation">,</span> identity<span class="token punctuation">,</span> n<span class="token punctuation">,</span> <span class="token keyword">lambda</span> <span class="token keyword">_</span><span class="token punctuation">:</span> func<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>To use <code>accumulate</code>, we just need to figure out the arguments passed to <code>accumulate</code>. The first three arguments are obvious. We need to look at how we implement accumulate to determine the last argument. We want <code>term(i)</code> still be <code>func</code> whatever <code>i</code> is, so the last argument is <code>lambda _: func</code> rather than simply <code>func</code>.</p>
+<h4 id="Church-Numerals">Church Numerals</h4>
+<h5 id="Peano-axioms">Peano axioms</h5>
+<ol>
+<li>0 is a natural number.</li>
+<li>Once we defined a single-valued injection S (which is called successor), For every natural number n, S(n) is a natural number. That is, the natural numbers are closed under S.</li>
+</ol>
+<p>According to this, we can define zero as:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">zero</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>also one and two:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">one</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">return</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> f<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">two</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> f<span class="token punctuation">(</span>f<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>function successor:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">successor</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token keyword">lambda</span> f<span class="token punctuation">:</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> f<span class="token punctuation">(</span>n<span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><code>successor</code> takes in a function n, and return n’s successor. After it is called, it will take in a function <code>f</code>, which indicates how the function should be iterated.</p>
+<p>So the <code>church_to_int</code> function takes in <code>increment</code>, which is the method we used to calculate the next natural number.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">church_to_int</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> n<span class="token punctuation">(</span>increment<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>I think it is better to consider how to convert the function <code>one</code> and <code>two</code> to 1 and 2.</p>
+<p><code>add_church</code> function:</p>
+<p>It is very important to understand the difference between <code>n</code>, <code>n(f)</code> and <code>n(f)(x)</code>.</p>
+<p><code>f</code> is the method we used to compute the next natural number.</p>
+<p><code>n</code> is a higher-order-function, taking in <code>f</code> as argument. It will return a function, which can take in an integer <code>x</code> and return the value <code>x</code> being iterated by f for n times.</p>
+<p><code>n(f)</code> is the return value of <code>n</code>, it is a function as well.</p>
+<p><code>n(f)(x)</code> is a expression like <code>f(f(...f(x)))</code>, it is just a number.</p>
+<p>What we want now is a function like <code>f -&gt; f(f(f...f(x)))</code>. So the answer comes to us.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">add_church</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> m<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token keyword">lambda</span> f<span class="token punctuation">:</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> m<span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">(</span>n<span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><code>mul_church</code> function:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">mul_church</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> m<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">return</span> <span class="token keyword">lambda</span> f<span class="token punctuation">:</span> m<span class="token punctuation">(</span>n<span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><code>n(f)</code> is a function that iterates n times, and we’re applying m to this function, making it able to iterate n * m times. (Unlike above, <code>n(f)(x)</code> is just a number).</p>
+<p><code>pow_church</code>:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">pow_church</span><span class="token punctuation">(</span>m<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token keyword">lambda</span> f<span class="token punctuation">:</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> n<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token comment"># which is equivalent to n(m)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>This time, instead of taking in <code>f</code> as <code>n</code>’s argument, we take in <code>m</code>. <code>n(m) = m((n-1)(m)) = ... = m^n</code>.</p>
+<h3 id="HW03">HW03</h3>
+<h4 id="composer">composer</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">composer</span><span class="token punctuation">(</span>func<span class="token operator">=</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Returns two functions -
+    one holding the composed function so far, and another
+    that can create further composed problems.
+    &gt;&gt;&gt; add_one = lambda x: x + 1
+    &gt;&gt;&gt; mul_two = lambda x: x * 2
+    &gt;&gt;&gt; f, func_adder = composer()
+    &gt;&gt;&gt; f1, func_adder = func_adder(add_one)
+    &gt;&gt;&gt; f1(3)
+    4
+    &gt;&gt;&gt; f2, func_adder = func_adder(mul_two)
+    &gt;&gt;&gt; f2(3) # should be 1 + (2*3) = 7
+    7
+    &gt;&gt;&gt; f3, func_adder = func_adder(add_one)
+    &gt;&gt;&gt; f3(3) # should be 1 + (2 * (3 + 1)) = 9
+    9
+    """</span>
+    <span class="token keyword">def</span> <span class="token function">func_adder</span><span class="token punctuation">(</span>g<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token string">"*** YOUR CODE HERE ***"</span>
+        <span class="token keyword">return</span> composer<span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> func<span class="token punctuation">(</span>g<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> func<span class="token punctuation">,</span> func_adder<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Obviously, <code>func_adder</code> should return the result after calling composer, so we need to think about the function passed in. Notice that it can not be <code>func(g)</code>, because the argument of <code>func</code> should be just a number, so the answer is <code>composer(lambda x: func(g(x)))</code>.</p>
+<h4 id="anonymous-factorial">anonymous factorial</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">make_anonymous_factorial</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Return the value of an expression that computes factorial.
+
+    &gt;&gt;&gt; make_anonymous_factorial()(5)
+    120
+    &gt;&gt;&gt; from construct_check import check
+    &gt;&gt;&gt; # ban any assignments or recursion
+    &gt;&gt;&gt; check(HW_SOURCE_FILE, 'make_anonymous_factorial', ['Assign', 'AugAssign', 'FunctionDef', 'Recursion'])
+    True
+    """</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">lambda</span> fact<span class="token punctuation">:</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> fact<span class="token punctuation">(</span>fact<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> fact<span class="token punctuation">,</span> x<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token keyword">if</span> x <span class="token operator">&lt;=</span> <span class="token number">1</span> <span class="token keyword">else</span> mul<span class="token punctuation">(</span>x<span class="token punctuation">,</span> fact<span class="token punctuation">(</span>fact<span class="token punctuation">,</span> x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Let’s divide it into two parts:</p>
+<p>First, we need the fact function to call itself, if we cannot give it a name, we can make it an argument. So the second part serve as a <code>fact</code> function.</p>
+<p>Second, since there are no arguments passed in, we need to apply that fact function inside <code>make_anonymous_factorial</code>, and the first part <code>(lambda fact: lambda x: fact(fact, x))</code> is doing this job.</p>
+<h3 id="HW04">HW04</h3>
+<h4 id="preorder-traverse">preorder traverse</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">preorder</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Return a list of the entries in this tree in the order that they
+    would be visited by a preorder traversal (see problem description).
+
+    &gt;&gt;&gt; numbers = tree(1, [tree(2), tree(3, [tree(4), tree(5)]), tree(6, [tree(7)])])
+    &gt;&gt;&gt; preorder(numbers)
+    [1, 2, 3, 4, 5, 6, 7]
+    &gt;&gt;&gt; preorder(tree(2, [tree(4, [tree(6)])]))
+    [2, 4, 6]
+    """</span>
+    <span class="token string">"*** YOUR CODE HERE ***"</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span>label<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">[</span>preorder<span class="token punctuation">(</span>branch<span class="token punctuation">)</span> <span class="token keyword">for</span> branch <span class="token keyword">in</span> branches<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>It is a recursive function without any base case, because when <code>t</code> is a leave, it has no branches and therefore <code>branches(t)</code> would be an empty list.</p>
+<h4 id="why-is-par2-better-than-par1">why is par2 better than par1</h4>
+<p><code>par1</code> calculate the summation and product of the two intervals. However, when the sum of two resistors is given, the range of the product is <strong>no longer that large</strong>. Therefore, the result interval given by <code>par1</code> is relatively larger comparing to <code>par2</code>, which uses the formular written in the form that <strong>no variable that represents an uncertain number is repeated.</strong> Thus, <code>par2</code> is a better program.</p>
+<h3 id="Lab08">Lab08</h3>
+<h4 id="WWPD">WWPD</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> e <span class="token keyword">in</span> <span class="token builtin">zip</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">tuple</span><span class="token punctuation">(</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>Won’t be any error. <code>map</code> will invoke the lambda function on both elements in the tuple e.</p>
+<h3 id="Lab10">Lab10</h3>
+<h4 id="WWSD">WWSD</h4>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; <span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token number">1</span> <span class="token punctuation">'</span><span class="token punctuation">(</span>list <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">; Recall quoting</span>
+<span class="token punctuation">(</span><span class="token number">1</span> list <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span>
+
+scm&gt; <span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token number">1</span> `<span class="token punctuation">(</span>list <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">; Quasiquotes also work as quotes!</span>
+<span class="token punctuation">(</span><span class="token number">1</span> list <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span>
+
+scm&gt; <span class="token punctuation">'</span><span class="token punctuation">(</span>cons <span class="token number">4</span> <span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token number">6</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token number">4</span> <span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token punctuation">(</span><span class="token builtin">cons</span> <span class="token number">6</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'iT1y2aQnx6u5pD7nnDM0hL8P-gzGzoHsz',
+        appKey: '6UmywYMRbt5i6Lymj3eskq9L',
+        notify: 'true' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '说点什么吧'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/02/02/ubuntu-dual-system/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/dual-system.jpg" class="responsive-img" alt="Ubuntu 双系统">
+                        
+                        <span class="card-title">Ubuntu 双系统</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            在 Windows 上装 Ubuntu 双系统
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-02
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/12/25/compile-and-debugging/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/compile.jpg" class="responsive-img" alt="Compile and Debugging">
+                        
+                        <span class="card-title">Compile and Debugging</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Make、CMake 的使用及 VSCode 中使用 GDB 调试
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C-C/" class="post-category">
+                                    C/C++
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C-C/">
+                        <span class="chip bg-color">C/C++</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: xkz<br />'
+            + '文章作者: xkz<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">xkz</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">112.5k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/xkz0777" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:xkz@mail.ustc.edu.cn" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=821376043" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 821376043" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

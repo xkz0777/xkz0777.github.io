@@ -1,0 +1,1881 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Compile and Debugging, xkz">
+    <meta name="description" content="Make、CMake 的使用及 VSCode 中使用 GDB 调试">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Compile and Debugging | xkz</title>
+    <link rel="icon" type="image/jpeg" href="/dog.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+   <style>
+    body{
+       background-image: url(/medias/background2.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/favicon.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">xkz</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/favicon.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">xkz</div>
+        <div class="logo-desc">
+            
+            xkz&#39;s blog
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/compile.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Compile and Debugging</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C-C/">
+                                <span class="chip bg-color">C/C++</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/C-C/" class="post-category">
+                                C/C++
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-12-25
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2021-12-25
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    17 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1>Compile and Debugging</h1>
+<h2 id="前言">前言</h2>
+<p>在写 C/C++ 项目时，少不了编译的步骤，对于单文件，使用命令行或是 VSCode 的插件都非常方便。而对于多文件的项目，一个简单的方式就是用把项目扔到 IDE 里傻瓜式编译，但这里我们介绍如何使用命令行工具编译。在此之前，先简单说说 C/C++ 文件的编译过程。</p>
+<h2 id="C-C-文件编译过程">C/C++ 文件编译过程</h2>
+<ol>
+<li>预处理：源代码（*.c 或 *.cpp）经预处理变为预处理文件（*.i），主要进行宏替换。</li>
+<li>编译：将预处理文件（*.i）编译成汇编文件（*.s）</li>
+<li>汇编：把汇编文件（*.s）转换成目标文件（Object File，在 Windows 下是 *.obj 文件，Linux 下则是 *.o）。</li>
+<li>链接：将目标文件、库文件、启动文件等链接起来生成可执行文件。</li>
+</ol>
+<p>源代码到 *.o：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ gcc -c test.c -o test.o<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>或</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ gcc -c test.c<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>*.o 到可执行文件：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ gcc test.o -o <span class="token builtin class-name">test</span> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>或</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ g++ -o <span class="token builtin class-name">test</span> test.o<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>对于 *.cpp 文件，只要把 gcc 换成 g++。</p>
+<p>事实上从源代码可以直接生成可执行文件：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ gcc test.c -o <span class="token builtin class-name">test</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>但是先生成目标文件的好处在于，编译大项目时，如果只修改了部分文件，可以只编译生成对应的目标文件然后直接链接，可以节省很多编译时间。</p>
+<h2 id="Make-和-Makefile">Make 和 Makefile</h2>
+<h3 id="什么是-Make">什么是 Make</h3>
+<p>以下摘自 Wikipedia:</p>
+<blockquote>
+<p>In software development, Make is a build automation tool that automatically builds executable programs and libraries from source code by reading files called Makefiles which specify how to derive the target program.</p>
+</blockquote>
+<p>也即我们写好了 Makefile 以后，使用 <code>make</code> 命令即可编译。Make 有许多不同的版本，我们只介绍最常用的 GNU Make.</p>
+<h3 id="Makefile-语法">Makefile 语法</h3>
+<h4 id="基本语法">基本语法</h4>
+<pre class="line-numbers language-makefile" data-language="makefile"><code class="language-makefile"><span class="token target symbol">targets</span><span class="token punctuation">:</span> prerequisites
+	command<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li>
+<p>targets：规则的目标，可以是目标文件（*.o），也可以是可执行文件，还可以是一个标签；</p>
+</li>
+<li>
+<p>prerequisites：是我们的<strong>依赖文件</strong>，要生成 targets 需要的文件或者是目标。可以是多个，也可以没有；</p>
+</li>
+</ul>
+<ul>
+<li>command：make 需要执行的命令（<strong>任意的 shell 命令</strong>）。可以有多条命令，每一条命令占一行。</li>
+</ul>
+<p>prerequisites 中如果<strong>有一个以上的文件比 target 文件要新</strong>的话，command 所定义的命令就会被执行。</p>
+<p>注意：command 前<strong>必须有一个 tab</strong>。</p>
+<p>那么简单的 Makefile 如下：</p>
+<pre class="line-numbers language-makefile" data-language="makefile"><code class="language-makefile"><span class="token target symbol">test</span><span class="token punctuation">:</span> test.cpp <span class="token comment"># comment</span>
+	g++ -c test.cpp -o test.o
+	g++ test.o -o test <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>其中 test.cpp 内容：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"hello world\n"</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>文件结构：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">ls</span>
+Makefile test.cpp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>之后在含 Makefile 的目录下用命令 make 即可编译：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">make</span>
+g++ -c test.cpp -o test.o
+g++ test.o -o <span class="token builtin class-name">test</span>
+$ <span class="token function">ls</span>
+Makefile  <span class="token builtin class-name">test</span>  test.cpp  test.o<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对于大型一点的工程，就需要用到下面的语法。</p>
+<h4 id="变量">变量</h4>
+<p>定义时很简单，使用 <code>变量名=变量值</code>，使用时用 <code>${变量名}</code> 或 <code>$(变量名)</code> 的形式。事实上这里称作变量并不是太合适，因为在使用变量时只是进行了宏替换。例如上面的 Makefile 可以改成</p>
+<pre class="line-numbers language-makefile" data-language="makefile"><code class="language-makefile">CC<span class="token operator">=</span>g++
+TARGET<span class="token operator">=</span>test
+SRC<span class="token operator">=</span>test.cpp
+OBJ<span class="token operator">=</span>test.o
+<span class="token target symbol"><span class="token variable">$</span>{TARGET}</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">{</span>SRC<span class="token punctuation">}</span>
+	<span class="token variable">$</span><span class="token punctuation">{</span>CC<span class="token punctuation">}</span> -c <span class="token variable">$</span><span class="token punctuation">{</span>SRC<span class="token punctuation">}</span> -o <span class="token variable">$</span><span class="token punctuation">{</span>OBJ<span class="token punctuation">}</span>
+	<span class="token variable">$</span><span class="token punctuation">{</span>CC<span class="token punctuation">}</span> <span class="token variable">$</span><span class="token punctuation">{</span>OBJ<span class="token punctuation">}</span> -o <span class="token variable">$</span><span class="token punctuation">{</span>TARGET<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="通配符">通配符</h4>
+<p>shell 支持的通配符（类似于正则）都可以在 Makefile 中使用，有如下通配符：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">通配符</th>
+<th style="text-align:center">使用说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">匹配 0 个或者是任意个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">？</td>
+<td style="text-align:center">匹配任意一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[]</td>
+<td style="text-align:center">我们可以指定匹配的字符放在 “[]” 中</td>
+</tr>
+</tbody>
+</table>
+<p>此外，在 Makefile 中，字符 <code>%</code> 也可以用于匹配任意个字符（shell 中不可），使用在我们的的规则当中，可以快速生成 <code>.o</code> 文件（使用类似循环的方式） ，这个在后面的例子中会体现。</p>
+<h4 id="自动化变量">自动化变量</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">自动化变量</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$@</td>
+<td style="text-align:center">表示规则的目标文件名。</td>
+</tr>
+<tr>
+<td style="text-align:center">$%</td>
+<td style="text-align:center">当目标文件是一个静态库文件时，代表静态库的一个成员名。</td>
+</tr>
+<tr>
+<td style="text-align:center">$&lt;</td>
+<td style="text-align:center">规则的第一个依赖的文件名。如果是一个目标文件使用隐含的规则来重建，则它代表由隐含规则加入的第一个依赖文件。</td>
+</tr>
+<tr>
+<td style="text-align:center">$?</td>
+<td style="text-align:center">所有比目标文件更新的依赖文件列表，空格分隔。如果目标文件时静态库文件，代表的是库文件（.o 文件）。</td>
+</tr>
+<tr>
+<td style="text-align:center">$^</td>
+<td style="text-align:center">代表的是所有依赖文件列表，使用空格分隔。如果目标是静态库文件，它所代表的只能是所有的库成员（.o 文件）名。 一个文件可重复的出现在目标的依赖中，变量 <code>\$^</code> 只记录它的第一次引用的情况。</td>
+</tr>
+<tr>
+<td style="text-align:center">$+</td>
+<td style="text-align:center">类似 <code>\$^</code>，但是它保留了依赖文件中重复出现的文件。主要用在程序链接时库的交叉引用场合。</td>
+</tr>
+</tbody>
+</table>
+<p>读者看到这个表可能已经晕了，不知道到底这些有啥用，事实上我也没有全部看懂，在后面的教程只用到了 <code>$@</code> 和 <code>$&lt;</code>，其他的应该用在一些更高级的项目里，具体遇到再查。</p>
+<h4 id="目标文件搜索">目标文件搜索</h4>
+<p>当所需的 *.cpp、*.h 文件不在 Makefile 所在目录下时，需要特别指定其路径，这里有一种更简单的方法，指定 <code>VPATH=src</code>，src 为需要寻找对应文件的地址（具体见后面的例子）。</p>
+<h4 id="例">例</h4>
+<p>以我本学期数据结构第一次大作业的工程（银行业务模拟）为例，工程目录：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">ls</span>
+Makefile  incl/  src/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>其中 src 里为 *.cpp 文件，incl 里为 *.h 文件。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">ls</span> incl
+client.h  event.h  global_variable.h  main.h  queue.h
+$ <span class="token function">ls</span> src
+client.cpp  event.cpp  global_variable.cpp  main.cpp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>初版 Makefile：</p>
+<pre class="line-numbers language-makefile" data-language="makefile"><code class="language-makefile">CC<span class="token operator">=</span>g++
+INCL<span class="token operator">=</span>./incl
+SRC<span class="token operator">=</span>./src
+OBJ<span class="token operator">=</span>client.o event.o global_variable.o main.o
+
+<span class="token target symbol">test</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">{</span>OBJ<span class="token punctuation">}</span>
+	<span class="token variable">$</span><span class="token punctuation">{</span>CC<span class="token punctuation">}</span> -o test <span class="token variable">$</span><span class="token punctuation">{</span>OBJ<span class="token punctuation">}</span>
+
+<span class="token target symbol">client.o</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">{</span>INCL<span class="token punctuation">}</span>/client.h <span class="token variable">$</span><span class="token punctuation">{</span>SRC<span class="token punctuation">}</span>/client.cpp
+	<span class="token variable">$</span><span class="token punctuation">{</span>CC<span class="token punctuation">}</span> -c <span class="token variable">$</span><span class="token punctuation">{</span>SRC<span class="token punctuation">}</span>/client.cpp
+
+<span class="token target symbol">global_variable.o</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">{</span>INCL<span class="token punctuation">}</span>/global_variable.h <span class="token variable">$</span><span class="token punctuation">{</span>SRC<span class="token punctuation">}</span>/global_variable.cpp
+	<span class="token variable">$</span><span class="token punctuation">{</span>CC<span class="token punctuation">}</span> -c <span class="token variable">$</span><span class="token punctuation">{</span>SRC<span class="token punctuation">}</span>/global_variable.cpp
+
+<span class="token target symbol">event.o</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">{</span>INCL<span class="token punctuation">}</span>/event.h <span class="token variable">$</span><span class="token punctuation">{</span>SRC<span class="token punctuation">}</span>/event.cpp
+	<span class="token variable">$</span><span class="token punctuation">{</span>CC<span class="token punctuation">}</span> -c <span class="token variable">$</span><span class="token punctuation">{</span>SRC<span class="token punctuation">}</span>/event.cpp
+
+<span class="token target symbol">main.o</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">{</span>INCL<span class="token punctuation">}</span>/main.h <span class="token variable">$</span><span class="token punctuation">{</span>SRC<span class="token punctuation">}</span>/main.cpp
+	<span class="token variable">$</span><span class="token punctuation">{</span>CC<span class="token punctuation">}</span> -c <span class="token variable">$</span><span class="token punctuation">{</span>SRC<span class="token punctuation">}</span>/main.cpp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>很明显写起来非常麻烦，每个目标文件都得有对应的处理语句，语句一多就很麻烦。</p>
+<p>之后我们用通配符和自动化变量改进：</p>
+<pre class="line-numbers language-makefile" data-language="makefile"><code class="language-makefile">CC<span class="token operator">=</span>g++
+INCL<span class="token operator">=</span>./incl
+SRC<span class="token operator">=</span>./src
+OBJ<span class="token operator">=</span>client.o event.o global_variable.o main.o <span class="token comment"># 宏替换，所以有空格也没事</span>
+
+<span class="token target symbol">test</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>OBJ<span class="token punctuation">)</span>
+	<span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> -o test <span class="token variable">$</span><span class="token punctuation">(</span>OBJ<span class="token punctuation">)</span>
+
+<span class="token target symbol">%.o</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>SRC<span class="token punctuation">)</span>/%.cpp <span class="token variable">$</span><span class="token punctuation">(</span>INCL<span class="token punctuation">)</span>
+	<span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> -c <span class="token variable">$&lt;</span> -o <span class="token variable">$@</span> <span class="token comment"># 也可以简写成 $(CC) -c $&lt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里 <code>%.o</code> 把我们需要的所有的 <code>.o</code> 文件组合成为一个列表，从列表中挨个取出每一个文件，<code>%</code> 表示取出来文件的文件名（不包含后缀），然后找到文件中和 <code>%</code> 名称相同的 <code>.cpp</code> 文件，然后执行下面的命令，直到列表中的文件全部被取出来为止。</p>
+<p>如果再使用 <code>VPATH</code>，可以最终简化为：</p>
+<pre class="line-numbers language-makefile" data-language="makefile"><code class="language-makefile">CC<span class="token operator">=</span>g++
+OBJ<span class="token operator">=</span>client.o event.o global_variable.o main.o
+VPATH<span class="token operator">=</span>src incl
+
+<span class="token target symbol">test</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>OBJ<span class="token punctuation">)</span>
+	<span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> -o test <span class="token variable">$</span><span class="token punctuation">(</span>OBJ<span class="token punctuation">)</span>
+
+<span class="token target symbol">%.o</span><span class="token punctuation">:</span> %.cpp
+	<span class="token variable">$</span><span class="token punctuation">{</span>CC<span class="token punctuation">}</span> -c <span class="token variable">$&lt;</span> -o <span class="token variable">$@</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>此外，也可以写一个伪目标用于清除过程中生成的 *.o 文件：</p>
+<pre class="line-numbers language-makefile" data-language="makefile"><code class="language-makefile"><span class="token builtin-target builtin">.PHONY</span><span class="token punctuation">:</span> clean
+
+<span class="token target symbol">clean</span><span class="token punctuation">:</span>
+	rm -rf <span class="token variable">$</span><span class="token punctuation">(</span>OBJ<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中 clean 不是一个文件，因此也不会被 Makefile 执行，只有执行 <code>make clean</code> 才会调用 clean 里的 command。<code>.PHONY</code> 的作用有二：</p>
+<ul>
+<li>避免 Makefile 中定义的只执行的命令的目标和工作目录下的实际文件出现名字冲突。</li>
+<li>提高执行 make 时的效率。</li>
+</ul>
+<p>PS：写 OBJ 的列表也有点麻烦，我尝试在 Makefile 写一个获取该列表的函数，但是没有成功，只能写了个 Python 脚本：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os
+
+<span class="token keyword">for</span> fileName <span class="token keyword">in</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span><span class="token string">'./src'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    s <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>splitext<span class="token punctuation">(</span>fileName<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> s<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'.cpp'</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">'.o'</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">" "</span><span class="token punctuation">)</span> <span class="token comment"># client.o event.o global_variable.o main.o</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="CMake-和-CMakeLists-txt">CMake 和 CMakeLists.txt</h2>
+<p>CMake 是一个<strong>跨平台的编译工具</strong>，能够输出各种各样的 Makefile 或者项目文件，能测试编译器所支持的 C++ 特性，类似 UNIX 下的automake. （在 UNIX 中，生成 Makefile，在 Visual Studio 中会生成项目解决方案……）</p>
+<p>安装 CMake 后，输入 cmake，可以发现有三种 Usage：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ cmake
+Usage
+
+  cmake <span class="token punctuation">[</span>options<span class="token punctuation">]</span> <span class="token operator">&lt;</span>path-to-source<span class="token operator">&gt;</span>
+  cmake <span class="token punctuation">[</span>options<span class="token punctuation">]</span> <span class="token operator">&lt;</span>path-to-existing-build<span class="token operator">&gt;</span>
+  cmake <span class="token punctuation">[</span>options<span class="token punctuation">]</span> -S <span class="token operator">&lt;</span>path-to-source<span class="token operator">&gt;</span> -B <span class="token operator">&lt;</span>path-to-build<span class="token operator">&gt;</span>
+
+Specify a <span class="token builtin class-name">source</span> directory to <span class="token punctuation">(</span>re-<span class="token punctuation">)</span>generate a build system <span class="token keyword">for</span> <span class="token for-or-select variable">it</span> <span class="token keyword">in</span> the
+current working directory.  Specify an existing build directory to
+re-generate its build system.
+
+Run <span class="token string">'cmake --help'</span> <span class="token keyword">for</span> <span class="token function">more</span> information.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>第三种指定的参数最多，也最灵活，后面都使用第三种方式。</p>
+<h3 id="简单的示例">简单的示例</h3>
+<p>创建源文件 <code>tutorial.cxx</code> 在 <code>Step0</code> 目录下，用于计算平方根：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// A simple program that computes the square root of a number</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cmath&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>argc <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Usage: "</span> <span class="token operator">&lt;&lt;</span> argv<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" number"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">double</span> inputValue <span class="token operator">=</span> <span class="token function">atof</span><span class="token punctuation">(</span>argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> outputValue <span class="token operator">=</span> <span class="token function">sqrt</span><span class="token punctuation">(</span>inputValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"The square root of "</span> <span class="token operator">&lt;&lt;</span> inputValue <span class="token operator">&lt;&lt;</span> <span class="token string">" is "</span> <span class="token operator">&lt;&lt;</span> outputValue <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>之后在同目录下创建 <code>CMakeLists.txt</code>：</p>
+<pre class="line-numbers language-cmake" data-language="cmake"><code class="language-cmake"><span class="token comment"># CMake 最低版本要求</span>
+<span class="token keyword">cmake_minimum_required</span><span class="token punctuation">(</span><span class="token property">VERSION</span> <span class="token number">3.10</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 设置项目名称和版本</span>
+<span class="token keyword">project</span><span class="token punctuation">(</span>Test<span class="token punctuation">)</span>
+
+<span class="token comment"># 添加可执行文件</span>
+<span class="token keyword">add_executable</span><span class="token punctuation">(</span><span class="token punctuation">${</span><span class="token variable">PROJECT_NAME</span><span class="token punctuation">}</span> tutorial.cxx<span class="token punctuation">)</span> <span class="token comment"># ${PROJECT_NAME} 即为 Test，也是最后生成可执行文件的名字</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>之后需要指定需要 build 的目录：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">mkdir</span> build
+$ <span class="token builtin class-name">cd</span> build
+$ cmake -S <span class="token punctuation">..</span> -B <span class="token builtin class-name">.</span> <span class="token comment"># 等价于 cmake ..</span>
+-- The C compiler identification is GNU <span class="token number">9.3</span>.0
+-- The CXX compiler identification is GNU <span class="token number">9.3</span>.0
+-- Check <span class="token keyword">for</span> working C compiler: /usr/bin/cc
+-- Check <span class="token keyword">for</span> working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - <span class="token keyword">done</span>
+-- Detecting C compile features
+-- Detecting C compile features - <span class="token keyword">done</span>
+-- Check <span class="token keyword">for</span> working CXX compiler: /usr/bin/c++
+-- Check <span class="token keyword">for</span> working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - <span class="token keyword">done</span>
+-- Detecting CXX compile features
+-- Detecting CXX compile features - <span class="token keyword">done</span>
+-- Configuring <span class="token keyword">done</span>
+-- Generating <span class="token keyword">done</span>
+-- Build files have been written to: <span class="token punctuation">..</span>./Step0/build<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这时可以发现 <code>build</code> 目录下生成了 Makefile：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">ls</span>
+CMakeCache.txt  CMakeFiles  Makefile  cmake_install.cmake<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>内容好长，我也没太看懂，直接 <code>make</code>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">make</span>
+Scanning dependencies of target Test
+<span class="token punctuation">[</span> <span class="token number">50</span>%<span class="token punctuation">]</span> Building CXX object CMakeFiles/Test.dir/tutorial.cxx.o
+<span class="token punctuation">[</span><span class="token number">100</span>%<span class="token punctuation">]</span> Linking CXX executable Test
+<span class="token punctuation">[</span><span class="token number">100</span>%<span class="token punctuation">]</span> Built target Test<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>发现多出了可执行文件 <code>Test</code>，运行一下：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ./Test
+Usage: ./Test number
+
+$ ./Test <span class="token number">49</span>
+The square root of <span class="token number">49</span> is <span class="token number">7</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="为项目添加版本号和可配置的头文件">为项目添加版本号和可配置的头文件</h3>
+<p>修改 <code>CMakeLists.txt</code> 如下：</p>
+<pre class="line-numbers language-cmake" data-language="cmake"><code class="language-cmake"><span class="token comment"># CMake 最低版本要求</span>
+<span class="token keyword">cmake_minimum_required</span><span class="token punctuation">(</span><span class="token property">VERSION</span> <span class="token number">3.10</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 设置项目名称和版本</span>
+<span class="token keyword">project</span><span class="token punctuation">(</span>Tutorial <span class="token property">VERSION</span> <span class="token number">1.0</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 添加可执行文件</span>
+<span class="token keyword">add_executable</span><span class="token punctuation">(</span>Tutorial tutorial.cxx<span class="token punctuation">)</span>
+
+<span class="token comment"># 配置文件，用于将后者的内容替换为前者</span>
+<span class="token keyword">configure_file</span><span class="token punctuation">(</span>TutorialConfig.h.in TutorialConfig.h<span class="token punctuation">)</span>
+
+<span class="token comment"># 固定写法</span>
+<span class="token keyword">target_include_directories</span><span class="token punctuation">(</span><span class="token punctuation">${</span><span class="token variable">PROJECT_NAME</span><span class="token punctuation">}</span> <span class="token namespace">PUBLIC</span> <span class="token string">"<span class="token interpolation"><span class="token punctuation">${</span><span class="token variable">PROJECT_BINARY_DIR</span><span class="token punctuation">}</span></span>"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 指定 C++ 标准</span>
+<span class="token keyword">set</span><span class="token punctuation">(</span><span class="token variable">CMAKE_CXX_STANDARD</span> <span class="token number">17</span><span class="token punctuation">)</span>
+<span class="token keyword">set</span><span class="token punctuation">(</span><span class="token variable">CMAKE_CXX_STANDARD_REQUIRED</span> True<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在目录下添加头文件 <code>TutorialConfig.h.in</code>：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// Tutorial 的配置选项和设置</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">Tutorial_VERSION_MAJOR</span> <span class="token expression">@Tutorial_VERSION_MAJOR@</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">Tutorial_VERSION_MINOR</span> <span class="token expression">@Tutorial_VERSION_MINOR@</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>其中以 <code>@</code> 开头和结尾的宏将会被 camke 替换为对应的版本。</p>
+<p>修改 <code>tutorial.cxx</code> 并让其包含头文件：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// A simple program that computes the square root of a number</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cmath&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"TutorialConfig.h"</span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>argc <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> argv<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" Version "</span> <span class="token operator">&lt;&lt;</span> Tutorial_VERSION_MAJOR <span class="token operator">&lt;&lt;</span> <span class="token string">"."</span>
+                  <span class="token operator">&lt;&lt;</span> Tutorial_VERSION_MINOR <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Usage: "</span> <span class="token operator">&lt;&lt;</span> argv<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" number"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">double</span> inputValue <span class="token operator">=</span> <span class="token function">atof</span><span class="token punctuation">(</span>argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> outputValue <span class="token operator">=</span> <span class="token function">sqrt</span><span class="token punctuation">(</span>inputValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"The square root of "</span> <span class="token operator">&lt;&lt;</span> inputValue <span class="token operator">&lt;&lt;</span> <span class="token string">" is "</span> <span class="token operator">&lt;&lt;</span> outputValue <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>重新操作一番后执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">mkdir</span> build
+$ cmake -S <span class="token builtin class-name">.</span> -B build
+$ <span class="token builtin class-name">cd</span> build
+$ <span class="token function">make</span>
+$ ./Tutorial
+./Tutorial Version <span class="token number">1.0</span>
+Usage: ./Tutorial number<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>发现多出了一行版本信息，同时在 <code>build</code> 目录下也多出了 CMake 为我们自动生成的 <code>TutorialConfig.h</code> 文件同时并作了替换：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">ls</span>
+CMakeCache.txt  CMakeFiles  Makefile  TutorialConfig.h  cmake_install.cmake
+
+$ <span class="token function">cat</span> TutorialConfig.h
+// Tutorial 的配置选项和设置
+<span class="token comment">#define Tutorial_VERSION_MAJOR 1</span>
+<span class="token comment">#define Tutorial_VERSION_MINOR 0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="为工程添加链接库">为工程添加链接库</h3>
+<h4 id="什么是链接库">什么是链接库</h4>
+<p>链接库（下面简称库）分为静态库和动态库。</p>
+<h4 id="静态库">静态库</h4>
+<p>静态库是一些目标文件（<code>.o</code> 文件）的集合，在 Windows 中通常后缀为 <code>.lib</code>，Linux 中为 <code>.a</code>。静态库在链接时会直接把里面的函数代码全部链接到可执行文件中，便于程序的移植，但是也浪费了空间和资源。例如，当多个程序都调用相同函数时，内存中就会存在这个函数的多个拷贝。此外，当静态库变动时，需要链接到库的程序需要重新进行编译，小小的改动可能就要浪费很多时间。因此，静态库的使用不如动态库来得方便。</p>
+<h4 id="动态库">动态库</h4>
+<p>在 Windows 中为 <code>.dll</code>，Linux 中为 <code>.so</code>（例如 LabS 中要用到的 boost 装上以后就是 .so 文件）。动态库在程序编译时<strong>并不会被链接到目标代码</strong>中**，而是在程序运行时才被载入。<strong>不同的应用程序如果调用相同的库，那么在内存里只需要有一份该共享库的实例</strong>，规避了空间浪费问题，也解决了静态库对程序的更新、部署和发布页带来的麻烦。用户只需要更新动态库即可，**增量更新。</p>
+<h4 id="如何添加库">如何添加库</h4>
+<p>这里以静态库为例，动态库也是类似的。</p>
+<p>首先新建子文件夹 <code>Adder</code>，里面包含 <code>adder.cpp</code> 及 <code>adder.h</code>，用于计算两个整数的和。</p>
+<p><code>adder.cpp</code>：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"adder.h"</span></span>
+<span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>adder.h</code>：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>并在该目录中创建 <code>CMakeLists.txt</code>：</p>
+<pre class="line-numbers language-cmake" data-language="cmake"><code class="language-cmake"><span class="token comment"># 指定库名以及编译库所需要的依赖文件</span>
+<span class="token keyword">add_library</span><span class="token punctuation">(</span>adder adder.cpp adder.h<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>修改父文件夹的 <code>CMakeLists.txt</code></p>
+<pre class="line-numbers language-cmake" data-language="cmake"><code class="language-cmake"><span class="token comment"># CMake 最低版本要求</span>
+<span class="token keyword">cmake_minimum_required</span><span class="token punctuation">(</span><span class="token property">VERSION</span> <span class="token number">3.10</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 设置项目名称和版本</span>
+<span class="token keyword">project</span><span class="token punctuation">(</span>Tutorial <span class="token property">VERSION</span> <span class="token number">1.0</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 添加可执行文件</span>
+<span class="token keyword">add_executable</span><span class="token punctuation">(</span>Tutorial tutorial.cxx<span class="token punctuation">)</span>
+
+<span class="token comment"># 配置文件，用于将后者的内容替换为前者</span>
+<span class="token keyword">configure_file</span><span class="token punctuation">(</span>TutorialConfig.h.in TutorialConfig.h<span class="token punctuation">)</span>
+
+<span class="token comment"># 这里加上了 Adder，固定写法</span>
+<span class="token keyword">target_include_directories</span><span class="token punctuation">(</span><span class="token punctuation">${</span><span class="token variable">PROJECT_NAME</span><span class="token punctuation">}</span> <span class="token namespace">PUBLIC</span> <span class="token string">"<span class="token interpolation"><span class="token punctuation">${</span><span class="token variable">PROJECT_BINARY_DIR</span><span class="token punctuation">}</span></span>"</span> Adder<span class="token punctuation">)</span>
+
+<span class="token comment"># 添加子目录，这时会把该子目录编译成库</span>
+<span class="token keyword">add_subdirectory</span><span class="token punctuation">(</span>Adder<span class="token punctuation">)</span>
+
+<span class="token comment"># 指定当CMake从那里寻找我们需要链接的库</span>
+<span class="token keyword">target_link_directories</span><span class="token punctuation">(</span><span class="token punctuation">${</span><span class="token variable">PROJECT_NAME</span><span class="token punctuation">}</span> <span class="token namespace">PUBLIC</span> Adder<span class="token punctuation">)</span>
+
+<span class="token comment"># 将库链接到程序里</span>
+<span class="token keyword">target_link_libraries</span><span class="token punctuation">(</span><span class="token punctuation">${</span><span class="token variable">PROJECT_NAME</span><span class="token punctuation">}</span> adder<span class="token punctuation">)</span>
+
+<span class="token comment"># 指定 C++ 标准，set 用来对变量复制</span>
+<span class="token keyword">set</span><span class="token punctuation">(</span><span class="token variable">CMAKE_CXX_STANDARD</span> <span class="token number">17</span><span class="token punctuation">)</span>
+<span class="token keyword">set</span><span class="token punctuation">(</span><span class="token variable">CMAKE_CXX_STANDARD_REQUIRED</span> True<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>tutorial.cxx</code>：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// A simple program that computes the square root of a number</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;adder.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"TutorialConfig.h"</span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>argc <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> argv<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" Version "</span> <span class="token operator">&lt;&lt;</span> Tutorial_VERSION_MAJOR <span class="token operator">&lt;&lt;</span> <span class="token string">"."</span>
+                  <span class="token operator">&lt;&lt;</span> Tutorial_VERSION_MINOR <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Usage: "</span> <span class="token operator">&lt;&lt;</span> argv<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" number1 number2"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token function">atof</span><span class="token punctuation">(</span>argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token function">atof</span><span class="token punctuation">(</span>argv<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> outputValue <span class="token operator">=</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"The sum of "</span> <span class="token operator">&lt;&lt;</span> a <span class="token operator">&lt;&lt;</span> <span class="token string">" and "</span> <span class="token operator">&lt;&lt;</span> b <span class="token operator">&lt;&lt;</span> <span class="token string">" is "</span> <span class="token operator">&lt;&lt;</span> outputValue <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意到这里可以直接 <code>#include &lt;adder.h&gt;</code> 因为 adder 已经被我们配置成了库加到 <code>CMakeLists.txt</code> 中。</p>
+<p>之后编译运行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ./Tutorial <span class="token number">2</span> <span class="token number">3</span>
+The <span class="token function">sum</span> of <span class="token number">2</span> and <span class="token number">3</span> is <span class="token number">5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>同时可以在 <code>build/Adder</code> 目录下找到 <code>libadder.a</code>，这便是 adder 编译成的链接文件。</p>
+<h2 id="VSCode-下使用-GDB-调试">VSCode 下使用 GDB 调试</h2>
+<p>对于单文件的编译，只要使用 Code Runner 或者前面介绍过的命令行工具即可，而如果要用 GDB 调试，就需要配置一下 VSCode：按下 F5，选择 g++，之后会弹出一个 <code>tasks.json</code> 文件，配置如下：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"tasks"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cppbuild"</span><span class="token punctuation">,</span> 
+            <span class="token property">"label"</span><span class="token operator">:</span> <span class="token string">"compile"</span><span class="token punctuation">,</span> <span class="token comment">// 该任务的名称</span>
+            <span class="token property">"command"</span><span class="token operator">:</span> <span class="token string">"D:\\edge download\\mingw64\\bin\\g++.exe"</span><span class="token punctuation">,</span> <span class="token comment">// 编译程序的路径</span>
+            <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"-g"</span><span class="token punctuation">,</span> <span class="token comment">// 加该参数才能使用 GDB 调试</span>
+                <span class="token string">"${file}"</span><span class="token punctuation">,</span> <span class="token comment">// ${file} 是按下 F5 时的文件名</span>
+                <span class="token string">"-o"</span><span class="token punctuation">,</span>
+                <span class="token string">"${fileDirname}\\${fileBasenameNoExtension}.exe"</span> <span class="token comment">// 生成的 .exe 文件</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"options"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${fileDirname}"</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token property">"problemMatcher"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"$gcc"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"group"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"kind"</span><span class="token operator">:</span> <span class="token string">"build"</span><span class="token punctuation">,</span>
+                <span class="token property">"isDefault"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token property">"detail"</span><span class="token operator">:</span> <span class="token string">"调试器生成的任务。"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"2.0.0"</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>launch.json</code> 文件：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token comment">// 使用 IntelliSense 了解相关属性。 </span>
+    <span class="token comment">// 悬停以查看现有属性的描述。</span>
+    <span class="token comment">// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387</span>
+    <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.2.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"g++.exe - 生成和调试活动文件"</span><span class="token punctuation">,</span>
+            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"cppdbg"</span><span class="token punctuation">,</span>
+            <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span>
+            <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${fileDirname}\\${fileBasenameNoExtension}.exe"</span><span class="token punctuation">,</span> <span class="token comment">// 要调试的程序名称</span>
+            <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 调试时的命令行参数</span>
+            <span class="token property">"stopAtEntry"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">"cwd"</span><span class="token operator">:</span> <span class="token string">"${fileDirname}"</span><span class="token punctuation">,</span>
+            <span class="token property">"environment"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"externalConsole"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// 调试时是否需要弹出外部终端</span>
+            <span class="token property">"MIMode"</span><span class="token operator">:</span> <span class="token string">"gdb"</span><span class="token punctuation">,</span>
+            <span class="token property">"miDebuggerPath"</span><span class="token operator">:</span> <span class="token string">"D:\\edge download\\mingw64\\bin\\gdb.exe"</span><span class="token punctuation">,</span> <span class="token comment">// gdb 的路径</span>
+            <span class="token property">"setupCommands"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"为 gdb 启用整齐打印"</span><span class="token punctuation">,</span>
+                    <span class="token property">"text"</span><span class="token operator">:</span> <span class="token string">"-enable-pretty-printing"</span><span class="token punctuation">,</span>
+                    <span class="token property">"ignoreFailures"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"preLaunchTask"</span><span class="token operator">:</span> <span class="token string">"compile"</span> <span class="token comment">// 对应 task.json 里面的 "label" 值</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对于多文件，则需要作一些修改：</p>
+<p>首先需要修改 task.json 里面的参数，先把 <code>$file$</code> 去掉，防止重复链接，再加上所有需要编译的 <code>.cpp</code> 文件和包含的头文件位置，如下：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"-g"</span><span class="token punctuation">,</span>
+    <span class="token string">"-std=c++17"</span><span class="token punctuation">,</span>
+    <span class="token string">"-I"</span><span class="token punctuation">,</span>
+    <span class="token string">"${workspaceFolder}\\incl"</span><span class="token punctuation">,</span>
+    <span class="token string">"${workspaceFolder}\\src\\*.cpp"</span><span class="token punctuation">,</span>
+    <span class="token string">"-o"</span><span class="token punctuation">,</span>
+    <span class="token string">"${workspaceFolder}\\build\\${workspaceFolderBasename}.exe"</span>
+<span class="token punctuation">]</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>之后再修改 <code>launch.json</code>：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}\\build\\${workspaceFolderBasename}.exe"</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="参考文档">参考文档</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/47390641">Makefile由浅入深–教程、干货 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106777805">C程序的编译过程 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="http://c.biancheng.net/makefile/">Makefile教程：Makefile文件编写1天入门 (biancheng.net)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ff0e0e26c47a">Makefile简易教程 - 简书 (jianshu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20484931">Linux 中的动态链接库和静态链接库是干什么的？ - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/guide/tutorial/index.html">CMake 官方教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/119426899">CMake教程（一） - 知乎 (zhihu.com)</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/C-C/">
+                                    <span class="chip bg-color">C/C++</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'iT1y2aQnx6u5pD7nnDM0hL8P-gzGzoHsz',
+        appKey: '6UmywYMRbt5i6Lymj3eskq9L',
+        notify: 'true' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '说点什么吧'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/01/01/cs61a-notes/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/cs61a_notes.jpg" class="responsive-img" alt="CS61A Notes">
+                        
+                        <span class="card-title">CS61A Notes</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Notes for taking the course CS61A su20
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/11/02/crypto1/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/crypto1.jpg" class="responsive-img" alt="菜鸡的 Crypto 入门">
+                        
+                        <span class="card-title">菜鸡的 Crypto 入门</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Crypto/" class="post-category">
+                                    Crypto
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Crypto/">
+                        <span class="chip bg-color">Crypto</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: xkz<br />'
+            + '文章作者: xkz<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">xkz</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">112.5k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/xkz0777" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:xkz@mail.ustc.edu.cn" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=821376043" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 821376043" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
