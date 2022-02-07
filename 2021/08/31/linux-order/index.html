@@ -393,21 +393,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-11-11
+                    2022-02-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.2k
+                    4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    15 分
                 </div>
                 
 
@@ -433,250 +433,395 @@
                 <h1>Linux 常用指令</h1>
 <h2 id="开机、重启和用户登陆注销">开机、重启和用户登陆注销</h2>
 <h3 id="关机、重启指令">关机、重启指令</h3>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">shutdown</span> -h now<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ shutdown -h now<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>立即关机</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">shutdown</span> -h <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ shutdown -h 1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>1 分钟后关机</p>
-<p><code>halt</code> 也可关机，<code>reboot</code> 可以重启，<code>sync</code> 可以把内存数据同步到磁盘。</p>
-<p>建议在关机或重启前运行 <code>sync</code>（虽然目前系统大多会执行）。</p>
+<p><code>halt</code> 也可关机, <code>reboot</code> 可以重启, <code>sync</code> 可以把内存数据同步到磁盘.</p>
+<p>建议在关机或重启前运行 <code>sync</code>(虽然目前系统大多会执行).</p>
 <h3 id="用户登陆或注销">用户登陆或注销</h3>
-<p>登陆时尽量少用 root 账号登陆，避免操作失误，普通用户登陆后可以使用 <code>su - 用户名</code> 来切换用户。</p>
-<p>在提示符下输入 <code>logout</code> 可以注销账户，但是在图形运行级别无效，只在运行级别 3 下有效。</p>
+<p>登陆时尽量少用 root 账号登陆, 避免操作失误, 普通用户登陆后可以使用 <code>su - 用户名</code> 来切换用户.</p>
+<p>在提示符下输入 <code>logout</code> 可以注销账户, 但是在图形运行级别无效, 只在运行级别 3 下有效.</p>
 <h2 id="用户管理">用户管理</h2>
 <h3 id="添加用户">添加用户</h3>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">useradd</span> 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>此时会在 <code>/home</code> 目录下创建一个用户名对应的文件夹，为该用户的家目录，登陆后默认进入该文件夹。</p>
-<p>同时，会创建一个组，组名与用户名相同，该用户即为该组成员。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">useradd</span> -d 指定目录 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>此时会在指定目录下为该用户创建家目录。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">useradd</span> -g 组名 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>此时会在指定的组下创建用户。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">useradd</span> 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>此时会在 <code>/home</code> 目录下创建一个用户名对应的文件夹, 为该用户的家目录, 登陆后默认进入该文件夹.</p>
+<p>同时, 会创建一个组, 组名与用户名相同, 该用户即为该组成员.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">useradd</span> -d 指定目录 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>此时会在指定目录下为该用户创建家目录.</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">useradd</span> -g 组名 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>此时会在指定的组下创建用户.</p>
 <h3 id="指定-修改密码">指定/修改密码</h3>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">passwd</span> 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>随后输入用户密码即可。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">passwd</span> 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>随后输入用户密码即可.</p>
 <h3 id="删除用户">删除用户</h3>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">userdel</span> 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>此时会删除该用户，但是保留其家目录。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">userdel</span> -r 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>此时会删除该用户及其家目录（通常两种方式选择前者）。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">userdel</span> 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>此时会删除该用户, 但是保留其家目录.</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">userdel</span> -r 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>此时会删除该用户及其家目录(通常两种方式选择前者).</p>
 <h3 id="查询用户信息">查询用户信息</h3>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">id</span> 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">id</span> 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="切换用户">切换用户</h3>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">su</span> - 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>注意：</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">su</span> - 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>注意:</p>
 <ul>
-<li>从权限高的用户切换到权限低的用户，不需要输入密码，反之需要。</li>
-<li>返回到原来用户使用 <code>exit</code> / <code>logout</code> 命令。</li>
-<li>如果未切换用户，使用 <code>exit</code> / <code>logout</code> 命令会注销当前账号。</li>
+<li>从权限高的用户切换到权限低的用户, 不需要输入密码, 反之需要.</li>
+<li>返回到原来用户使用 <code>exit</code> / <code>logout</code> 命令.</li>
+<li>如果未切换用户, 使用 <code>exit</code> / <code>logout</code> 命令会注销当前账号.</li>
 </ul>
 <h3 id="查看当前用户-登陆用户">查看当前用户/登陆用户</h3>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">whoami/who am i<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ whoami/who am i<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="组管理">组管理</h2>
 <h3 id="新增组">新增组</h3>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">groupadd</span> 组名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">groupadd</span> 组名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="删除组">删除组</h3>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">groupdel</span> 组名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">groupdel</span> 组名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="修改用户的组">修改用户的组</h3>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">usermod</span> -g 组名 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">usermod</span> -g 组名 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="修改用户登陆的初始目录">修改用户登陆的初始目录</h3>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">usermod</span> -d 目录名 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>注意：此时用户需要有进入到新目录的权限（即可执行 x 权限）。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">usermod</span> -d 目录名 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>注意: 此时用户需要有进入到新目录的权限(即可执行 x 权限).</p>
 <h2 id="用户和组相关文件">用户和组相关文件</h2>
 <ul>
 <li>
 <p><code>/etc/passwd</code></p>
-<p>用户的配置文件，记录用户的各种信息。</p>
-<p>每行的含义：用户名:密码（x）:用户标识号:组标识号:注释性描述:主目录:登陆 Shell</p>
+<p>用户的配置文件, 记录用户的各种信息.</p>
+<p>每行的含义: 用户名:密码(x):用户标识号:组标识号:注释性描述:主目录:登陆 Shell</p>
 </li>
 <li>
 <p><code>/etc/shadow</code></p>
-<p>密码的配置文件。</p>
-<p>每行的含义：登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</p>
+<p>密码的配置文件.</p>
+<p>每行的含义: 登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</p>
 </li>
 <li>
 <p><code>/etc/group</code></p>
-<p>组的配置文件，记录 Linux 包含的组信息。</p>
-<p>每行含义：组名:密码:组标识号:组内用户列表</p>
+<p>组的配置文件, 记录 Linux 包含的组信息.</p>
+<p>每行含义: 组名:密码:组标识号:组内用户列表</p>
 </li>
 </ul>
 <h2 id="帮助指令">帮助指令</h2>
 <h3 id="man">man</h3>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">man</span> 命令或配置文件<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>可以获取命令的帮助信息，如 <code>man ls</code>。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">man</span> 命令或配置文件<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>可以获取命令的帮助信息, 如 <code>man ls</code>.</p>
+<p>man 显示的信息往往过于全面, 可以使用第三方工具 <a target="_blank" rel="noopener" href="https://github.com/tldr-pages/tldr">tldr</a> 查看社区维护的精简版文档.</p>
+<p>首先需要安装 <code>tldr</code>:</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">apt</span> <span class="token function">install</span> tldr<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>之后可以查看文档:</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ tldr <span class="token function">tar</span>
+
+<span class="token function">tar</span>
+
+Archiving utility.
+Often combined with a compression method, such as <span class="token function">gzip</span> or bzip2.
+More information: <span class="token operator">&lt;</span>https://www.gnu.org/software/tar<span class="token operator">&gt;</span>.
+
+- <span class="token punctuation">[</span>c<span class="token punctuation">]</span>reate an archive and <span class="token function">write</span> it to a <span class="token punctuation">[</span>f<span class="token punctuation">]</span>ile:
+    <span class="token function">tar</span> cf target.tar file1 file2 file3
+
+- <span class="token punctuation">[</span>c<span class="token punctuation">]</span>reate a g<span class="token punctuation">[</span>z<span class="token punctuation">]</span>ipped archive and <span class="token function">write</span> it to a <span class="token punctuation">[</span>f<span class="token punctuation">]</span>ile:
+    <span class="token function">tar</span> czf target.tar.gz file1 file2 file3
+
+- <span class="token punctuation">[</span>c<span class="token punctuation">]</span>reate a g<span class="token punctuation">[</span>z<span class="token punctuation">]</span>ipped archive from a directory using relative paths:
+    <span class="token function">tar</span> czf target.tar.gz --directory<span class="token operator">=</span>path/to/directory <span class="token builtin class-name">.</span>
+
+- E<span class="token punctuation">[</span>x<span class="token punctuation">]</span>tract a <span class="token punctuation">(</span>compressed<span class="token punctuation">)</span> archive <span class="token punctuation">[</span>f<span class="token punctuation">]</span>ile into the current directory <span class="token punctuation">[</span>v<span class="token punctuation">]</span>erbosely:
+    <span class="token function">tar</span> xvf source.tar<span class="token punctuation">[</span>.gz<span class="token operator">|</span>.bz2<span class="token operator">|</span>.xz<span class="token punctuation">]</span>
+
+- E<span class="token punctuation">[</span>x<span class="token punctuation">]</span>tract a <span class="token punctuation">(</span>compressed<span class="token punctuation">)</span> archive <span class="token punctuation">[</span>f<span class="token punctuation">]</span>ile into the target directory:
+    <span class="token function">tar</span> xf source.tar<span class="token punctuation">[</span>.gz<span class="token operator">|</span>.bz2<span class="token operator">|</span>.xz<span class="token punctuation">]</span> --directory<span class="token operator">=</span>directory
+
+- <span class="token punctuation">[</span>c<span class="token punctuation">]</span>reate a compressed archive and <span class="token function">write</span> it to a <span class="token punctuation">[</span>f<span class="token punctuation">]</span>ile, using <span class="token punctuation">[</span>a<span class="token punctuation">]</span>rchive suffix to determine the compression program:
+    <span class="token function">tar</span> caf target.tar.xz file1 file2 file3
+
+- Lis<span class="token punctuation">[</span>t<span class="token punctuation">]</span> the contents of a <span class="token function">tar</span> <span class="token punctuation">[</span>f<span class="token punctuation">]</span>ile <span class="token punctuation">[</span>v<span class="token punctuation">]</span>erbosely:
+    <span class="token function">tar</span> tvf source.tar
+
+- E<span class="token punctuation">[</span>x<span class="token punctuation">]</span>tract files matching a pattern from an archive <span class="token punctuation">[</span>f<span class="token punctuation">]</span>ile:
+    <span class="token function">tar</span> xf source.tar --wildcards <span class="token string">"*.html"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="help">help</h3>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">help</span> 命令<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>可以获得 shell 内置命令的帮助信息。</p>
-<p>通常，在执行程序时使用 <code>-h</code> 或 <code>--help</code> 选项可以打印帮助信息，以便了解有哪些可用的标记或选项。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token builtin class-name">help</span> 命令<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>可以获得 shell 内置命令的帮助信息.</p>
+<p>通常, 在执行程序时使用 <code>-h</code> 或 <code>--help</code> 选项可以打印帮助信息, 以便了解有哪些可用的标记或选项.</p>
 <h2 id="文件目录命令">文件目录命令</h2>
 <h3 id="pwd">pwd</h3>
-<p>打印当前工作目录的绝对路径。</p>
+<p>打印当前工作目录的绝对路径.</p>
 <h3 id="ls">ls</h3>
-<p>查看当前目录的文件，Linux 中，以 <code>.</code> 开头的文件为隐藏文件，在 <code>ls</code> 中不可见。</p>
-<p>常用选项：<code>-a</code> 查看所有文件和目录，包括隐藏的。<code>-l</code>：以列表的方式显示信息，其中信息格式如下：</p>
+<p>查看当前目录的文件, Linux 中, 以 <code>.</code> 开头的文件为隐藏文件, 在 <code>ls</code> 中不可见.</p>
+<p>常用选项: <code>-a</code> 查看所有文件和目录, 包括隐藏的. <code>-l</code>: 以列表的方式显示信息, 其中信息格式如下:</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">-rw-r--r--.  <span class="token number">1</span> root root   <span class="token number">84</span> <span class="token number">8</span>月  <span class="token number">18</span> <span class="token number">19</span>:07 hello.cpp<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>第一个字符表示文件的类型：</p>
-<p><code>-</code> 表示普通文件，<code>d</code> 表示 <code>dirtectory</code>，<code>l</code> 表示链接文件，<code>p</code> 表示管理文件，<code>b</code> 表示块设备文件（如硬盘），<code>c</code> 表示字符设备文件（在 <code>/dev</code> 下常见），<code>s</code> 表示套接字文件。</p>
-<p>之后每三个字符为一组，分别表示文件所有者、所有者所在组以及其他人对文件的读（r）、写（w）、可执行（x）权限。</p>
-<p>对 rwx 权限：</p>
+<p>第一个字符表示文件的类型:</p>
+<p><code>-</code> 表示普通文件, <code>d</code> 表示 <code>dirtectory</code>, <code>l</code> 表示链接文件, <code>p</code> 表示管理文件, <code>b</code> 表示块设备文件(如硬盘), <code>c</code> 表示字符设备文件(在 <code>/dev</code> 下常见), <code>s</code> 表示套接字文件.</p>
+<p>之后每三个字符为一组, 分别表示文件所有者、所有者所在组以及其他人对文件的读®、写(w)、可执行(x)权限.</p>
+<p>对 rwx 权限:</p>
 <ul>
 <li>
 <p>作用于文件</p>
-<p>r 代表可读、查看。</p>
-<p>w 代表可写、修改，但<strong>不代表可以删除该文件</strong>，，删除一个文件的前提是对该文件所在的<strong>目录</strong>有**写（w）**权限。</p>
-<p>x 代表可执行。</p>
+<p>r 代表可读、查看.</p>
+<p>w 代表可写、修改, 但<strong>不代表可以删除该文件</strong>, , 删除一个文件的前提是对该文件所在的<strong>目录</strong>有**写(w)**权限.</p>
+<p>x 代表可执行.</p>
 </li>
 <li>
 <p>作用于目录</p>
-<p>r 代表可读，可以 <code>ls</code> 查看目录内容。</p>
-<p>w 代表可写，可以修改目录名，在目录内创建、删除文件和目录。</p>
-<p>x 代表可以进入该目录（可以 <code>cd</code> 进入该目录）。</p>
+<p>r 代表可读, 可以 <code>ls</code> 查看目录内容.</p>
+<p>w 代表可写, 可以修改目录名, 在目录内创建、删除文件和目录.</p>
+<p>x 代表可以进入该目录(可以 <code>cd</code> 进入该目录).</p>
 </li>
 </ul>
-<p>rwx 权限可以用二进制表示，r = 4，w = 2，x = 1，因此 rwx = 7</p>
-<p>第二字段：对于目录，为子目录+文件数，对于文件，为硬链接个数。</p>
-<p>第三、四字段为文件所有者及所有者所在组。</p>
-<p>第五字段为文件大小（以字节为单位），注意，如果是目录，则<strong>表示</strong>该目录符所占的大小（即<strong>文件夹本身的大小</strong>），并<strong>不表示该目录下所有文件的大小</strong>，如果希望以更适合人类阅读的单位显示，可以加上参数 <code>-h</code>。</p>
-<p>第六字段为文件（目录）最近访问（修改）时间。</p>
-<p>第七字段为文件名。</p>
+<p>rwx 权限可以用二进制表示, r = 4, w = 2, x = 1, 因此 rwx = 7</p>
+<p>第二字段: 对于目录, 为子目录+文件数, 对于文件, 为硬链接个数.</p>
+<p>第三、四字段为文件所有者及所有者所在组.</p>
+<p>第五字段为文件大小(以字节为单位), 注意, 如果是目录, 则<strong>表示</strong>该目录符所占的大小(即<strong>文件夹本身的大小</strong>), 并<strong>不表示该目录下所有文件的大小</strong>, 如果希望以更适合人类阅读的单位显示, 可以加上参数 <code>-h</code>.</p>
+<p>第六字段为文件(目录)最近访问(修改)时间.</p>
+<p>第七字段为文件名.</p>
 <h3 id="cd">cd</h3>
-<p>切换到指定目录。路径可以使用绝对/相对路径，特别地，<code>cd ~</code> 或 <code>cd</code> 可以回到家目录。</p>
+<p>切换到指定目录. 路径可以使用绝对/相对路径, 特别地, <code>cd ~</code> 或 <code>cd</code> 可以回到家目录.</p>
 <h3 id="mkdir">mkdir</h3>
-<p>用于创建目录，如果需要创建多级目录，例如 <code>./animal/tiger</code> ，则需要带 <code>-p</code> 选项。</p>
+<p>用于创建目录, 如果需要创建多级目录, 例如 <code>./animal/tiger</code> , 则需要带 <code>-p</code> 选项.</p>
 <h3 id="rmdir">rmdir</h3>
-<p>用于删除<strong>空</strong>目录。</p>
+<p>用于删除<strong>空</strong>目录.</p>
 <h3 id="touch">touch</h3>
-<p>创建空文件。</p>
+<p>创建空文件.</p>
 <h3 id="cp">cp</h3>
-<p>拷贝文件到指定目录，用法：<code>cp [选项] source dest</code>。</p>
-<p>常用选项：<code>-r</code>：递归复制整个文件夹。</p>
-<p>注意：如果复制时有文件重复，系统会逐一进行提示，如果需要强制覆盖不提示，可以使用 <code>\cp</code> 或带上选项 <code>-f</code>。</p>
+<p>拷贝文件到指定目录, 用法: <code>cp [选项] source dest</code>.</p>
+<p>常用选项: <code>-r</code>: 递归复制整个文件夹.</p>
+<p>注意: 如果复制时有文件重复, 系统会逐一进行提示, 如果需要强制覆盖不提示, 可以使用 <code>\cp</code> 或带上选项 <code>-f</code>.</p>
 <h3 id="rm">rm</h3>
-<p>删除文件或目录，用法：<code>rm [选项] 要删除的文件或目录</code>。</p>
-<p>常用选项：<code>-r</code>：递归删除整个文件夹。<code>-f</code>：强制删除不提示。</p>
+<p>删除文件或目录, 用法: <code>rm [选项] 要删除的文件或目录</code>.</p>
+<p>常用选项: <code>-r</code>: 递归删除整个文件夹. <code>-f</code>: 强制删除不提示.</p>
 <h3 id="mv">mv</h3>
-<p>移动文件与目录（如果在同一目录下移动，实际上是重命名），移动目录会自动递归移动，不用带参数。</p>
-<p>常用选项：<code>-b</code>：当目标文件或目录存在时，在执行覆盖前，会为其创建一个备份。<code>-f</code>：同名强制覆盖不提示。<code>-n</code>：不要覆盖任何已存在的文件或目录。<code>-u</code>：当源文件比目标文件新或者目标文件不存在时，才执行移动操作。</p>
+<p>移动文件与目录(如果在同一目录下移动, 实际上是重命名), 移动目录会自动递归移动, 不用带参数.</p>
+<p>常用选项: <code>-b</code>: 当目标文件或目录存在时, 在执行覆盖前, 会为其创建一个备份. <code>-f</code>: 同名强制覆盖不提示. <code>-n</code>: 不要覆盖任何已存在的文件或目录. <code>-u</code>: 当源文件比目标文件新或者目标文件不存在时, 才执行移动操作.</p>
 <h3 id="ln">ln</h3>
-<p>Linux 中的链接可以分为硬链接（hard link）和软链接（symbolic link）。</p>
-<p>软链接也称为符号链接，以路径的形式存在，类似于 Windows 里的快捷方式，主要存放了链接其他文件的路径，软链接可以跨文件系统，可以对不存在的目录进行链接，也可以对目录进行链接。</p>
-<p>硬链接以文件副本的形式存在，但不占用实际空间，不允许给目录创建硬链接，硬链接只有在同一个文件系统中才能创建。</p>
-<p>用法：<code>ln [选项] &lt;原文件或目录&gt; &lt;目标文件或目录&gt;</code>。</p>
-<p>常用选项：<code>-s</code>：软链接。<code>-f</code>：强制执行。<code>-b</code>：删除、覆盖以前建立的链接。</p>
-<p>使用 rm 命令可以删除链接。</p>
-<p>注意：使用 pwd 查看目录时，看到的仍然是软链接所在目录。</p>
+<p>Linux 中的链接可以分为硬链接(hard link)和软链接(symbolic link).</p>
+<p>软链接也称为符号链接, 以路径的形式存在, 类似于 Windows 里的快捷方式, 主要存放了链接其他文件的路径, 软链接可以跨文件系统, 可以对不存在的目录进行链接, 也可以对目录进行链接.</p>
+<p>硬链接以文件副本的形式存在, 但不占用实际空间, 不允许给目录创建硬链接, 硬链接只有在同一个文件系统中才能创建.</p>
+<p>用法: <code>ln [选项] &lt;原文件或目录&gt; &lt;目标文件或目录&gt;</code>.</p>
+<p>常用选项: <code>-s</code>: 软链接. <code>-f</code>: 强制执行. <code>-b</code>: 删除、覆盖以前建立的链接.</p>
+<p>使用 rm 命令可以删除链接.</p>
+<p>注意: 使用 pwd 查看目录时, 看到的仍然是软链接所在目录.</p>
 <h3 id="history">history</h3>
-<p>查看已经执行过的历史命令。</p>
-<p>用法：不带参数时查看所有的历史命令；<code>history n</code> 可以查看最近使用过的 n 条指令。<code>!n</code> 可以执行历史编号为 n 的指令。</p>
+<p>查看已经执行过的历史命令.</p>
+<p>用法: 不带参数时查看所有的历史命令；<code>history n</code> 可以查看最近使用过的 n 条指令. <code>!n</code> 可以执行历史编号为 n 的指令.</p>
 <h2 id="文件查看">文件查看</h2>
 <h3 id="cat">cat</h3>
-<p>查看文件内容。</p>
-<p>常用选项：<code>-n</code>：显示行号。<code>-b</code>：显示行号，但空白行不编号。</p>
-<p>对于大文件，宜采用 <code>less</code> 指令查看文件，具有更高的效率。</p>
+<p>查看文件内容.</p>
+<p>常用选项: <code>-n</code>: 显示行号. <code>-b</code>: 显示行号, 但空白行不编号.</p>
+<p>对于大文件, 宜采用 <code>less</code> 指令查看文件, 具有更高的效率.</p>
 <h3 id="more-和-less">more 和 less</h3>
-<p>more 是基于 vi 的文本过滤器，以全屏幕的方式按页显示文本文件的内容。</p>
-<p>在 more 中的操作：</p>
-<p><code>空格</code> 向下翻页，<code>Enter</code> 向下一行。</p>
-<p><code>Ctrl+F</code> 向下滚动一屏，<code>Ctrl+B</code> 返回上一屏。</p>
-<p><code>=</code> 输出当前行号，<code>:f</code> 输出文件名和当前行号，<code>q</code> 离开 more。</p>
-<p>less 命令用于分屏查看文件内容，但它不会将一整个文件加载之后才显示，在查看大文件时具有较高的效率。</p>
-<p>less 下的操作：</p>
-<p><code>空格/pagedown</code> 向下翻页，<code>pageup</code> 向上翻页。</p>
-<p><code>/（?）</code> 分别用于向下（向上）搜寻字串，n：向下（上）查找，N：向上（下）查找。</p>
-<p><code>q</code> 离开 less。</p>
+<p>more 是基于 vi 的文本过滤器, 以全屏幕的方式按页显示文本文件的内容.</p>
+<p>在 more 中的操作:</p>
+<p><code>空格</code> 向下翻页, <code>Enter</code> 向下一行.</p>
+<p><code>Ctrl+F</code> 向下滚动一屏, <code>Ctrl+B</code> 返回上一屏.</p>
+<p><code>=</code> 输出当前行号, <code>:f</code> 输出文件名和当前行号, <code>q</code> 离开 more.</p>
+<p>less 命令用于分屏查看文件内容, 但它不会将一整个文件加载之后才显示, 在查看大文件时具有较高的效率.</p>
+<p>less 下的操作:</p>
+<p><code>空格/pagedown</code> 向下翻页, <code>pageup</code> 向上翻页.</p>
+<p><code>/(?)</code> 分别用于向下(向上)搜寻字串, n: 向下(上)查找, N: 向上(下)查找.</p>
+<p><code>q</code> 离开 less.</p>
 <h3 id="echo">echo</h3>
-<p>可以使用 echo 命令输出环境变量，如 <code>echo $PATH</code>、<code>echo $HOSTNAME</code> 等。</p>
+<p>可以使用 echo 命令输出环境变量, 如 <code>echo $PATH</code>、<code>echo $HOSTNAME</code> 等.</p>
 <h3 id="head">head</h3>
-<p>用于显示文件的开头内容，默认显示前十行，用法：<code>head [选项] 文件</code>。</p>
-<p>常用选项：<code>-n x</code>：查看文件的前 x 行内容。</p>
+<p>用于显示文件的开头内容, 默认显示前十行, 用法: <code>head [选项] 文件</code>.</p>
+<p>常用选项: <code>-n x</code>: 查看文件的前 x 行内容.</p>
 <h3 id="tail">tail</h3>
-<p>显示文件的尾部内容，默认显示后十行。</p>
-<p>常用选项：<code>-n x</code>：查看文件后 x 行内容，<code>-f</code> <strong>实时追踪该文件的所有更新</strong>。</p>
+<p>显示文件的尾部内容, 默认显示后十行.</p>
+<p>常用选项: <code>-n x</code>: 查看文件后 x 行内容, <code>-f</code> <strong>实时追踪该文件的所有更新</strong>.</p>
 <h3 id="重定向">重定向</h3>
-<p>重定向输出：&gt; 为覆盖写（文件不存在会自动创建），&gt;&gt; 为追加写（会自动添加换行符）。</p>
-<p>同理，&lt; 和 &lt;&lt; 用于重定向输入。</p>
-<p>例如：<code>ll -a &gt; fileInfo</code> 把目录下的文件信息写入 <code>fileInfo</code> 文件中；<code>cat file1 &gt; file2</code> 把 <code>file1</code> 的内容覆盖到 <code>file2</code>。</p>
+<p>重定向输出: &gt; 为覆盖写(文件不存在会自动创建), &gt;&gt; 为追加写(会自动添加换行符).</p>
+<p>同理, &lt; 和 &lt;&lt; 用于重定向输入.</p>
+<p>例如: <code>ll -a &gt; fileInfo</code> 把目录下的文件信息写入 <code>fileInfo</code> 文件中；<code>cat file1 &gt; file2</code> 把 <code>file1</code> 的内容覆盖到 <code>file2</code>.</p>
 <h2 id="时间日期命令">时间日期命令</h2>
 <h3 id="date">date</h3>
-<p>用法：不带参数显示当前时间，如果要格式化输出，使用 <code>date "+%Y-%m-%d %H:%M:%S"</code> 格式。<code>date -s 字符串时间</code> 可以设置系统当前时间。</p>
+<p>用法: 不带参数显示当前时间, 如果要格式化输出, 使用 <code>date "+%Y-%m-%d %H:%M:%S"</code> 格式. <code>date -s 字符串时间</code> 可以设置系统当前时间.</p>
 <h3 id="cal">cal</h3>
-<p>查看日历，不带参数显示本月日历，显示 2020 年日历：<code>cal 2020</code>。</p>
+<p>查看日历, 不带参数显示本月日历, 显示 2020 年日历: <code>cal 2020</code>.</p>
 <h2 id="搜索查找类">搜索查找类</h2>
 <h3 id="find">find</h3>
-<p>用法：<code>find &lt;指定目录&gt; &lt;指定条件&gt; &lt;指定动作&gt; &lt;文件或目录名&gt;</code></p>
-<p>未指定目录默认为当前目录。目录可以有多个，目录之间要用空格分开。</p>
-<p>指定条件：</p>
+<p>用法: <code>find &lt;指定目录&gt; &lt;指定条件&gt; &lt;指定动作&gt; &lt;文件或目录名&gt;</code></p>
+<p>未指定目录默认为当前目录. 目录可以有多个, 目录之间要用空格分开.</p>
+<p>指定条件:</p>
 <ul>
 <li>
-<p>按名字查找：</p>
-  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> <span class="token operator">&lt;</span>指定目录<span class="token operator">&gt;</span> -name <span class="token operator">&lt;</span>文件或目录名<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>当参数为 <code>-iname</code> 时不区分大小写。</p>
+<p>按名字查找:</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">find</span> <span class="token operator">&lt;</span>指定目录<span class="token operator">&gt;</span> -name <span class="token operator">&lt;</span>文件或目录名<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>当参数为 <code>-iname</code> 时不区分大小写.</p>
 </li>
 <li>
-<p>按拥有者/所有组查找：</p>
-  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">find</span> <span class="token operator">&lt;</span>指定目录<span class="token operator">&gt;</span> -user/-group <span class="token operator">&lt;</span>文件或目录名<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>把参数换成 -uid 或 -gid 为按 uid 和 gid 查找。</p>
+<p>按拥有者/所有组查找:</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">find</span> <span class="token operator">&lt;</span>指定目录<span class="token operator">&gt;</span> -user/-group <span class="token operator">&lt;</span>文件或目录名<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>把参数换成 -uid 或 -gid 为按 uid 和 gid 查找.</p>
 </li>
 <li>
 <p>按文件大小查找</p>
-  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">find</span> <span class="token operator">&lt;</span>指定目录<span class="token operator">&gt;</span> -size <span class="token punctuation">[</span>+/-<span class="token punctuation">]</span>大小<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>例如：</p>
-  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">find</span> / -size +200M<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>+ 大于、- 小于、没有符号为等于，单位有 k，M，G 等。</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">find</span> <span class="token operator">&lt;</span>指定目录<span class="token operator">&gt;</span> -size <span class="token punctuation">[</span>+/-<span class="token punctuation">]</span>大小<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>例如:</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">find</span> / -size +200M<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>+ 大于、- 小于、没有符号为等于, 单位有 k, M, G 等.</p>
 </li>
 <li>
 <p>按文件类型查找</p>
 </li>
 </ul>
 <h3 id="locate">locate</h3>
-<p>locate 可以根据实现建立的 locate 数据库快速定位给定的文件，只要使用 <code>locate 搜索文件</code> 即可，查找速度极快，查找前需要使用 <code>updatedb</code> 更新数据库。</p>
+<p>locate 可以根据实现建立的 locate 数据库快速定位给定的文件, 只要使用 <code>locate 搜索文件</code> 即可, 查找速度极快, 查找前需要使用 <code>updatedb</code> 更新数据库.</p>
 <h3 id="which">which</h3>
-<p>可以查看某个指令在哪个目录下。</p>
+<p>可以查看某个指令在哪个目录下.</p>
 <h3 id="grep">grep</h3>
-<p>grep 用于过滤查找内容。用法：<code>grep [-选项] 查找内容 源文件</code>。</p>
-<p><code>-n</code> 选项显示行号，<code>-i</code> 忽略大小写，常配合管道符号 |（pipe）使用。</p>
-<h3 id="管道符号（pipe）">管道符号（pipe）</h3>
-<p>如 <code>cat hello.txt | grep "yes"</code>，可以把前面的输出作为后面的输入。</p>
+<p>grep 用于过滤查找内容. 用法: <code>grep [-选项] 查找内容 源文件</code>.</p>
+<p><code>-n</code> 选项显示行号, <code>-i</code> 忽略大小写, 常配合管道符号 |(pipe)使用.</p>
+<h3 id="管道符号-pipe">管道符号(pipe)</h3>
+<p>如 <code>cat hello.txt | grep "yes"</code>, 可以把前面的输出作为后面的输入.</p>
 <h2 id="压缩和解压类">压缩和解压类</h2>
 <h3 id="gz-文件"><code>.gz</code> 文件</h3>
-<p>用 gzip 压缩，gunzip 解压。<strong>只能用于压缩文件</strong>。</p>
+<p>用 gzip 压缩, gunzip 解压. <strong>只能用于压缩文件</strong>.</p>
 <h3 id="zip-文件"><code>.zip</code> 文件</h3>
-<p>用 zip 压缩，unzip 解压。</p>
-<p>压缩时，用法为 <code>zip [-选项] 压缩文件名.zip</code>，如果压缩的为目录，需要带 <code>-r</code> 选项。</p>
-<p>解压时，用法为 <code>zip [-选项] 待解压文件</code>，如果需要指定解压目录，需要带 <code>-d 待解压目录</code> 选项。</p>
+<p>用 zip 压缩, unzip 解压.</p>
+<p>压缩时, 用法为 <code>zip [-选项] 压缩文件名.zip</code>, 如果压缩的为目录, 需要带 <code>-r</code> 选项.</p>
+<p>解压时, 用法为 <code>zip [-选项] 待解压文件</code>, 如果需要指定解压目录, 需要带 <code>-d 待解压目录</code> 选项.</p>
 <h3 id="tar-gz-和-tar-bz2-文件"><code>.tar.gz</code> 和 <code>.tar.bz2</code> 文件</h3>
-<p>用 tar 命令压缩和解压。</p>
-<p>对于 <code>.tar.gz</code> 文件：</p>
-<p>压缩时为 <code>tar -zcvf 文件/目录 文件/目录</code>。其中不同的文件或目录用空格分隔即可。</p>
-<p>解压时用 <code>tar -zxvf 待解压文件 [-C 解压到目录]</code>。默认解压到当前目录。</p>
-<p>对于 <code>.tar.bz2</code> 文件：</p>
-<p>只要把前面的 z 换成 j 即可。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/gexiaobaoHelloWorld/article/details/8206889">(7条消息) linux-find【递归搜索文件名】_gexiaobaoHelloWorld的专栏-CSDN博客</a></p>
+<p>用 tar 命令压缩和解压.</p>
+<p>对于 <code>.tar.gz</code> 文件:</p>
+<p>压缩时为 <code>tar -zcvf 文件/目录 文件/目录</code>. 其中不同的文件或目录用空格分隔即可.</p>
+<p>解压时用 <code>tar -zxvf 待解压文件 [-C 解压到目录]</code>. 默认解压到当前目录.</p>
+<p>其中 <code>-z</code> 表示使用 gzip 算法处理文件, <code>-c</code> 为压缩(注意小写与大写不同), <code>-x</code> 是解压, <code>-v</code> 显示具体信息, <code>-f</code> 使用指定存档文件文件.</p>
+<p>对于 <code>.tar.bz2</code> 文件:</p>
+<p>只要把前面的 z 换成 j 即可.</p>
 <h2 id="文件所有者、所有组、权限管理类">文件所有者、所有组、权限管理类</h2>
 <h3 id="查看文件-目录所有者和所在组">查看文件/目录所有者和所在组</h3>
-<p>使用 <code>ll</code> 或 <code>ls -l</code> 即可。</p>
+<p>使用 <code>ll</code> 或 <code>ls -l</code> 即可.</p>
 <h3 id="修改文件-目录所有者">修改文件/目录所有者</h3>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chown</span> <span class="token punctuation">[</span>选项<span class="token punctuation">]</span> 用户名 文件/目录名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>其中，如果是目录，可以使用 -R 选项，使得对其下所有子文件和目录递归生效。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">chown</span> <span class="token punctuation">[</span>选项<span class="token punctuation">]</span> 用户名 文件/目录名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中, 如果是目录, 可以使用 <code>-R</code> 选项, 使得对其下所有子文件和目录递归生效.</p>
 <h3 id="修改文件-目录所在组">修改文件/目录所在组</h3>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chgrp</span> <span class="token punctuation">[</span>选项<span class="token punctuation">]</span> 组名 文件/目录名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>也有 -R（recursive）递归选项。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">chgrp</span> <span class="token punctuation">[</span>选项<span class="token punctuation">]</span> 组名 文件/目录名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>也有 -R(recursive)递归选项.</p>
 <h3 id="修改权限">修改权限</h3>
-<p>使用 <code>chmod</code> 命令，有两种方式：</p>
+<p>使用 <code>chmod</code> 命令, 有两种方式:</p>
 <ul>
 <li>
-<p>使用 <code>+ - =</code> 变更权限：</p>
-<p>u：所有者、g：所在组、o：其他人、a：所有人。</p>
-<p>例如：</p>
-  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> <span class="token assign-left variable">u</span><span class="token operator">=</span>rwx,g<span class="token operator">=</span>rx,o<span class="token operator">=</span>x readme.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> o+w readme.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>使用 <code>+ - =</code> 变更权限:</p>
+<p>u: 所有者、g: 所在组、o: 其他人、a: 所有人.</p>
+<p>例如:</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">chmod</span> <span class="token assign-left variable">u</span><span class="token operator">=</span>rwx,g<span class="token operator">=</span>rx,o<span class="token operator">=</span>x readme.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">chmod</span> o+w readme.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 <li>
-<p>通过数字变更权限，此时类似于第一种方式中的 <code>=</code> 变更权限。</p>
-<p>上面提到过，rwx 可以用二进制表示，rwx 的有无分别对应 1 和 0，例如，rwx = 7，rx = 5，wx = 3。</p>
-<p>上面的例一用数字方式可以写为：</p>
-  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> <span class="token number">751</span> readme.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>通过数字变更权限, 此时类似于第一种方式中的 <code>=</code> 变更权限.</p>
+<p>上面提到过, rwx 可以用二进制表示, rwx 的有无分别对应 1 和 0, 例如, rwx = 7, rx = 5, wx = 3.</p>
+<p>上面的例一用数字方式可以写为:</p>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">chmod</span> <span class="token number">751</span> readme.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 </ul>
+<h2 id="下载类">下载类</h2>
+<h3 id="Wget">Wget</h3>
+<p>wget 支持 http 和 ftp 协议, 并且可以递归遍历, 非常适合用于下载文件.</p>
+<p>用法: <code>wget [选项] [url]</code></p>
+<p>常用选项:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">选项</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-i, --input-file=文件</td>
+<td style="text-align:left">下载本地或外部文件中的 URL</td>
+</tr>
+<tr>
+<td style="text-align:left">-O, --output-document=文件</td>
+<td style="text-align:left">将输出写入文件</td>
+</tr>
+<tr>
+<td style="text-align:left">-b, --background</td>
+<td style="text-align:left">在后台运行 wget</td>
+</tr>
+<tr>
+<td style="text-align:left">-d, --debug</td>
+<td style="text-align:left">调试模式, 打印出 wget 运行时的调试信息</td>
+</tr>
+</tbody>
+</table>
+<p>例如 oh-my-zsh 官网给出的下载方式为:</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">sh</span> -c <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">wget</span> https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -<span class="token variable">)</span></span>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><code>-</code> 表示标准输出, wget 会默认下载 <a target="_blank" rel="noopener" href="http://install.sh">install.sh</a> 到当前文件夹, 重定向到标准输出后用 sh 执行</p>
+<h3 id="cURL">cURL</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">选项</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-o</td>
+<td style="text-align:left">把远程下载的数据保存到文件中, 需要指定文件名</td>
+</tr>
+<tr>
+<td style="text-align:left">-O</td>
+<td style="text-align:left">把远程下载的数据保存到文件中, 直接使用 URL 中默认的文件名</td>
+</tr>
+<tr>
+<td style="text-align:left">-I</td>
+<td style="text-align:left">只展示响应头内容</td>
+</tr>
+</tbody>
+</table>
+<p>例如:</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token function">curl</span> http://cn.bing.com <span class="token comment"># 将得到 bing 页面 html 源码, 可以通过 -o 或者重定向存到文件里.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="进程管理">进程管理</h2>
+<p>ubuntu 上常用的进程管理器为 htop, 可以通过 apt 安装.</p>
+<p>每个进程有对应的<strong>进程标识符(PID, Process Identifier)</strong>.</p>
+<h3 id="父子进程">父子进程</h3>
+<p>除了最开始的 0 号进程外, 其他进程一定由另一个进程通过 fork 产生, 显然产生进程的一方为<strong>父进程</strong>, 被产生的是<strong>子进程</strong>, 在 Linux 中, 父进程可以等待子进程, 接收子进程退出信号以及返回值.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">进程属性</th>
+<th style="text-align:left">意义/目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">PID</td>
+<td style="text-align:left">Process ID, 标识进程的唯一性.</td>
+</tr>
+<tr>
+<td style="text-align:left">PPID</td>
+<td style="text-align:left">Parent PID, 标识进程父子关系.</td>
+</tr>
+<tr>
+<td style="text-align:left">PGID</td>
+<td style="text-align:left">Process Group ID, 标识共同完成一个任务的整体.</td>
+</tr>
+<tr>
+<td style="text-align:left">TPGID</td>
+<td style="text-align:left">标识一组会话中处于前台（与用户交流）的进程（组）.</td>
+</tr>
+<tr>
+<td style="text-align:left">SID</td>
+<td style="text-align:left">Session ID, 标识一组会话, 传统意义上标识一次登录所做的任务的集合, 如果是与具体登录无关的进程, 其 SID 被重置.</td>
+</tr>
+<tr>
+<td style="text-align:left">USER/UID</td>
+<td style="text-align:left">标识进程的权限.</td>
+</tr>
+<tr>
+<td style="text-align:left">Priority</td>
+<td style="text-align:left">标识进程的重要性, 值越大越得到优先处理(用于描述实时进程).</td>
+</tr>
+<tr>
+<td style="text-align:left">Nice</td>
+<td style="text-align:left">普通进程的优先级标度, 越 “nice” 优先级越低.</td>
+</tr>
+<tr>
+<td style="text-align:left">State</td>
+<td style="text-align:left">标识进程的状态：能不能运行 (running / sleep), 能不能投入运行 (interruptible / uninterruptible), 让不让运行 (stop / trace), 程序还在不在 (zombie).</td>
+</tr>
+</tbody>
+</table>
 
                 
             </div>
@@ -1403,7 +1548,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">112.5k</span>
+                        class="white-color">113.4k</span>
             
             
             
