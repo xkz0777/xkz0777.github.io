@@ -1,0 +1,1741 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="CS61A Scheme Interpreter, xkz">
+    <meta name="description" content="CS61A 课程中 HW08 和 Scheme Project 的总结">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>CS61A Scheme Interpreter | xkz</title>
+    <link rel="icon" type="image/jpeg" href="/dog.jpg">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+   <style>
+    body{
+       background-image: url(/medias/background2.jpg);
+       background-repeat:no-repeat;
+       background-size: 100% 100%;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/favicon.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">xkz</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/favicon.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">xkz</div>
+        <div class="logo-desc">
+            
+            xkz&#39;s blog
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/interpreter.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">CS61A Scheme Interpreter</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Python/">
+                                <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                            <a href="/tags/Interpreter/">
+                                <span class="chip bg-color">Interpreter</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Python/" class="post-category">
+                                Python
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-03-02
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-03-06
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    13 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1>Scheme Interpreter</h1>
+<h2 id="Introduction">Introduction</h2>
+<p>在 CS61A 的 Project 4 要求自己实现一个 Scheme Interpreter. 实现的 Interactive Interpreter 主要工作流程为 REPL: Read-Eval-Print-Loop, 具体为:</p>
+<ol>
+<li>Print a prompt</li>
+<li>Read text input from the user</li>
+<li>Parse the text input into an expression</li>
+<li>Evaluate the expression</li>
+<li>If any errors occur, report those errors, otherwise</li>
+<li>Print the value of the expression and repeat</li>
+</ol>
+<h3 id="Read">Read</h3>
+<p>The interpreter takes the user input (a string) and passes it through a lexer and parser.</p>
+<ul>
+<li>The <em>lexer</em> turns the user input string into atomic pieces (tokens) that are like “words” of the implemented language. (词法分析)</li>
+<li>The <em>parser</em> takes the tokens and organizes them into data structures that the underlying language can understand. (有时也称 Syntactic analysis, 语法分析)</li>
+</ul>
+<p>例如, 输入为</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token operator">+</span> <span class="token number">1</span>
+   <span class="token punctuation">(</span><span class="token operator">-</span> <span class="token number">23</span><span class="token punctuation">)</span>
+   <span class="token punctuation">(</span><span class="token operator">*</span> <span class="token number">4</span> <span class="token number">5.6</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>在词法分析时, 一次读入一行, 会去掉不必要的空格, 并且进行数据类型的识别, 例如 <code>23</code> 会被识别为整数, 而 <code>a</code> 会被识别为 symbol, <code>5.6</code> 会作为完整的浮点数被读取, 处理后将得到:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token string">'('</span><span class="token punctuation">,</span> <span class="token string">'+'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'('</span><span class="token punctuation">,</span> <span class="token string">'-'</span><span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">,</span> <span class="token string">')'</span><span class="token punctuation">,</span> <span class="token string">'('</span><span class="token punctuation">,</span> <span class="token string">'*'</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5.6</span><span class="token punctuation">,</span> <span class="token string">')'</span><span class="token punctuation">,</span> <span class="token string">')'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>之后的词法分析会递归的进行处理, 进行括号匹配, 将之转化为 Python 的数据结构 (这里是一个类链表的 Pair 类型)</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">Pair<span class="token punctuation">(</span><span class="token string">'+'</span><span class="token punctuation">,</span> Pair<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> Pair<span class="token punctuation">(</span>Pair<span class="token punctuation">(</span><span class="token string">'-'</span><span class="token punctuation">,</span> Pair<span class="token punctuation">(</span><span class="token number">23</span><span class="token punctuation">,</span> nil<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> nil<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Pair 类型定义如下:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Pair</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""A Pair has two instance attributes:
+    first and second.
+    For a Pair to be a well-formed list,
+    second is either a well-formed list or nil.
+    Some methods only apply to well-formed lists.
+    """</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> first<span class="token punctuation">,</span> second<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>first <span class="token operator">=</span> first
+        self<span class="token punctuation">.</span>second <span class="token operator">=</span> second<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Eval">Eval</h3>
+<p>Eval 是两个函数 <code>Eval</code> 和 <code>Apply</code> 的相互递归调用:</p>
+<ul>
+<li><code>Eval</code> takes an expression and evaluates it according to the rules of the language. Evaluating a call expression involves calling <code>apply</code> to apply an evaluated operator to its evaluated operands.</li>
+<li><code>Apply</code> takes an evaluated operator, i.e., a function, and applies it to the call expression’s arguments. Apply may call <code>eval</code> to do more work in the body of the function, so <code>eval</code> and <code>apply</code> are <em>mutually recursive</em>.</li>
+</ul>
+<p>需要 Evaluate 表达式时, 首先是调用 <code>Eval</code> 处理该表达式, 这时就要分别 Evaluate Operator 和 Operands, 然后再调用 <code>Apply</code>, 而 <code>Apply</code> 在调用时需要判断该表达式是否是 Builtin Procedure, 如果是, 调用对应的 Builtin Procedure, 如上例, 否则应该创造一个 Environment, 绑定参数和值, 然后继续调用 <code>Eval</code> 处理该表达式的主体部分, 最后递归的终点一定是 Builtin Procedure.</p>
+<h2 id="Lab-11">Lab 11</h2>
+<p>为了有个适应的过程, Lab 11 让我们先做了一个小型的 PyCombinator Interpreter, 可以调用 <code>add</code>, <code>mul</code> 等 Builtin, 并且能够创建并调用 Lambda:</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">&gt; add<span class="token punctuation">(</span><span class="token function">3,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token number">7</span>
+&gt; mul<span class="token punctuation">(</span><span class="token function">4,</span> <span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token number">20</span>
+&gt; sub<span class="token punctuation">(</span><span class="token function">2,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token number">-1</span>
+&gt; <span class="token punctuation">(</span><span class="token function">lambda:</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token number">4</span>
+&gt; <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token lambda-parameter">x,</span> y: add<span class="token punctuation">(</span><span class="token function">y,</span> x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token function">3,</span> <span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token number">8</span>
+&gt; <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token lambda-parameter">x:</span> lambda y: mul<span class="token punctuation">(</span><span class="token function">x,</span> y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token number">12</span>
+&gt; <span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token lambda-parameter">f:</span> f<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token lambda-parameter">x:</span> pow<span class="token punctuation">(</span><span class="token function">2,</span> x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一共包含 5 个 <code>.py</code> 文件,</p>
+<ul>
+<li>
+<p><code>utils.py</code> 只包含一个 <code>comma_separated</code> 函数, 能够把传入的列表里的 String 组合成用逗号分隔的一整个 <code>String</code>.</p>
+</li>
+<li>
+<p><code>buffer.py</code> 包含自己写的一个 <code>Buffer</code> 类, 其实就是一个队列, 存储词法分析后的 token, 能够 peek (对应 <code>current()</code>) 和 <code>pop_first()</code>.</p>
+</li>
+<li>
+<p><code>repl.py</code> 就是进行 Read-Eval-Print-Loop</p>
+</li>
+<li>
+<p><code>expr.py</code> 包含两个基类 <code>Expr</code> 和 <code>Value</code></p>
+<p>其中 <code>Expr</code> 的子类有 <code>Literal</code>, <code>Name</code>, <code>LambdaExpr</code>, <code>CallExpr</code>, 是调用 <code>reader.py</code> 中 <code>read</code> 函数后返回的结果. 每个子类都有自己的 <code>eval</code> 方法和 <code>__str__</code> 表示</p>
+<p><code>Value</code> 子类则为 <code>Number</code>, <code>LambdaFunction</code> 和 <code>PrimitiveFunction</code>, 在 Evaluate <code>Expr</code> 后得到, 每个子类有自己的 <code>apply</code> 方法.</p>
+</li>
+<li>
+<p><code>reader.py</code> 中, <code>tokenize</code> 是 <em>Lexer</em>, <code>read_expr</code> 则是 <em>Parser</em>.</p>
+</li>
+</ul>
+<h2 id="Project-4-Scheme-Interpreter">Project 4: Scheme Interpreter</h2>
+<p>Here are all the files included in the archive:</p>
+<ul>
+<li>
+<p><code>scheme.py</code>: implements the REPL and a evaluator for Scheme expressions</p>
+</li>
+<li>
+<p><code>scheme_reader.py</code>: implements the reader for Scheme input. The <code>Pair</code> class and <code>nil</code> definition can be found here.</p>
+</li>
+<li>
+<p><code>scheme_tokens.py</code>: implements the tokenizer for Scheme input</p>
+</li>
+<li>
+<p><code>scheme_builtins.py</code>: implements built-in Scheme procedures in Python</p>
+</li>
+<li>
+<p><code>buffer.py</code>: implements the <code>Buffer</code> class, used in <code>scheme_reader.py</code></p>
+</li>
+<li>
+<p><code>ucb.py</code>: utility functions for use in 61A projects</p>
+</li>
+<li>
+<p><code>questions.scm</code>: contains skeleton code for Phase III</p>
+</li>
+<li>
+<p><code>tests.scm</code>: a collection of test cases written in Scheme</p>
+</li>
+<li>
+<p><code>ok</code>: the autograder</p>
+</li>
+<li>
+<p><code>tests</code>: a directory of tests used by <code>ok</code></p>
+</li>
+<li>
+<p><code>mytests.rst</code>: a file where you can add your own tests</p>
+<p>You will turn in the following files:</p>
+</li>
+<li>
+<p><code>scheme_reader.py</code></p>
+</li>
+<li>
+<p><code>scheme.py</code></p>
+</li>
+<li>
+<p><code>questions.scm</code></p>
+</li>
+<li>
+<p><code>tests.scm</code></p>
+</li>
+</ul>
+<h3 id="Problem-01">Problem 01</h3>
+<p>是 <code>scheme_read</code> 和 <code>read_tail</code> 的互相调用, <code>scheme_read</code> 可以读取一个完整的表达式, <code>read_tail</code> 读取一个完整的 <code>Pair</code>, 下面的描述对解题很有帮助:</p>
+<ul>
+<li><code>scheme_read</code> removes enough tokens from <code>src</code> to form a single expression and returns that expression in the correct internal representation.</li>
+<li><code>read_tail</code> expects to read the rest of a list or pair, assuming the open parenthesis of that list or pair has already been removed by <code>scheme_read</code>. It will read expressions (and thus remove tokens) until the matching closing parenthesis <code>)</code> is seen. This list of expressions is returned as a linked list of <code>Pair</code> instances.</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">scheme_read</span><span class="token punctuation">(</span>src<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Read the next expression from SRC, a Buffer of tokens.
+
+    &gt;&gt;&gt; scheme_read(Buffer(tokenize_lines(['nil'])))
+    nil
+    &gt;&gt;&gt; scheme_read(Buffer(tokenize_lines(['1'])))
+    1
+    &gt;&gt;&gt; scheme_read(Buffer(tokenize_lines(['true'])))
+    True
+    &gt;&gt;&gt; scheme_read(Buffer(tokenize_lines(['(+ 1 2)'])))
+    Pair('+', Pair(1, Pair(2, nil)))
+    """</span>
+    <span class="token keyword">if</span> src<span class="token punctuation">.</span>current<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+        <span class="token keyword">raise</span> EOFError
+    val <span class="token operator">=</span> src<span class="token punctuation">.</span>pop_first<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> val <span class="token operator">==</span> <span class="token string">'nil'</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> nil
+    <span class="token keyword">elif</span> val <span class="token operator">==</span> <span class="token string">'('</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> read_tail<span class="token punctuation">(</span>src<span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> val <span class="token keyword">in</span> quotes<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> Pair<span class="token punctuation">(</span>quotes<span class="token punctuation">[</span>val<span class="token punctuation">]</span><span class="token punctuation">,</span> Pair<span class="token punctuation">(</span>scheme_read<span class="token punctuation">(</span>src<span class="token punctuation">)</span><span class="token punctuation">,</span> nil<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment"># 注意之后还是继续调用 `scheme_read`, quote 只是加上一层括号而已</span>
+    <span class="token comment"># 例如 '(1 2) 转换成 (quote (1 2))</span>
+    <span class="token keyword">elif</span> val <span class="token keyword">not</span> <span class="token keyword">in</span> DELIMITERS<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> val
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">raise</span> SyntaxError<span class="token punctuation">(</span><span class="token string">'unexpected token: {0}'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">read_tail</span><span class="token punctuation">(</span>src<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Return the remainder of a list in SRC, starting before an element or ).
+
+    &gt;&gt;&gt; read_tail(Buffer(tokenize_lines([')'])))
+    nil
+    &gt;&gt;&gt; read_tail(Buffer(tokenize_lines(['2 3)'])))
+    Pair(2, Pair(3, nil))
+    """</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> src<span class="token punctuation">.</span>current<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+            <span class="token keyword">raise</span> SyntaxError<span class="token punctuation">(</span><span class="token string">'unexpected end of file'</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> src<span class="token punctuation">.</span>current<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">')'</span><span class="token punctuation">:</span>
+            src<span class="token punctuation">.</span>pop_first<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> nil
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> Pair<span class="token punctuation">(</span>scheme_read<span class="token punctuation">(</span>src<span class="token punctuation">)</span><span class="token punctuation">,</span> read_tail<span class="token punctuation">(</span>src<span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 本题难点</span>
+    <span class="token keyword">except</span> EOFError<span class="token punctuation">:</span>
+        <span class="token keyword">raise</span> SyntaxError<span class="token punctuation">(</span><span class="token string">'unexpected end of file'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Problem-03">Problem 03</h3>
+<p>要实现 Builtin Procedure 的 <code>apply</code> 方法, 这里为了使用 <code>fn(*lst)</code> 的语法, 需要先把传进来的 <code>Pair</code> 类型转成 Python List, 但是<strong>不需要递归转换</strong>.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">apply</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> args<span class="token punctuation">,</span> env<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""Apply SELF to ARGS in ENV, where ARGS is a Scheme list (a Pair instance).
+
+        &gt;&gt;&gt; env = create_global_frame()
+        &gt;&gt;&gt; plus = env.bindings['+']
+        &gt;&gt;&gt; twos = Pair(2, Pair(2, nil))
+        &gt;&gt;&gt; plus.apply(twos, env)
+        4
+        """</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> scheme_listp<span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">raise</span> SchemeError<span class="token punctuation">(</span><span class="token string">'arguments are not in a list: {0}'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        python_args <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token comment"># Convert a Scheme list to a Python list</span>
+        <span class="token keyword">while</span> args<span class="token punctuation">:</span>
+            python_args<span class="token punctuation">.</span>append<span class="token punctuation">(</span>args<span class="token punctuation">.</span>first<span class="token punctuation">)</span>
+            args <span class="token operator">=</span> args<span class="token punctuation">.</span>rest
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>use_env<span class="token punctuation">:</span>  <span class="token comment"># 最后可以放字典参数, 作为 binding</span>
+            python_args<span class="token punctuation">.</span>append<span class="token punctuation">(</span>env<span class="token punctuation">)</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> self<span class="token punctuation">.</span>fn<span class="token punctuation">(</span><span class="token operator">*</span>python_args<span class="token punctuation">)</span>
+        <span class="token keyword">except</span> TypeError<span class="token punctuation">:</span>
+            <span class="token keyword">raise</span> SchemeError<span class="token punctuation">(</span><span class="token string">'Incorrect number of arguments to function call'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Problem-04">Problem 04</h3>
+<p>To evaluate a call expression, we do the following:</p>
+<ol>
+<li>Evaluate the operator (which should evaluate to an instance of <code>Procedure</code>)</li>
+<li>Evaluate all of the operands (when there are multiple operands, we evaluate from left-to-right)</li>
+<li>Apply the procedure on the evaluated operands, and return the result</li>
+</ol>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">scheme_eval</span><span class="token punctuation">(</span>expr<span class="token punctuation">,</span> env<span class="token punctuation">,</span> _<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># Optional third argument is ignored</span>
+    <span class="token triple-quoted-string string">"""Evaluate Scheme expression EXPR in environment ENV.
+
+    &gt;&gt;&gt; expr = read_line('(+ 2 2)')
+    &gt;&gt;&gt; expr
+    Pair('+', Pair(2, Pair(2, nil)))
+    &gt;&gt;&gt; scheme_eval(expr, create_global_frame())
+    4
+    """</span>
+    <span class="token comment"># Evaluate atoms</span>
+    <span class="token keyword">if</span> scheme_symbolp<span class="token punctuation">(</span>expr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> env<span class="token punctuation">.</span>lookup<span class="token punctuation">(</span>expr<span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> self_evaluating<span class="token punctuation">(</span>expr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> expr
+
+    <span class="token comment"># All non-atomic expressions are lists (combinations)</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> scheme_listp<span class="token punctuation">(</span>expr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">raise</span> SchemeError<span class="token punctuation">(</span><span class="token string">'malformed list: {0}'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>repl_str<span class="token punctuation">(</span>expr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    first<span class="token punctuation">,</span> rest <span class="token operator">=</span> expr<span class="token punctuation">.</span>first<span class="token punctuation">,</span> expr<span class="token punctuation">.</span>rest
+
+    <span class="token keyword">if</span> scheme_symbolp<span class="token punctuation">(</span>first<span class="token punctuation">)</span> <span class="token keyword">and</span> first <span class="token keyword">in</span> SPECIAL_FORMS<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> SPECIAL_FORMS<span class="token punctuation">[</span>first<span class="token punctuation">]</span><span class="token punctuation">(</span>rest<span class="token punctuation">,</span> env<span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        procedure <span class="token operator">=</span> scheme_eval<span class="token punctuation">(</span>first<span class="token punctuation">,</span> env<span class="token punctuation">)</span>
+        validate_procedure<span class="token punctuation">(</span>procedure<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>procedure<span class="token punctuation">,</span> MacroProcedure<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> scheme_eval<span class="token punctuation">(</span>procedure<span class="token punctuation">.</span>apply_macro<span class="token punctuation">(</span>rest<span class="token punctuation">,</span> env<span class="token punctuation">)</span><span class="token punctuation">,</span> env<span class="token punctuation">)</span>  <span class="token comment"># apply_macro 会进行宏替换, 之后还需要 eval 一次</span>
+        <span class="token keyword">return</span> scheme_apply<span class="token punctuation">(</span>procedure<span class="token punctuation">,</span> rest<span class="token punctuation">.</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> exp<span class="token punctuation">:</span> scheme_eval<span class="token punctuation">(</span>exp<span class="token punctuation">,</span> env<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> env<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Problem-17">Problem 17</h3>
+<p>典型的动态规划问题, 就看 <code>denoms</code> 里的第一个数, <code>total</code> 能否要得起, 如果要, 之后还有可能要, 如果不要, 就彻底丢弃, 那么这样一定能够将 <code>denoms</code> 和 <code>total</code> 往小了转化. 考虑递归基:</p>
+<ul>
+<li>如果 <code>total = 0</code>, 成功, 直接返回 <code>(())</code>, 在回溯时会通过定义的 helper procedure <code>cons-all</code> 往里塞东西</li>
+<li>如果 <code>denoms</code> 为空, 此时失败, 直接返回 <code>nil</code></li>
+</ul>
+<p>注意到我们并没有考虑 <code>total &lt; 0</code> 时的递归基, 因为 <code>total</code> 要不起时就不会选择减小 <code>total</code>, 而是会选择迭代 <code>denoms</code>, 所以不可能被减到小于 0.</p>
+<pre class="line-numbers language-lisp" data-language="lisp"><code class="language-lisp"><span class="token punctuation">(</span><span class="token car">define</span> <span class="token punctuation">(</span><span class="token car">cons-all</span> first rests<span class="token punctuation">)</span>
+  <span class="token punctuation">(</span><span class="token car">map</span> <span class="token punctuation">(</span><span class="token lambda"><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token arguments"><span class="token argument variable">x</span></span><span class="token punctuation">)</span></span> <span class="token punctuation">(</span><span class="token keyword">append</span> <span class="token punctuation">(</span><span class="token car">list</span> first<span class="token punctuation">)</span> x<span class="token punctuation">)</span><span class="token punctuation">)</span> rests<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">; ; List all ways to make change for TOTAL with DENOMS</span>
+<span class="token punctuation">(</span><span class="token car">define</span> <span class="token punctuation">(</span><span class="token car">list-change</span> total denoms<span class="token punctuation">)</span>
+  <span class="token punctuation">(</span><span class="token keyword">cond</span>
+    <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token car">zero</span>? total<span class="token punctuation">)</span>
+     <span class="token punctuation">(</span><span class="token car">list</span> <span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token car">null</span>? denoms<span class="token punctuation">)</span>
+     <span class="token boolean">nil</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token car">&lt;</span> total <span class="token punctuation">(</span><span class="token car">car</span> denoms<span class="token punctuation">)</span><span class="token punctuation">)</span>
+     <span class="token punctuation">(</span><span class="token car">list-change</span> total <span class="token punctuation">(</span><span class="token car">cdr</span> denoms<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token car">else</span>
+     <span class="token punctuation">(</span><span class="token keyword">append</span> <span class="token punctuation">(</span><span class="token car">cons-all</span> <span class="token punctuation">(</span><span class="token car">car</span> denoms<span class="token punctuation">)</span>
+                       <span class="token punctuation">(</span><span class="token car">list-change</span> <span class="token punctuation">(</span><span class="token car">-</span> total <span class="token punctuation">(</span><span class="token car">car</span> denoms<span class="token punctuation">)</span><span class="token punctuation">)</span> denoms<span class="token punctuation">)</span><span class="token punctuation">)</span>
+             <span class="token punctuation">(</span><span class="token car">list-change</span> total <span class="token punctuation">(</span><span class="token car">cdr</span> denoms<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Problem-18">Problem 18</h3>
+<p><code>let</code> 可以被转化为对 <code>lambda</code> 的调用, 例如:</p>
+<pre class="line-numbers language-lisp" data-language="lisp"><code class="language-lisp"><span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token car">a</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token car">b</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token car">+</span> a b<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">;; Is equivalent to:</span>
+<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token lambda"><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token arguments"><span class="token argument variable">a</span> <span class="token argument variable">b</span></span><span class="token punctuation">)</span></span> <span class="token punctuation">(</span><span class="token car">+</span> a b<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token number">1</span> <span class="token number">2</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>要求写一个 <code>let-to-lambda</code> 函数, 把 <code>let</code> 表达式转成 <code>lambda</code></p>
+<pre class="line-numbers language-lisp" data-language="lisp"><code class="language-lisp">scm&gt; <span class="token punctuation">(</span><span class="token car">let-to-lambda</span> <span class="token punctuation">'(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token car">a</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token car">b</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token car">+</span> a b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token lambda"><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token arguments"><span class="token argument variable">a</span> <span class="token argument variable">b</span></span><span class="token punctuation">)</span></span> <span class="token punctuation">(</span><span class="token car">+</span> a b<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token number">1</span> <span class="token number">2</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>首先实现了 <code>zip</code> 函数:</p>
+<pre class="line-numbers language-lisp" data-language="lisp"><code class="language-lisp"><span class="token punctuation">(</span><span class="token car">define</span> <span class="token punctuation">(</span><span class="token car">zip</span> pairs<span class="token punctuation">)</span>
+  <span class="token punctuation">(</span><span class="token car">list</span> <span class="token punctuation">(</span><span class="token car">map</span> <span class="token punctuation">(</span><span class="token lambda"><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token arguments"><span class="token argument variable">x</span></span><span class="token punctuation">)</span></span> <span class="token punctuation">(</span><span class="token car">car</span> x<span class="token punctuation">)</span><span class="token punctuation">)</span> pairs<span class="token punctuation">)</span>
+        <span class="token punctuation">(</span><span class="token car">map</span> <span class="token punctuation">(</span><span class="token lambda"><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token arguments"><span class="token argument variable">x</span></span><span class="token punctuation">)</span></span> <span class="token punctuation">(</span><span class="token car">cadr</span> x<span class="token punctuation">)</span><span class="token punctuation">)</span> pairs<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>思路就是把形如 <code>((1 2) (3 4) (5 6))</code> 的 <code>list</code> 通过 <code>map</code> 转成 <code>(1 3 5)</code> 和 <code>(2 4 6)</code>, 再拼起来.</p>
+<pre class="line-numbers language-lisp" data-language="lisp"><code class="language-lisp"><span class="token comment">; ; Converts all let special forms in EXPR into equivalent forms using lambda</span>
+<span class="token punctuation">(</span><span class="token car">define</span> <span class="token punctuation">(</span><span class="token car">let-to-lambda</span> expr<span class="token punctuation">)</span>
+  <span class="token punctuation">(</span><span class="token keyword">cond</span> 
+    <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token car">atom</span>? expr<span class="token punctuation">)</span> <span class="token comment">; 这个和下面的 quoted 是递归终点</span>
+     expr<span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token car">quoted</span>? expr<span class="token punctuation">)</span> <span class="token comment">; 因为这里只用转换表达式, 不用 evaluate, 所以 quoted 也返回自身</span>
+     <span class="token comment">; 注意 quoted 不用递归转换</span>
+     expr<span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">or</span> <span class="token punctuation">(</span><span class="token car">lambda</span>? expr<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token car">define</span>? expr<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+     <span class="token comment">; 这里 form 和 params 都不用转换(有例子说 lambda parameters not affected), body 可能需要递归进行转换</span>
+     <span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token car">form</span> <span class="token punctuation">(</span><span class="token car">car</span> expr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+           <span class="token punctuation">(</span><span class="token car">params</span> <span class="token punctuation">(</span><span class="token car">cadr</span> expr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+           <span class="token punctuation">(</span><span class="token car">body</span> <span class="token punctuation">(</span><span class="token car">cddr</span> expr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">(</span><span class="token keyword">cons</span> form <span class="token punctuation">(</span><span class="token keyword">cons</span> params <span class="token punctuation">(</span><span class="token car">map</span> let-to-lambda body<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token car">let</span>? expr<span class="token punctuation">)</span> <span class="token comment">; form 换成 lambda, params 需要转换, body 递归转换, 之后还要调用这个 lambda</span>
+     <span class="token comment">; 注意 zip 之前还要再递归转换, 因为参数里也可能有 let</span>
+     <span class="token comment">; params 转换为 (car (zip(let-to-lambda values))), 调用时的参数为 (cadr (zip(let-to-lambda values)))</span>
+     <span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token car">values</span> <span class="token punctuation">(</span><span class="token car">cadr</span> expr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+           <span class="token punctuation">(</span><span class="token car">body</span> <span class="token punctuation">(</span><span class="token car">cddr</span> expr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">(</span><span class="token keyword">cons</span> <span class="token punctuation">(</span><span class="token keyword">cons</span> <span class="token quoted-symbol variable symbol">'lambda</span>
+             <span class="token punctuation">(</span><span class="token keyword">cons</span> <span class="token punctuation">(</span><span class="token car">car</span> <span class="token punctuation">(</span><span class="token car">zip</span> <span class="token punctuation">(</span><span class="token car">let-to-lambda</span> values<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                             <span class="token punctuation">(</span><span class="token car">map</span> let-to-lambda body<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                   <span class="token punctuation">(</span><span class="token car">cadr</span> <span class="token punctuation">(</span><span class="token car">zip</span> <span class="token punctuation">(</span><span class="token car">let-to-lambda</span> values<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token car">else</span> <span class="token comment">; 函数体, 继续递归即可</span>
+     <span class="token punctuation">(</span><span class="token car">map</span> let-to-lambda expr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Problem-19">Problem 19</h3>
+<p>要求自己在解释器中进行尾递归的优化, 通过一个 Higher-Order-Function 改进原本的 <code>scheme_eval</code>:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">optimize_tail_calls</span><span class="token punctuation">(</span>prior_eval_function<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Return a properly tail recursive version of an eval function."""</span>
+
+    <span class="token keyword">def</span> <span class="token function">optimized_eval</span><span class="token punctuation">(</span>expr<span class="token punctuation">,</span> env<span class="token punctuation">,</span> tail<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""Evaluate Scheme expression EXPR in environment ENV. If TAIL,
+        return a Thunk containing an expression for further evaluation.
+        """</span>
+        <span class="token keyword">if</span> tail <span class="token keyword">and</span> <span class="token keyword">not</span> scheme_symbolp<span class="token punctuation">(</span>expr<span class="token punctuation">)</span> <span class="token keyword">and</span> <span class="token keyword">not</span> self_evaluating<span class="token punctuation">(</span>expr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> Thunk<span class="token punctuation">(</span>expr<span class="token punctuation">,</span> env<span class="token punctuation">)</span>
+
+        result <span class="token operator">=</span> Thunk<span class="token punctuation">(</span>expr<span class="token punctuation">,</span> env<span class="token punctuation">)</span>
+        <span class="token keyword">while</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>result<span class="token punctuation">,</span> Thunk<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            result <span class="token operator">=</span> prior_eval_function<span class="token punctuation">(</span>result<span class="token punctuation">.</span>expr<span class="token punctuation">,</span> result<span class="token punctuation">.</span>env<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> result
+
+    <span class="token keyword">return</span> optimized_eval
+
+
+scheme_eval <span class="token operator">=</span> optimize_tail_calls<span class="token punctuation">(</span>scheme_eval<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>改进以后的函数有了第三个参数 <code>tail</code>, 标记着它是不是尾递归.</p>
+<p>根据提示:</p>
+<blockquote>
+<p>When <code>scheme_optimized_eval</code> receives a non-atomic expression in a <code>tail</code> context, then it returns an <code>Thunk</code> instance. Otherwise, it should repeatedly call <code>prior_eval_function</code> until the result is a value, rather than a <code>Thunk</code>.</p>
+</blockquote>
+<p>不难补出完整的代码. 这里主要讲一下优化尾调用 (tail call) 的思路:</p>
+<p>首先是 <code>Thunk</code> 类, 其实就是一个表达式和对应环境的绑定, 这样的绑定可以让新的表达式复用之前的环境.</p>
+<p>优化 tail call, 就是要让 tail call 不额外增加一个 environment, 对应到代码中就是返回了一个 <code>Thunk</code>, 该 <code>Thunk</code> 绑定的表达式是 tail call, environment 则复用当前的 <code>env</code>. 这样创建新环境就变成了创建 <code>Thunk</code>, 但是 <code>Thunk</code> 用完之后就会被 GC 回收掉, 就可以实现 constant space 了.</p>
+<p>之后在非 <code>Thunk</code> 时, 就用原本的函数来 evaluate 这个表达式, 注意到原本表达式可能又是 tail context 的, 返回的可能还是 <code>Thunk</code>, 因此需要用 while 循环保证最后返回的是一个值而不是 <code>Thunk</code>.</p>
+<p>此外, 还需要修改对 <code>tail context</code> 的判断, 在该 Project 里只需要考虑</p>
+<ol>
+<li><code>eval_all</code> 时最后一个 expression</li>
+<li><code>if</code> special form</li>
+<li><code>and</code>, <code>or</code> special form</li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/tags/Interpreter/">
+                                    <span class="chip bg-color">Interpreter</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'iT1y2aQnx6u5pD7nnDM0hL8P-gzGzoHsz',
+        appKey: '6UmywYMRbt5i6Lymj3eskq9L',
+        notify: 'true' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '说点什么吧'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/03/02/scheme-interpreter/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/interpreter.jpg" class="responsive-img" alt="CS61A Scheme Interpreter">
+                        
+                        <span class="card-title">CS61A Scheme Interpreter</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            CS61A 课程中 HW08 和 Scheme Project 的总结
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/Interpreter/">
+                        <span class="chip bg-color">Interpreter</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/02/02/ubuntu-dual-system/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/dual-system.jpg" class="responsive-img" alt="Ubuntu 双系统">
+                        
+                        <span class="card-title">Ubuntu 双系统</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            在 Windows 上装 Ubuntu 双系统
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: xkz<br />'
+            + '文章作者: xkz<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <a href="/about" target="_blank">xkz</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">119.1k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/xkz0777" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:xkz@mail.ustc.edu.cn" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=821376043" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 821376043" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

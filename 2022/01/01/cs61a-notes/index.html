@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="CS61A Notes, xkz">
-    <meta name="description" content="Notes for taking the course CS61A su20">
+    <meta name="description" content="Notes for CS61A su20">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -393,21 +393,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-01-30
+                    2022-03-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    7.3k
+                    10.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    45 分
+                    67 分
                 </div>
                 
 
@@ -431,9 +431,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1>CS61A Notes</h1>
-<p>This is my notes for <a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61a/su20/">CS61A su20</a>(Also the first blog in 2022!).</p>
-<p>Still updating…</p>
-<h1>CS61A Notes</h1>
+<p>This is my notes for <a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61a/su20/">CS61A summer20</a>(Also the first blog in 2022!).</p>
 <h2 id="Docstring">Docstring</h2>
 <p>A docstring is a string literal that occurs as the first statement in a module, function, class, or method definition. Such a docstring becomes the <code>__doc__</code> attribute of that object.</p>
 <ul>
@@ -802,7 +800,7 @@ a <span class="token keyword">is</span> b  <span class="token comment"># True (I
 f<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 1</span>
 f<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 2</span>
 f<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<img src="../../../Courses/Online/CS61A/images/CS61A Notes/image-20220122115819577.png" alt="image-20220122115819577" style="zoom:50%;">
+<img src="./images/CS61A Notes/image-20220122115819577.png" alt="image-20220122115819577" style="zoom:50%;">
 <h3 id="Nonlocal-Statements">Nonlocal Statements</h3>
 <p>Syntax: <code>nonlocal &lt;name&gt;</code></p>
 <p>Effect: Future assignments to that name change its pre-existing binding in the first non-local frame of the current environment in which that name is bound.</p>
@@ -813,7 +811,7 @@ f<span class="token punctuation">(</span><span class="token punctuation">)</span
 <h3 id="Iterators">Iterators</h3>
 <p>A container can provide an iterator that provides access to its elements in order.</p>
 <p><code>iter(iterable)</code>: Return an iterator over the elements of an iterable value.</p>
-<p><code>next(iterator):</code> Return the next element in an iterator.</p>
+<p><code>next(iterator):</code> Return the next element in an iterator. Once an iterator has returned all the values in an iterable, subsequent calls to next on that iterable will result in a <code>StopIteration</code> exception.</p>
 <h4 id="Views-of-a-Dictionary">Views of a Dictionary</h4>
 <p>A dictionary, its keys, its values, and its items are all iterable values.</p>
 <p>An <strong>iterable value</strong> is any value that <strong>can be passed to iter</strong> to produce an iterator.</p>
@@ -838,7 +836,7 @@ f<span class="token punctuation">(</span><span class="token punctuation">)</span
 <h3 id="Generators">Generators</h3>
 <p>A <strong>generator function</strong> is a function that <strong>yields values instead of returning them</strong>.</p>
 <p>A normal function returns once; a generator function can yield multiple times.</p>
-<p>When a generator function is called, it <strong>returns a generator that iterates over its yields</strong>.</p>
+<p>When a generator function is called, it <strong>returns a generator object which is a type of iterator.</strong> This generator object iterates over its yields.</p>
 <p>A <code>yield from</code> statement yields all values from an iterator or iterable.</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">a_then_b</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">:</span>
 	<span class="token keyword">for</span> x <span class="token keyword">in</span> a<span class="token punctuation">:</span>
@@ -1144,7 +1142,7 @@ load_restaurants<span class="token punctuation">(</span>load_reviews<span class=
 <span class="token number">1234</span>
 scm&gt; <span class="token number">123.4</span>   <span class="token comment">; real number</span>
 <span class="token number">123.4</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="Symbols">Symbols</h4>
+<h5 id="Symbols">Symbols</h5>
 <p>Out of these, the symbol type is the only one we didn’t encounter in Python. A symbol acts a lot like a Python name, but not exactly. Specifically, a symbol in Scheme is also a type of value. On the other hand, in Python, names only serve as expressions; a Python expression can never evaluate to a name.</p>
 <pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; quotient      <span class="token comment">; A name bound to a built-in procedure</span>
 #<span class="token punctuation">[</span>quotient<span class="token punctuation">]</span>
@@ -1152,7 +1150,7 @@ scm&gt; <span class="token symbol">'quotient</span>     <span class="token comme
 quotient
 scm&gt; <span class="token symbol">'hello-world!</span>
 hello-world!<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="Booleans">Booleans</h4>
+<h5 id="Booleans">Booleans</h5>
 <p>In Scheme, all values except the special boolean value <code>#f</code> are interpreted as true values (unlike Python, where there are some false-y values like <code>0</code>). Our particular version of the Scheme interpreter allows you to write <code>True</code> and <code>False</code> in place of <code>#t</code> and <code>#f</code>. This is not standard.</p>
 <pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; <span class="token boolean">#t</span>
 <span class="token boolean">#t</span>
@@ -1229,7 +1227,8 @@ scm&gt; <span class="token punctuation">(</span><span class="token builtin">appe
 <span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span><span class="token punctuation">)</span>
 scm&gt; <span class="token punctuation">(</span><span class="token builtin">length</span> <span class="token punctuation">'</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>      <span class="token comment">; Returns the number of elements in a list</span>
 <span class="token number">5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="Define-procedures">Define procedures</h3>
+<h3 id="Special-Form">Special Form</h3>
+<h4 id="Define-procedures">Define procedures</h4>
 <p>The special form <code>define</code> is used to define variables and functions in Scheme. There are two versions of the <code>define</code> special form. To define variables, we use the <code>define</code> form with the following syntax:</p>
 <pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define</span> &lt;name&gt; &lt;expression&gt;<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>The rules to evaluate this expression are</p>
@@ -1251,11 +1250,23 @@ scm&gt; <span class="token punctuation">(</span><span class="token builtin">leng
 foo
 scm&gt; <span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">foo</span> x y<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">+</span> x y<span class="token punctuation">)</span><span class="token punctuation">)</span>
 foo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="Lambdas">Lambdas</h3>
+<h4 id="Lambdas">Lambdas</h4>
 <p>All Scheme procedures are lambda procedures. To create a lambda procedure, we can use the <code>lambda</code> special form:</p>
 <pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">lambda</span> <span class="token punctuation">(</span><span class="token lambda-parameter">&lt;param1&gt; &lt;param2&gt; ...</span><span class="token punctuation">)</span> &lt;body&gt;<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>This expression will create and return a function with the given parameters and body, but it will not alter the current environment.</p>
 <p>The function will <strong>simply return the value of the last expression in the body.</strong></p>
+<h4 id="Quote-and-Quasiquote">Quote and Quasiquote</h4>
+<p>The quote special form takes in a single operand. It returns this operand exactly as is, without evaluating it. Note that this special form can be used to return any value, not just a list.</p>
+<p>Similarly, a quasiquote, denoted with a backtick symbol, returns an expression without evaluating it. However, parts of that expression can be unquoted, denoted using a comma, and those unquoted parts are evaluated.</p>
+<h4 id="eq-equal">=, eq?, equal?</h4>
+<ul>
+<li><code>=</code> can only be used for comparing numbers.</li>
+<li><code>eq?</code> behaves like == in Python for comparing two non-pairs (numbers, booleans,<br>
+etc.). Otherwise, eq? behaves like is in Python.</li>
+<li><code>equal?</code> compares pairs by determining if their cars are equal? and their cdrs<br>
+are equal?(that is, they have the same contents). Otherwise, equal? behaves<br>
+like eq?</li>
+</ul>
 <h3 id="Sierpinski’s-Triangle">Sierpinski’s Triangle</h3>
 <pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">line</span> len<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token function">fd</span> len<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
@@ -1279,9 +1290,196 @@ foo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 <span class="token punctuation">(</span><span class="token function">rt</span> <span class="token number">90</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token function">speed</span> <span class="token number">0</span><span class="token punctuation">)</span>
 <span class="token punctuation">(</span><span class="token function">sier</span> <span class="token number">6</span> <span class="token number">400</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Tail-Recursion">Tail Recursion</h3>
+<p>Scheme implements tail-call optimization, which allows programmers to write recursive functions that <strong>use a constant amount of space. A tail call occurs when a function calls another function as its last action of the current frame.</strong> In this<br>
+case, the frame is no longer needed, and we can remove it from memory. In other words, <strong>if this is the last thing you are going to do in a function call, we can reuse the current frame instead of making a new frame</strong>.</p>
+<p>Consider this implementation of factorial.</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">fact</span> n<span class="token punctuation">)</span>
+	<span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">=</span> n <span class="token number">0</span><span class="token punctuation">)</span>
+		<span class="token number">1</span>
+		<span class="token punctuation">(</span><span class="token operator">*</span> n <span class="token punctuation">(</span><span class="token function">fact</span> <span class="token punctuation">(</span><span class="token operator">-</span> n <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>The recursive call occurs in the last line, but it is not the last expression evaluated. After calling <code>(fact (- n 1))</code>, the function still needs to multiply that result with n. The final expression that is evaluated is a call to the multiplication function, not<br>
+fact itself. Therefore, the recursive call is not a tail call.</p>
+<p>We can rewrite this function using a helper function that remembers the temporary product that we have calculated so far in each recursive step.</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">fact</span> n<span class="token punctuation">)</span>
+	<span class="token punctuation">(</span><span class="token keyword">define</span> <span class="token punctuation">(</span><span class="token function">fact-tail</span> n result<span class="token punctuation">)</span>
+		<span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">=</span> n <span class="token number">0</span><span class="token punctuation">)</span>
+			result
+			<span class="token punctuation">(</span><span class="token function">fact-tail</span> <span class="token punctuation">(</span><span class="token operator">-</span> n <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token operator">*</span> n result<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">(</span><span class="token function">fact-tail</span> n <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="Tail-context">Tail context</h4>
+<p>When trying to identify whether a given function call within the body of a function is a tail call, we look for whether the call expression is in tail context.<br>
+Given that each of the following expressions is the last expression in the body of the function, the following expressions are tail contexts:</p>
+<ul>
+<li>the second or third operand in an if expression</li>
+<li>any of the non-predicate sub-expressions in a cond expression (i.e. the second expression of each clause)</li>
+<li>the last operand in an and or an or expression</li>
+<li>the last operand in a begin expression’s body</li>
+<li>the last operand in a let expression’s body</li>
+</ul>
+<h3 id="Macros">Macros</h3>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme">scm&gt; <span class="token punctuation">(</span><span class="token keyword">define-macro</span> <span class="token punctuation">(</span><span class="token function">twice</span> f<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">list</span> <span class="token symbol">'begin</span> f f<span class="token punctuation">)</span><span class="token punctuation">)</span>
+twice<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><code>define-macro</code> allows us to define what’s known as a macro, which is simply a way for us to combine unevaluated input expressions together into another expression. When we call macros, the operands are not evaluated, but rather are treated as<br>
+Scheme data. This means that any operands that are call expressions or special form expression are treated like lists.</p>
+<p>The rules for evaluating calls to macro procedures are:</p>
+<ol>
+<li>Evaluate operator</li>
+<li>Apply operator to unevaluated operands</li>
+<li>Evaluate the expression returned by the macro in the frame it was called in</li>
+</ol>
+<h3 id="Streams">Streams</h3>
+<p>Because <code>cons</code> is a regular procedure and both its operands must be evaluted before the pair is constructed, we cannot create an infinite sequence of integers using a Scheme list. Instead, our Scheme interpreter supports streams, which are lazy<br>
+Scheme lists. The first element is represented explicitly, but <strong>the rest of the stream’s elements are computed only when needed</strong>. Computing a value only when it’s needed is also known as <strong>lazy evaluation</strong>.</p>
+<p>We use the special form <code>cons-stream</code> to create a stream. To actually get the rest of the stream, we must call <code>cdr-stream</code> on it to force the promise to be evaluated.</p>
+<p>Here’s a summary of what we just went over:</p>
+<ul>
+<li><code>nil</code> is the empty stream</li>
+<li><code>cons-stream</code> constructs a stream containing the value of the first operand and a promise to evaluate the second operand</li>
+<li><code>car</code> returns the first element of the stream</li>
+<li><code>cdr-stream</code> computes and returns the rest of stream</li>
+</ul>
+<h2 id="SQL">SQL</h2>
+<p>SQL is an example of a declarative programming language. Statements do not describe computations directly, but instead describe the desired result of some computation. It is the role of the query interpreter of the database system to plan and<br>
+perform a computational process to produce such a result.</p>
+<p>In SQL, data is organized into tables. A table has a fixed number of named columns. A row of the table represents a single data record and has one value for each column. Table used in examples below:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Division</th>
+<th>Title</th>
+<th>Salary</th>
+<th>Supervisor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ben Bitdiddle</td>
+<td>Computer</td>
+<td>Wizard</td>
+<td>60000</td>
+<td>Oliver Warbucks</td>
+</tr>
+<tr>
+<td>Alyssa P Hacker</td>
+<td>Computer</td>
+<td>Programmer</td>
+<td>40000</td>
+<td>Ben Bitdiddle</td>
+</tr>
+<tr>
+<td>Cy D Fect</td>
+<td>Computer</td>
+<td>Programmer</td>
+<td>35000</td>
+<td>Ben Bitdiddle</td>
+</tr>
+<tr>
+<td>Lem E Tweakit</td>
+<td>Computer</td>
+<td>Technician</td>
+<td>25000</td>
+<td>Ben Bitdiddle</td>
+</tr>
+<tr>
+<td>Louis Reasoner</td>
+<td>Computer</td>
+<td>Programmer Trainee</td>
+<td>30000</td>
+<td>Alyssa P Hacker</td>
+</tr>
+<tr>
+<td>Robert Cratchet</td>
+<td>Administration</td>
+<td>Big Wheel</td>
+<td>150000</td>
+<td>Oliver Warbucks</td>
+</tr>
+<tr>
+<td>Eben Scrooge</td>
+<td>Accounting</td>
+<td>Chief Accountant</td>
+<td>75000</td>
+<td>Oliver Warbucks</td>
+</tr>
+<tr>
+<td>Robert Cratchet</td>
+<td>Accounting</td>
+<td>Scrivener</td>
+<td>18000</td>
+<td>Eben Scrooge</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Creating-Tables">Creating Tables</h3>
+<p>We can use a <code>SELECT</code> statement to create tables. The following statement creates a table with a single row, with columns named “first" and ”last":</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">sqlite&gt; SELECT "Ben" AS first, "Bitdiddle" AS last;
+Ben|Bitdiddle<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>Given two tables with the same number of columns, we can combine their rows into<br>
+a larger table with <code>UNION</code>:</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">sqlite&gt; SELECT "Ben" AS first, "Bitdiddle" AS last UNION
+   ...&gt; SELECT "Louis", "Reasoner";
+Ben|Bitdiddle
+Louis|Reasoner<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>To save a table, use <code>CREATE TABLE</code> and a name. Here we’re going to create the table<br>
+of employees from the previous section and assign it to the name records:</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">sqlite&gt; CREATE TABLE records AS
+   ...&gt;   SELECT "Ben Bitdiddle" AS name, "Computer" AS division, "Wizard" AS title, 60000 AS salary, "Oliver Warbucks" AS supervisor UNION
+   ...&gt;   SELECT "Alyssa P Hacker", "Computer", "Programmer", 40000, "Ben Bitdiddle" UNION ... ;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>We can <code>SELECT</code> specific values from an existing table using a <code>FROM</code> clause.</p>
+<p>The special syntax <code>SELECT *</code> will select all columns from a table. It’s an easy way to print the contents of a table.</p>
+<p>We can choose which columns to show in the first part of the <code>SELECT</code>, we can filter out rows using a <code>WHERE</code> clause, and sort the resulting rows with an <code>ORDER BY</code> clause (In non-decreasing order by default).</p>
+<p>In general the syntax is:</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">SELECT [columns] FROM [tables]
+  WHERE [condition] ORDER BY [criteria];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>Note that all valid SQL statements must be terminated by a semicolon (;). Additionally, you can split up your statement over many lines and add as much whitespace as you want, much like Scheme.</p>
+<h3 id="Joins">Joins</h3>
+<p>Data are combined by joining multiple tables together into one, a fundamental operation in database systems. There are many methods of joining, all closely related, but we will focus on just one method (the inner join) in this class. When tables are joined, <strong>the resulting table contains a new row for each combination of rows in the input tables</strong>. If two tables are joined and the left table has <em>m</em> rows and the right table has <em>n</em> rows, then the joined table will have <em>mn</em> rows. Joins are expressed in SQL by separating table names by commas in the <code>FROM</code> clause of a <code>SELECT</code> statement.</p>
+<p>SQL allows us to join a table with itself by giving aliases to tables within a <code>FROM</code> clause using the keyword <code>AS</code> and to refer to a column within a particular table using a dot expression. In the example below we find the name and title of Louis Reasoner’s supervisor.</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">sqlite&gt; SELECT b.name, b.title FROM records AS a, records AS b
+   ...&gt;   WHERE a.name = "Louis Reasoner" AND a.supervisor = b.name;
+Alyssa P Hacker | Programmer<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="Aggregation">Aggregation</h3>
+<p>We can use the <code>MAX</code>, <code>MIN</code>, <code>COUNT</code>, and <code>SUM</code> functions to retrieve more information from our initial tables.</p>
+<p>If we wanted to find the name and salary of the employee who makes the most money, we might say</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">sqlite&gt; SELECT name, MAX(salary) FROM records;
+Oliver Warbucks|150000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>Using the special <code>COUNT(*)</code> syntax, we can count the number of rows in our table to see the number of employees at the company.</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">sqlite&gt; SELECT COUNT(*) from RECORDS;
+9<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>These commands can be performed on specific sets of rows in our table by using the GROUP BY [column name] clause. This clause takes all of the rows that have the same value in column name and groups them together.</p>
+<p>We can find the miniumum salary earned in each division of the company.</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">sqlite&gt; SELECT division, MIN(salary) FROM records GROUP BY division;
+Computer|25000
+Administration|25000
+Accounting|18000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>These groupings can be additionally filtered by the <code>HAVING</code> clause. In contrast to the <code>WHERE</code> clause, which filters out rows, the <code>HAVING</code> clause filters out entire groups.</p>
+<p>To find all titles that are held by more than one person, we say</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">sqlite&gt; SELECT title FROM records GROUP BY title HAVING count(*) &gt; 1;
+Programmer<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="Create-Table-and-Drop-Table">Create Table and Drop Table</h3>
+<p>Create Empty Table:</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">CREATE TABLE numbers(n, note);
+CREATE TABLE numbers(n UNIQUE, note);
+CREATE TABLE numbers(n, note DEFAULT "No Comment");<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>Drop Table:</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">DROP TABLE [IF EXISTS] numbers;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Modifying-Tables">Modifying Tables</h3>
+<h4 id="INSERT">INSERT</h4>
+<p>For a table <code>t</code> with two columns, to insert into one column:</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">INSERT INTO t(column) VALUES(value);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>To insert into both columns:</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">INSERT INTO t VALUES(value0, value1);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="UPDATE">UPDATE</h4>
+<p>Update sets all entries in certain columns to new values, just for some subset of rows.</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">UPDATE numbers SET n = 0 WHERE note = "No Comment";<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="DELETE">DELETE</h4>
+<p>Delete removes some or all rows from a table.</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">DELETE FROM numbers WHERE n = 0;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="Intersting-problems-in-Homework-and-Lab">Intersting problems in Homework and Lab</h2>
 <h3 id="HW02">HW02</h3>
-<h4 id="count-cond">count_cond</h4>
+<h4 id="Count-Cond">Count Cond</h4>
 <p>(True + True == 2)</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">count_cond</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">"""Returns a function with one parameter N that counts all the numbers from
@@ -1316,7 +1514,7 @@ foo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
         <span class="token keyword">return</span> <span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">[</span>condition<span class="token punctuation">(</span>n<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
     <span class="token keyword">return</span> count_fn<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="make-repeater">make repeater</h4>
+<h4 id="Make-Repeater">Make Repeater</h4>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">accumulate</span><span class="token punctuation">(</span>combiner<span class="token punctuation">,</span> base<span class="token punctuation">,</span> n<span class="token punctuation">,</span> term<span class="token punctuation">)</span><span class="token punctuation">:</span>
     i <span class="token operator">=</span> <span class="token number">1</span>
     <span class="token keyword">while</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">:</span>
@@ -1389,7 +1587,7 @@ foo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
     <span class="token keyword">return</span> <span class="token keyword">lambda</span> f<span class="token punctuation">:</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span> n<span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token comment"># which is equivalent to n(m)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>This time, instead of taking in <code>f</code> as <code>n</code>’s argument, we take in <code>m</code>. <code>n(m) = m((n-1)(m)) = ... = m^n</code>.</p>
 <h3 id="HW03">HW03</h3>
-<h4 id="composer">composer</h4>
+<h4 id="Composer">Composer</h4>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">composer</span><span class="token punctuation">(</span>func<span class="token operator">=</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">"""
     Returns two functions -
@@ -1414,7 +1612,7 @@ foo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 
     <span class="token keyword">return</span> func<span class="token punctuation">,</span> func_adder<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>Obviously, <code>func_adder</code> should return the result after calling composer, so we need to think about the function passed in. Notice that it can not be <code>func(g)</code>, because the argument of <code>func</code> should be just a number, so the answer is <code>composer(lambda x: func(g(x)))</code>.</p>
-<h4 id="anonymous-factorial">anonymous factorial</h4>
+<h4 id="Anonymous-Factorial">Anonymous Factorial</h4>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">make_anonymous_factorial</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">"""Return the value of an expression that computes factorial.
 
@@ -1430,7 +1628,7 @@ foo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 <p>First, we need the fact function to call itself, if we cannot give it a name, we can make it an argument. So the second part serve as a <code>fact</code> function.</p>
 <p>Second, since there are no arguments passed in, we need to apply that fact function inside <code>make_anonymous_factorial</code>, and the first part <code>(lambda fact: lambda x: fact(fact, x))</code> is doing this job.</p>
 <h3 id="HW04">HW04</h3>
-<h4 id="preorder-traverse">preorder traverse</h4>
+<h4 id="Preorder-Traverse">Preorder Traverse</h4>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">preorder</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token triple-quoted-string string">"""Return a list of the entries in this tree in the order that they
     would be visited by a preorder traversal (see problem description).
@@ -1444,8 +1642,365 @@ foo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
     <span class="token string">"*** YOUR CODE HERE ***"</span>
     <span class="token keyword">return</span> <span class="token punctuation">[</span>label<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">[</span>preorder<span class="token punctuation">(</span>branch<span class="token punctuation">)</span> <span class="token keyword">for</span> branch <span class="token keyword">in</span> branches<span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>It is a recursive function without any base case, because when <code>t</code> is a leave, it has no branches and therefore <code>branches(t)</code> would be an empty list.</p>
-<h4 id="why-is-par2-better-than-par1">why is par2 better than par1</h4>
+<h4 id="Why-is-par2-better-than-par1">Why is par2 better than par1</h4>
 <p><code>par1</code> calculate the summation and product of the two intervals. However, when the sum of two resistors is given, the range of the product is <strong>no longer that large</strong>. Therefore, the result interval given by <code>par1</code> is relatively larger comparing to <code>par2</code>, which uses the formular written in the form that <strong>no variable that represents an uncertain number is repeated.</strong> Thus, <code>par2</code> is a better program.</p>
+<h3 id="HW05">HW05</h3>
+<h4 id="Make-Joint">Make Joint</h4>
+<p>We can write a password-protected <code>make_withdraw</code> function as below:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">make_withdraw</span><span class="token punctuation">(</span>balance<span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Return a password-protected withdraw function.
+
+    &gt;&gt;&gt; w = make_withdraw(100, 'hax0r')
+    &gt;&gt;&gt; w(25, 'hax0r')
+    75
+    &gt;&gt;&gt; error = w(90, 'hax0r')
+    &gt;&gt;&gt; error
+    'Insufficient funds'
+    &gt;&gt;&gt; error = w(25, 'hwat')
+    &gt;&gt;&gt; error
+    'Incorrect password'
+    &gt;&gt;&gt; new_bal = w(25, 'hax0r')
+    &gt;&gt;&gt; new_bal
+    50
+    &gt;&gt;&gt; w(75, 'a')
+    'Incorrect password'
+    &gt;&gt;&gt; w(10, 'hax0r')
+    40
+    &gt;&gt;&gt; w(20, 'n00b')
+    'Incorrect password'
+    &gt;&gt;&gt; w(10, 'hax0r')
+    "Too many incorrect attempts. Attempts: ['hwat', 'a', 'n00b']"
+    &gt;&gt;&gt; w(10, 'l33t')
+    "Too many incorrect attempts. Attempts: ['hwat', 'a', 'n00b']"
+    &gt;&gt;&gt; type(w(10, 'l33t')) == str
+    True
+    """</span>
+    <span class="token string">"*** YOUR CODE HERE ***"</span>
+    incorrect_attempts <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">withdraw</span><span class="token punctuation">(</span>amount<span class="token punctuation">,</span> passwd<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">nonlocal</span> balance
+        <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>incorrect_attempts<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f'Too many incorrect attempts. Attempts: </span><span class="token interpolation"><span class="token punctuation">{</span>incorrect_attempts<span class="token punctuation">}</span></span><span class="token string">'</span></span>
+        <span class="token keyword">elif</span> passwd <span class="token operator">==</span> password<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> balance <span class="token operator">&lt;</span> amount<span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token string">'Insufficient funds'</span>
+            balance <span class="token operator">-=</span> amount
+            <span class="token keyword">return</span> balance
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            incorrect_attempts<span class="token punctuation">.</span>append<span class="token punctuation">(</span>passwd<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token string">'Incorrect password'</span>
+
+    <span class="token keyword">return</span> withdraw<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>This is simple, how about making joint accounts which can be accessed by multiple passwords?</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">make_joint</span><span class="token punctuation">(</span>withdraw<span class="token punctuation">,</span> old_pass<span class="token punctuation">,</span> new_pass<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Return a password-protected withdraw function that has joint access to
+    the balance of withdraw.
+    
+    &gt;&gt;&gt; w = make_withdraw(100, 'hax0r')
+    &gt;&gt;&gt; w(25, 'hax0r')
+    75
+    &gt;&gt;&gt; make_joint(w, 'my', 'secret')
+    'Incorrect password'
+    &gt;&gt;&gt; j = make_joint(w, 'hax0r', 'secret')
+    &gt;&gt;&gt; w(25, 'secret')
+    'Incorrect password'
+    &gt;&gt;&gt; j(25, 'secret')
+    50
+    &gt;&gt;&gt; j(25, 'hax0r')
+    25
+    &gt;&gt;&gt; j(100, 'secret')
+    'Insufficient funds'
+
+    &gt;&gt;&gt; j2 = make_joint(j, 'secret', 'code')
+    &gt;&gt;&gt; j2(5, 'code')
+    20
+    &gt;&gt;&gt; j2(5, 'secret')
+    15
+    &gt;&gt;&gt; j2(5, 'hax0r')
+    10
+
+    &gt;&gt;&gt; j2(25, 'password')
+    'Incorrect password'
+    &gt;&gt;&gt; j2(5, 'secret')
+    "Too many incorrect attempts. Attempts: ['my', 'secret', 'password']"
+    &gt;&gt;&gt; j(5, 'secret')
+    "Too many incorrect attempts. Attempts: ['my', 'secret', 'password']"
+    &gt;&gt;&gt; w(5, 'hax0r')
+    "Too many incorrect attempts. Attempts: ['my', 'secret', 'password']"
+    &gt;&gt;&gt; make_joint(w, 'hax0r', 'hello')
+    "Too many incorrect attempts. Attempts: ['my', 'secret', 'password']"
+    """</span>
+    <span class="token string">"*** YOUR CODE HERE ***"</span>
+    attempt <span class="token operator">=</span> withdraw<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> old_pass<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token builtin">type</span><span class="token punctuation">(</span>attempt<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token builtin">str</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> attempt
+
+    <span class="token keyword">def</span> <span class="token function">joint_withdraw</span><span class="token punctuation">(</span>amount<span class="token punctuation">,</span> passwd<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> passwd <span class="token operator">==</span> new_pass<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> withdraw<span class="token punctuation">(</span>amount<span class="token punctuation">,</span> old_pass<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> withdraw<span class="token punctuation">(</span>amount<span class="token punctuation">,</span> passwd<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> joint_withdraw<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>This is a very clever solution. First we need to decide if we should create the joint account. Actually it is the job we have done in <code>make_withdraw</code>, so we only need to try withdraw 0$ from the account to see whether or not the password is correct.</p>
+<p>Then we need to worry about <code>joint_withdraw</code>. It works like a linked list (This is actually a recursive solution).</p>
+<h4 id="Remainders-Generator">Remainders Generator</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">remainders_generator</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Yields m generators. The ith yielded generator yields natural numbers whose
+    remainder is i when divided by m.
+
+    &gt;&gt;&gt; import types
+    &gt;&gt;&gt; [isinstance(gen, types.GeneratorType) for gen in remainders_generator(5)]
+    [True, True, True, True, True]
+    &gt;&gt;&gt; remainders_four = remainders_generator(4)
+    &gt;&gt;&gt; for i in range(4):
+    ...     print("First 3 natural numbers with remainder {0} when divided by 4:".format(i))
+    ...     gen = next(remainders_four)
+    ...     for _ in range(3):
+    ...         print(next(gen))
+    First 3 natural numbers with remainder 0 when divided by 4:
+    4
+    8
+    12
+    First 3 natural numbers with remainder 1 when divided by 4:
+    1
+    5
+    9
+    First 3 natural numbers with remainder 2 when divided by 4:
+    2
+    6
+    10
+    First 3 natural numbers with remainder 3 when divided by 4:
+    3
+    7
+    11
+    """</span>
+    <span class="token string">"*** YOUR CODE HERE ***"</span>
+
+    <span class="token keyword">def</span> <span class="token function">helper</span><span class="token punctuation">(</span>remainder<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        i <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> i <span class="token operator">*</span> m <span class="token operator">+</span> remainder<span class="token punctuation">:</span>
+                <span class="token keyword">yield</span> i <span class="token operator">*</span> m <span class="token operator">+</span> remainder
+            i <span class="token operator">+=</span> <span class="token number">1</span>
+
+    <span class="token keyword">yield</span> <span class="token keyword">from</span> <span class="token builtin">map</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> i<span class="token punctuation">:</span> helper<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">range</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>The keyword <code>yield from</code> makes generator behave like recursive functions.</p>
+<h3 id="HW06">HW06</h3>
+<h4 id="Store-Digits">Store Digits</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">store_digits</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Stores the digits of a positive number n in a linked list.
+
+    &gt;&gt;&gt; s = store_digits(1)
+    &gt;&gt;&gt; s
+    Link(1)
+    &gt;&gt;&gt; store_digits(2345)
+    Link(2, Link(3, Link(4, Link(5))))
+    &gt;&gt;&gt; store_digits(876)
+    Link(8, Link(7, Link(6)))
+    &gt;&gt;&gt; # a check for restricted functions
+    &gt;&gt;&gt; import inspect, re
+    &gt;&gt;&gt; cleaned = re.sub(r"#.*\\n", '', re.sub(r'"{3}[\s\S]*?"{3}', '', inspect.getsource(store_digits)))
+    &gt;&gt;&gt; print("Do not use str or reversed!") if any([r in cleaned for r in ["str", "reversed"]]) else None
+    """</span>
+    <span class="token string">"*** YOUR CODE HERE ***"</span>
+    res <span class="token operator">=</span> Link<span class="token punctuation">.</span>empty
+    <span class="token keyword">while</span> n<span class="token punctuation">:</span>
+        res <span class="token operator">=</span> Link<span class="token punctuation">(</span>n <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span>
+        n <span class="token operator">//=</span> <span class="token number">10</span>
+    <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>We can use recursion to construct the linked list from front, or we can just contruct it from the back end using iteration, which seems a better way to me.</p>
+<h4 id="Path-Yielder">Path Yielder</h4>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">path_yielder</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Yields all possible paths from the root of t to a node with the label value
+    as a list.
+
+    &gt;&gt;&gt; t1 = Tree(1, [Tree(2, [Tree(3), Tree(4, [Tree(6)]), Tree(5)]), Tree(5)])
+    &gt;&gt;&gt; print(t1)
+    1
+      2
+        3
+        4
+          6
+        5
+      5
+    &gt;&gt;&gt; next(path_yielder(t1, 6))
+    [1, 2, 4, 6]
+    &gt;&gt;&gt; path_to_5 = path_yielder(t1, 5)
+    &gt;&gt;&gt; sorted(list(path_to_5))
+    [[1, 2, 5], [1, 5]]
+
+    &gt;&gt;&gt; t2 = Tree(0, [Tree(2, [t1])])
+    &gt;&gt;&gt; print(t2)
+    0
+      2
+        1
+          2
+            3
+            4
+              6
+            5
+          5
+    &gt;&gt;&gt; path_to_2 = path_yielder(t2, 2)
+    &gt;&gt;&gt; sorted(list(path_to_2))
+    [[0, 2], [0, 2, 1, 2]]
+    """</span>
+    <span class="token keyword">if</span> t<span class="token punctuation">.</span>label <span class="token operator">==</span> value<span class="token punctuation">:</span>
+        <span class="token keyword">yield</span> <span class="token punctuation">[</span>value<span class="token punctuation">]</span>
+    <span class="token keyword">for</span> b <span class="token keyword">in</span> t<span class="token punctuation">.</span>branches<span class="token punctuation">:</span>
+        <span class="token keyword">for</span> sub_path <span class="token keyword">in</span> path_yielder<span class="token punctuation">(</span>b<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">yield</span> <span class="token punctuation">[</span>t<span class="token punctuation">.</span>label<span class="token punctuation">]</span> <span class="token operator">+</span> sub_path<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="HW08">HW08</h3>
+<h4 id="Run-Length-Encoding">Run-Length Encoding</h4>
+<p>Target: convert given stream s<code>(1, 1, 1, 1, 1, 6, 6, 6, 6, 2, 5, 5, 5)</code> to another stream <code>((1 5), (6 4), (2 1), (5 3))</code></p>
+<p>At first, I want the body of the procudure works like:</p>
+<pre class="line-numbers language-scheme" data-language="scheme"><code class="language-scheme"><span class="token punctuation">(</span><span class="token function">cons-stream</span> <span class="token punctuation">(</span><span class="token function">something</span> given by helper<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token function">rle</span> s<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>However, after calling <code>helper</code> to get something like <code>(1 5)</code>, <code>s</code> doesn’t get modified in <code>rle</code>, so it won’t work, I have to write another helper precudure to remove the previous sequence:</p>
+<pre class="line-numbers language-lisp" data-language="lisp"><code class="language-lisp"><span class="token punctuation">(</span><span class="token car">define</span> <span class="token punctuation">(</span><span class="token car">rle</span> s<span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token car">define</span> <span class="token punctuation">(</span><span class="token car">helper</span> times last s<span class="token punctuation">)</span>
+        <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">or</span> <span class="token punctuation">(</span><span class="token car">null</span>? s<span class="token punctuation">)</span> 
+                <span class="token punctuation">(</span><span class="token keyword">not</span> <span class="token punctuation">(</span><span class="token car">=</span> <span class="token punctuation">(</span><span class="token car">car</span> s<span class="token punctuation">)</span> last<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            times
+        <span class="token punctuation">(</span><span class="token car">helper</span> <span class="token punctuation">(</span><span class="token car">+</span> times <span class="token number">1</span><span class="token punctuation">)</span> last <span class="token punctuation">(</span><span class="token car">cdr-stream</span> s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token car">define</span> <span class="token punctuation">(</span><span class="token car">remove</span> s last<span class="token punctuation">)</span>
+        <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token car">null</span>? s<span class="token punctuation">)</span>
+            <span class="token boolean">nil</span>
+            <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token car">=</span> last <span class="token punctuation">(</span><span class="token car">car</span> s<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">(</span><span class="token car">remove</span> <span class="token punctuation">(</span><span class="token car">cdr-stream</span> s<span class="token punctuation">)</span> last<span class="token punctuation">)</span>
+                s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token car">null</span>? s<span class="token punctuation">)</span>
+        <span class="token boolean">nil</span>
+        <span class="token punctuation">(</span><span class="token car">cons-stream</span> 
+            <span class="token punctuation">(</span><span class="token car">list</span> <span class="token punctuation">(</span><span class="token car">car</span> s<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token car">helper</span> <span class="token number">0</span> <span class="token punctuation">(</span><span class="token car">car</span> s<span class="token punctuation">)</span> s<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">(</span><span class="token car">rle</span> <span class="token punctuation">(</span><span class="token car">remove</span> s <span class="token punctuation">(</span><span class="token car">car</span> s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>But I can make these two functions call each other to simply the logic:</p>
+<pre class="line-numbers language-lisp" data-language="lisp"><code class="language-lisp"><span class="token punctuation">(</span><span class="token car">define</span> <span class="token punctuation">(</span><span class="token car">rle</span> s<span class="token punctuation">)</span>
+    <span class="token punctuation">(</span><span class="token car">define</span> <span class="token punctuation">(</span><span class="token car">helper</span> last times s<span class="token punctuation">)</span>
+        <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token car">null</span>? s<span class="token punctuation">)</span>
+            <span class="token punctuation">(</span><span class="token car">cons-stream</span> <span class="token punctuation">(</span><span class="token car">list</span> last times<span class="token punctuation">)</span> <span class="token boolean">nil</span><span class="token punctuation">)</span>
+            <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token car">=</span> last <span class="token punctuation">(</span><span class="token car">car</span> s<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">(</span><span class="token car">helper</span> last <span class="token punctuation">(</span><span class="token car">+</span> times <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token car">cdr-stream</span> s<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">(</span><span class="token car">cons-stream</span> 
+                    <span class="token punctuation">(</span><span class="token car">list</span> last times<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token car">rle</span> s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+       
+    <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token car">null</span>? s<span class="token punctuation">)</span>
+        <span class="token boolean">nil</span>
+        <span class="token punctuation">(</span><span class="token car">helper</span> <span class="token punctuation">(</span><span class="token car">car</span> s<span class="token punctuation">)</span> <span class="token number">1</span> <span class="token punctuation">(</span><span class="token car">cdr-stream</span> s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Problem “Group By Nondecreasing” can also be solved like this.</p>
+<h4 id="Stacks">Stacks</h4>
+<p>We have two tables <code>dogs</code> and <code>sizes</code>:</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">CREATE TABLE dogs AS
+  SELECT "abraham" AS name, "long" AS fur, 26 AS height UNION
+  SELECT "barack"         , "short"      , 52           UNION
+  SELECT "clinton"        , "long"       , 47           UNION
+  SELECT "delano"         , "long"       , 46           UNION
+  SELECT "eisenhower"     , "short"      , 35           UNION
+  SELECT "fillmore"       , "curly"      , 32           UNION
+  SELECT "grover"         , "short"      , 28           UNION
+  SELECT "herbert"        , "curly"      , 31;
+
+CREATE TABLE sizes AS
+  SELECT "toy" AS size, 24 AS min, 28 AS max UNION
+  SELECT "mini"       , 28       , 35        UNION
+  SELECT "medium"     , 35       , 45        UNION
+  SELECT "standard"   , 45       , 60;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>The goal is to create a two-column table describing all stacks of four dogs at least 170 cm high. The first column should contain a comma-separated list of dogs in the stack, and the second column should contain the total height of the stack. <strong>Order the stacks in increasing order of total height.</strong></p>
+<p>A valid stack of dogs includes each dog only once, and the dogs should be listed in increasing order of height within the stack. You may assume that no two dogs have the same height.</p>
+<p>Final output:</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">sqlite&gt; SELECT * FROM stacks;
+abraham, delano, clinton, barack|171
+grover, delano, clinton, barack|173
+herbert, delano, clinton, barack|176
+fillmore, delano, clinton, barack|177
+eisenhower, delano, clinton, barack|180<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Solution:</p>
+<pre class="line-numbers language-sqlite" data-language="sqlite"><code class="language-sqlite">CREATE TABLE stacks_helper(dogs, stack_height, last_height, n);
+
+-- Add your INSERT INTOs here
+INSERT INTO stacks_helper 
+  SELECT name, height, height, 1 FROM dogs; -- 可以直接用数字, 这时不会去找对应的项
+
+INSERT INTO stacks_helper
+  SELECT dogs || ", " || name, height + stack_height, height, 2 FROM dogs, stacks_helper
+    WHERE height &gt; last_height AND n = 1;
+
+INSERT INTO stacks_helper
+  SELECT dogs || ", " || name, height + stack_height, height, 3 FROM dogs, stacks_helper
+    WHERE height &gt; last_height AND n = 2;
+
+INSERT INTO stacks_helper
+  SELECT dogs || ", " || name, height + stack_height, height, 4 FROM dogs, stacks_helper
+    WHERE height &gt; last_height AND n = 3;
+
+CREATE TABLE stacks AS
+  SELECT dogs, stack_height FROM stacks_helper
+    WHERE stack_height &gt;= 170 
+      ORDER BY stack_height;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="HW09">HW09</h3>
+<h4 id="Mutate-Reverse">Mutate Reverse</h4>
+<p>In order to write animplementation that requires only linear time in the length of the list ($\Theta n$). The first solution I came up with is to iterate through this list twice. The first time I convert <code>link</code> to a Python built-in list, the second time convert that back to linked list.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">mutate_reverse</span><span class="token punctuation">(</span>link<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Mutates the Link so that its elements are reversed.
+    &gt;&gt;&gt; link = Link(1)
+    &gt;&gt;&gt; mutate_reverse(link)
+    &gt;&gt;&gt; link
+    Link(1)
+    &gt;&gt;&gt; link = Link(1, Link(2, Link(3)))
+    &gt;&gt;&gt; mutate_reverse(link)
+    &gt;&gt;&gt; link
+    Link(3, Link(2, Link(1)))
+    """</span>
+    <span class="token string">"*** YOUR CODE HERE ***"</span>
+    <span class="token keyword">def</span> <span class="token function">reverse_to_lst</span><span class="token punctuation">(</span>link<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> link <span class="token keyword">is</span> Link<span class="token punctuation">.</span>empty<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">return</span> reverse_to_lst<span class="token punctuation">(</span>link<span class="token punctuation">.</span>rest<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">[</span>link<span class="token punctuation">.</span>first<span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">convert_to_linked</span><span class="token punctuation">(</span>lst<span class="token punctuation">,</span> link<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> lst <span class="token operator">==</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> Link<span class="token punctuation">.</span>empty
+        link<span class="token punctuation">.</span>first <span class="token operator">=</span> lst<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        link<span class="token punctuation">.</span>rest <span class="token operator">=</span> convert_to_linked<span class="token punctuation">(</span>lst<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">,</span> link<span class="token punctuation">.</span>rest<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> link
+
+    convert_to_linked<span class="token punctuation">(</span>reverse_to_lst<span class="token punctuation">(</span>link<span class="token punctuation">)</span><span class="token punctuation">,</span> link<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Notice that the doctest will check for <code>link</code> itself is reversed or not, so we can not just reassign link to another reversed list because the linked list object that <code>link </code> points to is not modified</p>
+<p>The right way is to directly modify the link passed in <code>convert_to_linked</code>.</p>
+<p>The second solution is just like reverse the linked list class in language like C:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">mutate_reverse</span><span class="token punctuation">(</span>link<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    pre <span class="token operator">=</span> Link<span class="token punctuation">.</span>empty
+    cur <span class="token operator">=</span> link
+    <span class="token keyword">while</span> cur <span class="token keyword">is</span> <span class="token keyword">not</span> Link<span class="token punctuation">.</span>empty<span class="token punctuation">:</span>
+        rest <span class="token operator">=</span> cur<span class="token punctuation">.</span>rest
+        cur<span class="token punctuation">.</span>rest <span class="token operator">=</span> pre
+        pre <span class="token operator">=</span> cur
+        cur <span class="token operator">=</span> rest<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>However, this piece of code is incorrect. After the reversal, <code>link</code> <strong>becomes the last node</strong> of the reversed linked list, namely <code>Link(1)</code> in the example given in the doctest. So I rewrite it:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">mutate_reverse</span><span class="token punctuation">(</span>link<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""Mutates the Link so that its elements are reversed.
+
+    &gt;&gt;&gt; link = Link(1)
+    &gt;&gt;&gt; mutate_reverse(link)
+    &gt;&gt;&gt; link
+    Link(1)
+
+    &gt;&gt;&gt; link = Link(1, Link(2, Link(3)))
+    &gt;&gt;&gt; mutate_reverse(link)
+    &gt;&gt;&gt; link
+    Link(3, Link(2, Link(1)))
+    """</span>
+    <span class="token string">"*** YOUR CODE HERE ***"</span>
+    pre <span class="token operator">=</span> Link<span class="token punctuation">(</span>link<span class="token punctuation">.</span>first<span class="token punctuation">)</span>
+    cur <span class="token operator">=</span> link<span class="token punctuation">.</span>rest
+    <span class="token keyword">while</span> cur <span class="token keyword">is</span> <span class="token keyword">not</span> Link<span class="token punctuation">.</span>empty<span class="token punctuation">:</span>
+        rest <span class="token operator">=</span> cur<span class="token punctuation">.</span>rest
+        cur<span class="token punctuation">.</span>rest <span class="token operator">=</span> pre
+        pre <span class="token operator">=</span> cur
+        cur <span class="token operator">=</span> rest
+    link<span class="token punctuation">.</span>first <span class="token operator">=</span> pre<span class="token punctuation">.</span>first
+    link<span class="token punctuation">.</span>rest <span class="token operator">=</span> pre<span class="token punctuation">.</span>rest<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Creating a new node as the last node, so we can modify <code>link</code> at the end of the function.</p>
 <h3 id="Lab08">Lab08</h3>
 <h4 id="WWPD">WWPD</h4>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> e <span class="token keyword">in</span> <span class="token builtin">zip</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -2187,7 +2742,7 @@ scm&gt; <span class="token punctuation">'</span><span class="token punctuation">
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">113.4k</span>
+                        class="white-color">119.1k</span>
             
             
             
