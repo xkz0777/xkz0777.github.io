@@ -393,21 +393,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-02-02
+                    2022-05-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    187
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    6 分
                 </div>
                 
 
@@ -430,11 +430,76 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1>记录装 Ubuntu 双系统的过程</h1>
-<p>机型为联想 Yoga14s amd 版, 大体按照 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/masbay/p/10745170.html">https://www.cnblogs.com/masbay/p/10745170.html</a> 这篇文章进行操作(情况为 UEFI 加单硬盘), 这里主要记录不同之处.</p>
-<p>首先是 BIOS, 狂按 F2 进入以后并不能直接选择 USB 启动, 而是需要先到 Securty 中 disable Secure Boot, 然后保存再次重启, 狂按 F12, 选择 USB HDD 开始安装系统.</p>
+                <h1 id="记录装-Ubuntu-双系统的过程"><a href="#记录装-Ubuntu-双系统的过程" class="headerlink" title="记录装 Ubuntu 双系统的过程"></a>记录装 Ubuntu 双系统的过程</h1><p>机型为联想 Yoga14s amd 版, 大体按照 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/masbay/p/10745170.html">https://www.cnblogs.com/masbay/p/10745170.html</a> 这篇文章进行操作(情况为 UEFI 加单硬盘), 这里主要记录不同之处.</p>
+<p>首先是 BIOS, 先按 F2, 到 Securty 中 disable Secure Boot, 然后保存并重启. 按 F12, 选择 USB HDD 开始安装系统.</p>
 <p>在手动分区时, 分区类型全部选择逻辑分区即可.</p>
 <p>第一次分区完准备安装以后卡死过一次, 重启然后重复操作发现没有影响, 装机之前也没有备份, 感觉装双系统装崩的可能性还是比较小的.</p>
+<p>———————————————————————2022.04.09 更新———————————————————————</p>
+<p>有一堆作业实验没做, 但是不想学习, 于是又在老机子上装了第三个操作系统 Manjaro, 这时对装系统还是比较熟练的了, 下面记录下大体步骤.</p>
+<ol>
+<li><p>获取镜像, 这里直接从 Manjaro <a target="_blank" rel="noopener" href="https://manjaro.org/">官网</a> 下载, 共有 3 种可选的桌面, 这里选择 <a target="_blank" rel="noopener" href="https://download.manjaro.org/kde/21.2.5/manjaro-kde-21.2.5-220314-linux515.iso">KDE 版</a>.</p>
+</li>
+<li><p>将下载后的 <code>iso</code> 文件刻入 U 盘 (Mac 下可以用 <a target="_blank" rel="noopener" href="https://www.balena.io/etcher">balenaEtcher</a>, Windows 可以用 <a target="_blank" rel="noopener" href="https://cn.ultraiso.net/">软碟通</a> 或者 <a target="_blank" rel="noopener" href="https://rufus.ie/zh/">rufus</a>).</p>
+</li>
+<li><p>利用 Windows 的磁盘管理工具分出一块磁盘空间.</p>
+</li>
+<li><p>Disable secure boot, 开机时按 F12 选择 USB HDD 安装系统, 这时界面如下图</p>
+<p> <img src="install-page.png" alt="安装界面" style="zoom: 50%;"></p>
+</li>
+<li><p>在该界面下可以选择时区 (tz, timezone), 语言 (lang), 进去再选也行, 之后选择开源驱动, 按 Enter, 就安装完了.</p>
+</li>
+<li><p>分区配置. 安装完以后将来到 Manjaro 的欢迎页, 选择最下面的”启动安装程序” (如果没改语言可能是英语的 Installation 之类的), 前面欢迎和位置页可以选语言. 分区时可以只分 <code>/</code> 或者细分 <code>/home</code>, <code>/opt</code> 以及交换分区等. 这里我只分了 <code>/home</code> 和 <code>/</code>. 最重要的是要<strong>配置引导</strong>, 选中第一个分区 (通常是几百兆, 文件系统为 FAT32 的引导分区), 选择编辑, 挂载点选 <code>/boot/efi</code>, 就完成了分区配置. 之后重启岂可.</p>
+</li>
+</ol>
+<p>安装完成后的配置:</p>
+<ol>
+<li><p>换源. 首先打开终端 (Manjaro 的终端真是吊打 Ubuntu, 默认 shell 就是 zsh, 而且带 syntax highlighting 和 autosuggestion), 输入<code>sudo pacman-mirrors -i -c China -m rank</code> 就会弹出一个按延时排序的镜像列表供选择, 果断选择妮可镜像<del>(事实上 nju 的好像比妮可的快一点).</del> pacman 是 Manjaro 下的包管理器, 换源之后输入 <code>sudo pacman -Syy</code> 来同步软件包数据库 (类似 <code>apt update</code>). <code>sudo pacman -Syu</code> 可以进行所有软件的 upgrade. 由于 Manjaro 是滚动更新的, 经常 upgrade 可以保持系统始终是最新版. (最好每次开机都进行 <code>sudo pacman -Syu</code>).</p>
+</li>
+<li><p>中文输入法. 首先增加中文社区的源，在 <code>/etc/pacman.conf</code> 中添加 <code>archlinuxcn</code> 源：</p>
+ <pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">archlinuxcn</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">SigLevel</span> <span class="token punctuation">=</span> <span class="token value attr-value">Optional TrustedOnly</span>
+<span class="token key attr-name">Server</span> <span class="token punctuation">=</span> <span class="token value attr-value">https://mirrors.ustc.edu.cn/archlinuxcn/$arch</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p> 之后同样是 <code>sudo pacman -Syy</code>, 然后 <code>sudo pacman -Sy archlinuxcn-keyring</code> 以导入 <code>GPG key</code>，否则的话会报签名验证失败无法安装的错. 之后输入如下命令:</p>
+ <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ sudo pacman -S fcitx-im fcitx-configtool fcitx-sogoupinyin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p> 然后添加文件 <code>~/.xprofile</code>: </p>
+ <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">export GTK_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<p>​        完成后重启即可.</p>
+<ol>
+<li><p>其他包管理器. pacman 不能直接安装 AUR (Arch User Repository), 因此需要 AUR 助手, 目前常用的有 yay 和 paru (Rust 编写). 都可以用 pacman 安装.</p>
+</li>
+<li><p>梯子. 直接 <code>yay -S clash</code> 即可.</p>
+</li>
+<li><p>下面重点记录一下美化的过程.</p>
+<p> 作为一个不资深果粉, 肯定是要把主题刷成 MacOS Monterey 的. KDE 版本的直接在系统设置-&gt;外观里就可以进行美化, 但是从系统的主题商店即使挂了梯子也下载不到主题, 这时只能去 GitHub 上下载.</p>
+<p> 首先访问主题网站: <a target="_blank" rel="noopener" href="https://www.pling.com/">https://www.pling.com/</a>, 搜 Monterey KDE, 得到 <a target="_blank" rel="noopener" href="https://www.pling.com/p/1567584/">https://www.pling.com/p/1567584/</a>, 循着 source 来到 GitHub 页面, 按照 README 的提示走就行. 安装完成后就可以去设置里更换. 值得注意的是按钮的位置如果要调到左边, 需要在窗口装饰元素-&gt;标题栏按钮里面修改.</p>
+<p> 主题对了, 还有顶上的菜单栏和底下的 Docker 要搞. </p>
+<p> 先处理 Docker. 首先装上 <code>latte-dock</code>: <code>sudo pacman -S latte-dock</code>. 之后输入<code>latte-dock</code> 以启用. 然后就可以把原本底下的 Panel 去掉. 之后搜索 “macos layout for latte dock”, 找到 <a target="_blank" rel="noopener" href="https://store.kde.org/p/1399346/">https://store.kde.org/p/1399346/</a>, 点击右边的 Download, 解压后在 <code>latte-dock</code> 的配置中引入即可.</p>
+<p> 然后是菜单栏: 在桌面进行添加面板-&gt;应用程序菜单栏, 上方出现一个菜单栏. 之后右键该菜单栏添加组件, 内容见仁见智, 这里我从左到右的排列是: 应用程序启动器 全局菜单 总 CPU 使用情况 显示桌面 系统托盘 电池和亮度 数字时钟. 最后放上美化的最终成果:</p>
+<p> <img src="final.png" alt="美化成果"></p>
+</li>
+<li><p>Vivado 公交车, 之前为了做数电实验专门给 Ubuntu 分了 60 G 的磁盘空间装 Vivado, 并把这个分区挂载到了 Ubuntu 的 <code>/mnt</code>, 现在想让它发挥余热, 也挂到 Manjaro 上用. 打开 GParted, 发现这块分区已经自动被挂载了, 只是没有挂载点, 这时只要修改 <code>/etc/fstab</code> 就可以了:</p>
+ <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ sudo blkid # 找到磁盘的 UUID
+$ sudo nvim /etc/fstab # 添加到文件里<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p> 启动 Vivado, 这垃圾软件果然不让我失望, 还缺个依赖 (libtinfo.so.5), Ubuntu 也缺, 做法是</p>
+ <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ sudo apt install libtinfo-dev
+$ sudo ln -s /lib/x86_64-linux-gnu/libtinfo.so.6 /lib/x86_64-linux-gnu/libtinfo.so.5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p> Manjaro 没有 <code>libtinfo-dev</code> 这个库, 万能的 arch 社区表示 Manjaro 只有 <code>libtinfo.so.6</code>, <code>libtinfo.so.5</code> 是 <code>ncurses5-compat-libs</code> 提供的.</p>
+<p> 运行后发现 Vivado 连 scale 都不懂得跟随系统, 需要通过 Tools-&gt;Settings-&gt;Display-&gt;Scaling 修改.</p>
+</li>
+<li><p>一些好用的软件: 待更.</p>
+</li>
+<li><p>一些踩坑和未做:</p>
+<p> 首先是 wine, 由于 arch 的软件包过于先进, 导致 wine 只有 wine5 和 wine6 可以用, 而 wine6 虽然包名里带个 stable, 但是很不稳定. TIM 和微信都依赖 wine6, 但是我的 TIM 有很多字体显示不出来, 参考了 <a target="_blank" rel="noopener" href="http://linux-wiki.cn/wiki/Wine%E7%9A%84%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E4%B8%8E%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE">arch wiki</a> 和 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/476452504">知乎</a> 修改了注册表依然不奏效, 暂且作罢. 不过微信暂时能用. QQ 依赖 wine5, 可以解决字体无法显示问题, 但是每次关闭后重开都要重装 QQ, 不知为何. 按 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Deepin-wine#Deepin-wine_applications_fails_to_start">arch wiki</a> 的说法, 这可能跟 KDE 也有关系.</p>
+<p> 然后是驱动, 闲着蛋疼在设置-&gt;硬件设定里装了 video-vesa, 导致开机无法进入 KDE 桌面 (提一嘴, KDE 真不如 GNOME 好用), 搜了一圈, 有说是 NVIDIA 显卡的问题 (但我的机子是 AMD 核显, 不存在这个问题); 也有说是 Qt 的锅, 因为输入 <code>kstart5 plasmashell</code> 手动进入 KDE 桌面会报如下错误:</p>
+ <pre class="line-numbers language-none"><code class="language-none">qt.qpa.xcb: couldnot connect to display
+qt.qpa.plugins: couldn’t load the Qt platform plugin "xcb" in "" even though it was found.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p> 同时建议重装 xxx 来修复此问题, 全部重装了一遍发现没用. 最后的解决方案是, 先去 tty, <code>mhwd -l</code> 看看都装了什么驱动, <code>sudo mhwd -r pci video-vesa</code> 删掉 video-vesa 即可.</p>
+</li>
+</ol>
 
                 
             </div>
@@ -1165,7 +1230,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">119.1k</span>
+                        class="white-color">120.6k</span>
             
             
             
