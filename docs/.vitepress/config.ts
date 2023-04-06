@@ -13,7 +13,7 @@ const config = defineConfig({
       "link",
       {
         rel: "icon",
-        href: "/img/icon.jpg", // The pictures are placed in the public folder
+        href: "/images/icon.jpg", // The pictures are placed in the public folder
       },
     ],
   ],

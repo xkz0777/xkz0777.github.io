@@ -5,9 +5,9 @@ outline: [2, 3]
 
 # Hello World
 
-最开始使用 Hexo 作为博客框架, 现在觉得太老, 改用 Vitepress.
+最开始使用 Hexo 作为博客框架，现在觉得太老，改用 Vitepress。
 
-此页仅做测试页, 记录一些配置项和博客的 TBD.
+此页仅做测试页，记录一些配置项和博客的 TBD。
 
 ## Vitepress 的使用
 
@@ -19,6 +19,10 @@ outline: [2, 3]
 - `outline`: list of numbers, he levels of header in the outline to display for the page
 
 Frontmatter data can be accessed via the special `$frontmatter` global variable
+
+### 图片
+
+图片都需要放在 `/public/` 目录里，但引用时不需要带上 `/public/`。
 
 ## TBD
 

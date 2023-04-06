@@ -522,7 +522,7 @@ f()  # 2
 f()  # 3
 ```
 
-<img src="./images/CS61A Notes/image-20220122115819577.png" alt="image-20220122115819577" style="zoom:50%;" />
+<img src="/images/cs61a/python_frame.png" style="zoom:50%;" />
 
 ### Nonlocal Statements
 
