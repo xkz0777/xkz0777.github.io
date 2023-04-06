@@ -16,6 +16,12 @@
   },
   "dependencies": {
     "@algolia/client-search": ">= 4.9.1 < 6",
-    "blogs_new": "link:"
+    "blogs_new": "link:",
+    "flexsearch": "^0.7.31",
+    "markdown-it": "^13.0.1",
+    "markdown-it-mathjax3": "^4.3.2",
+    "vite": "^4.2.1",
+    "vitepress-plugin-search": "1.0.4-alpha.20",
+    "vue": "3"
   }
 }

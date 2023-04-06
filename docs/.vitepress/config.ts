@@ -1,11 +1,15 @@
-module.exports = {
+import { defineConfig } from "vitepress";
+import mathjax3 from "markdown-it-mathjax3";
+
+const customElements = ["mjx-container"];
+const config = defineConfig({
   title: "xkz's blog", // Website title
   description: "my new Blog using vitrepress", //Website description
-  base: "/", //  The default path during deployment / secondary address / base can be used/
-  // Lang: 'en US', / / language
+  base: "/",
+  // lang: "zh-CN",
+  lastUpdated: true,
   // Page header configuration, icon, css, js
   head: [
-    // Change the icon of the title
     [
       "link",
       {
@@ -16,7 +20,12 @@ module.exports = {
   ],
   // Theme configuration
   themeConfig: {
-    repo: "xkz0777/Blogs", // Your github warehouse address will jump in the upper right corner of the page
+    socialLinks: [
+      {
+        icon: "github",
+        link: "https://github.com/xkz0777/Blogs",
+      },
+    ],
     //   Head navigation
     nav: [
       { text: "Homepage", link: "/" },
@@ -24,6 +33,18 @@ module.exports = {
       { text: "Friends", link: "/friends/" },
     ],
     //   Side navigation
+    // algolia: {
+    //   appId: "JLN7294SFK",
+    //   apiKey: "c3e50fff39e131aac4010ca3e6988077",
+    //   indexName: "blog",
+    // },
     // sidebar: [{ text: "my", link: "/mine/" }],
   },
-};
+  markdown: {
+    config: (md) => {
+      md.use(mathjax3);
+    },
+  },
+});
+
+export default config;
