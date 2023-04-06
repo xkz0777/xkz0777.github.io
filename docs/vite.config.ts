@@ -6,23 +6,15 @@ import flexSearchIndexOptions from "flexsearch";
 const SearchOptions = {
   ...flexSearchIndexOptions,
   previewLength: 62,
+  encode: false,
   buttonLabel: "Search",
   placeholder: "Search docs",
   allow: [],
   ignore: [],
 };
 
-// https://github.com/vuejs/vitepress/discussions/1015#discussioncomment-3177860
-const NavLinkPatch = (): Plugin => ({
-  name: "override-target-blank",
-  enforce: "pre",
-  transform: (code, id) => {
-    if (id.endsWith("VPLink.vue")) return code.replace("_blank", "_self");
-  },
-});
-
 export default defineConfig({
-  plugins: [NavLinkPatch(), SearchPlugin(SearchOptions)],
+  plugins: [SearchPlugin(SearchOptions)],
   optimizeDeps: {
     exclude: ["vitepress"],
   },

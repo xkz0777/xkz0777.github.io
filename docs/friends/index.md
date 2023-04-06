@@ -1,3 +1,7 @@
+---
+aside: true
+---
+
 # Friends
 
 <table>
