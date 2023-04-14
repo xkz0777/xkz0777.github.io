@@ -27,6 +27,8 @@ Frontmatter data can be accessed via the special `$frontmatter` global variable
 ## TBD
 
 - 博客评论
+- 编译实验记录
+- 6.S081 实验记录
 
 ## 数学公式测试
 

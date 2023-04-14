@@ -74,6 +74,10 @@ const config = defineConfig({
               text: "记一次重装系统",
               link: "/env_config/reinstall.md",
             },
+            {
+              text: "6.S081 环境配置",
+              link: "/env_config/6.s081.md",
+            },
           ],
         },
       ],
