@@ -24,6 +24,66 @@ Frontmatter data can be accessed via the special `$frontmatter` global variable
 
 图片都需要放在 `/public/` 目录里，但引用时不需要带上 `/public/`。
 
+### 使用 GitHub Actions 部署
+
+原本使用网上抄的一个 deploy.sh 来部署：
+
+```bash
+#!/usr/bin/env sh
+
+set -e # abort on errors
+pnpm build
+cd docs/.vitepress/dist
+git add -A
+git commit -m 'deploy'
+git push -f git@github.com:xkz0777/xkz0777.github.io.git master
+cd -
+```
+
+这样博客源代码跟 github pages 仓库分开了，并且源码修改 commit 后还要手动 deploy，有点麻烦。
+
+用 GitHub Actions 部署，首先创建 `.github/workflows/deploy.yml`：
+
+```yaml
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.9.5
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+
+      # 拉取代码
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      # 生成静态文件
+      - name: Build
+        run: pnpm install --frozen-lockfile && pnpm build
+
+      # 部署到 GitHub Pages
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          publish_dir: docs/.vitepress/dist
+```
+
+其中 pnpm 的 version 应该与本地的一致，否则在 `pnpm install` 那一步会报错。
+
 ## TBD
 
 - 博客评论
