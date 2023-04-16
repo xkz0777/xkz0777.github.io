@@ -84,6 +84,8 @@ jobs:
 
 其中 pnpm 的 version 应该与本地的一致，否则在 `pnpm install` 那一步会报错。
 
+然后在 repo 的 Settings -> Pages -> Build and deployment 把 Sources 改成 Deploy from a branch，Branch 设置为 gh-pages 即可。
+
 ## TBD
 
 - 博客评论
