@@ -1,7 +1,6 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@algolia/client-search': '>= 4.9.1 < 6'
   blogs_new: 'link:'
   flexsearch: ^0.7.31
   markdown-it: ^13.0.1
@@ -12,7 +11,6 @@ specifiers:
   vue: '3'
 
 dependencies:
-  '@algolia/client-search': registry.npmmirror.com/@algolia/client-search/4.17.0
   blogs_new: 'link:'
   flexsearch: registry.npmmirror.com/flexsearch/0.7.31
   markdown-it: registry.npmmirror.com/markdown-it/13.0.1
@@ -22,7 +20,7 @@ dependencies:
   vue: registry.npmmirror.com/vue/3.2.47
 
 devDependencies:
-  vitepress: registry.npmmirror.com/vitepress/1.0.0-alpha.65_rurrd674gzxmsn4o6mrapg6sje
+  vitepress: registry.npmmirror.com/vitepress/1.0.0-alpha.65
 
 packages:
 
@@ -33,7 +31,7 @@ packages:
     dependencies:
       '@algolia/autocomplete-shared': registry.npmmirror.com/@algolia/autocomplete-shared/1.7.4
 
-  registry.npmmirror.com/@algolia/autocomplete-preset-algolia/1.7.4_slqhrehefpn47bfjvmiz4bdfs4:
+  registry.npmmirror.com/@algolia/autocomplete-preset-algolia/1.7.4_algoliasearch@4.17.0:
     resolution: {integrity: sha512-s37hrvLEIfcmKY8VU9LsAXgm2yfmkdHT3DnA3SgHaY93yjZ2qL57wzb5QweVkYuEBZkT2PIREvRoLXC2sxTbpQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@algolia/autocomplete-preset-algolia/-/autocomplete-preset-algolia-1.7.4.tgz}
     id: registry.npmmirror.com/@algolia/autocomplete-preset-algolia/1.7.4
     name: '@algolia/autocomplete-preset-algolia'
@@ -43,7 +41,6 @@ packages:
       algoliasearch: '>= 4.9.1 < 6'
     dependencies:
       '@algolia/autocomplete-shared': registry.npmmirror.com/@algolia/autocomplete-shared/1.7.4
-      '@algolia/client-search': registry.npmmirror.com/@algolia/client-search/4.17.0
       algoliasearch: registry.npmmirror.com/algoliasearch/4.17.0
 
   registry.npmmirror.com/@algolia/autocomplete-shared/1.7.4:
@@ -191,13 +188,12 @@ packages:
     name: '@docsearch/css'
     version: 3.3.3
 
-  registry.npmmirror.com/@docsearch/js/3.3.3_rurrd674gzxmsn4o6mrapg6sje:
+  registry.npmmirror.com/@docsearch/js/3.3.3:
     resolution: {integrity: sha512-2xAv2GFuHzzmG0SSZgf8wHX0qZX8n9Y1ZirKUk5Wrdc+vH9CL837x2hZIUdwcPZI9caBA+/CzxsS68O4waYjUQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@docsearch/js/-/js-3.3.3.tgz}
-    id: registry.npmmirror.com/@docsearch/js/3.3.3
     name: '@docsearch/js'
     version: 3.3.3
     dependencies:
-      '@docsearch/react': registry.npmmirror.com/@docsearch/react/3.3.3_rurrd674gzxmsn4o6mrapg6sje
+      '@docsearch/react': registry.npmmirror.com/@docsearch/react/3.3.3
       preact: registry.npmmirror.com/preact/10.13.2
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -205,9 +201,8 @@ packages:
       - react
       - react-dom
 
-  registry.npmmirror.com/@docsearch/react/3.3.3_rurrd674gzxmsn4o6mrapg6sje:
+  registry.npmmirror.com/@docsearch/react/3.3.3:
     resolution: {integrity: sha512-pLa0cxnl+G0FuIDuYlW+EBK6Rw2jwLw9B1RHIeS4N4s2VhsfJ/wzeCi3CWcs5yVfxLd5ZK50t//TMA5e79YT7Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@docsearch/react/-/react-3.3.3.tgz}
-    id: registry.npmmirror.com/@docsearch/react/3.3.3
     name: '@docsearch/react'
     version: 3.3.3
     peerDependencies:
@@ -223,7 +218,7 @@ packages:
         optional: true
     dependencies:
       '@algolia/autocomplete-core': registry.npmmirror.com/@algolia/autocomplete-core/1.7.4
-      '@algolia/autocomplete-preset-algolia': registry.npmmirror.com/@algolia/autocomplete-preset-algolia/1.7.4_slqhrehefpn47bfjvmiz4bdfs4
+      '@algolia/autocomplete-preset-algolia': registry.npmmirror.com/@algolia/autocomplete-preset-algolia/1.7.4_algoliasearch@4.17.0
       '@docsearch/css': registry.npmmirror.com/@docsearch/css/3.3.3
       algoliasearch: registry.npmmirror.com/algoliasearch/4.17.0
     transitivePeerDependencies:
@@ -1229,19 +1224,18 @@ packages:
       flexsearch: registry.npmmirror.com/flexsearch/0.7.31
       glob-to-regexp: registry.npmmirror.com/glob-to-regexp/0.4.1
       markdown-it: registry.npmmirror.com/markdown-it/13.0.1
-      vitepress: registry.npmmirror.com/vitepress/1.0.0-alpha.65_rurrd674gzxmsn4o6mrapg6sje
+      vitepress: registry.npmmirror.com/vitepress/1.0.0-alpha.65
       vue: registry.npmmirror.com/vue/3.2.47
     dev: false
 
-  registry.npmmirror.com/vitepress/1.0.0-alpha.65_rurrd674gzxmsn4o6mrapg6sje:
+  registry.npmmirror.com/vitepress/1.0.0-alpha.65:
     resolution: {integrity: sha512-iGWC0AQC6WrfRZTJf5+TiGG4o8PLhqIJNyai8NVxZCY9YpmMJhddvQeqqjJdQniF/LQK/hQ5nQZ9HgSZDGRPGQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vitepress/-/vitepress-1.0.0-alpha.65.tgz}
-    id: registry.npmmirror.com/vitepress/1.0.0-alpha.65
     name: vitepress
     version: 1.0.0-alpha.65
     hasBin: true
     dependencies:
       '@docsearch/css': registry.npmmirror.com/@docsearch/css/3.3.3
-      '@docsearch/js': registry.npmmirror.com/@docsearch/js/3.3.3_rurrd674gzxmsn4o6mrapg6sje
+      '@docsearch/js': registry.npmmirror.com/@docsearch/js/3.3.3
       '@vitejs/plugin-vue': registry.npmmirror.com/@vitejs/plugin-vue/4.1.0_vite@4.2.1+vue@3.2.47
       '@vue/devtools-api': registry.npmmirror.com/@vue/devtools-api/6.5.0
       '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.13.0_vue@3.2.47

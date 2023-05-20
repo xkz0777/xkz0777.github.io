@@ -15,7 +15,6 @@
     "vitepress": "^1.0.0-alpha.65"
   },
   "dependencies": {
-    "@algolia/client-search": ">= 4.9.1 < 6",
     "blogs_new": "link:",
     "flexsearch": "^0.7.31",
     "markdown-it": "^13.0.1",
