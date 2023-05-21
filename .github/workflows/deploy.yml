@@ -9,13 +9,13 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v2.2.2
         with:
-          version: 7.9.5
+          version: latest
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: latest
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: latest
 
       # 拉取代码
       - uses: actions/checkout@v3
@@ -25,7 +25,7 @@ jobs:
 
       # 生成静态文件
       - name: Build
-        run: pnpm install --no-frozen-lockfile && pnpm build
+        run: pnpm install --frozen-lockfile && pnpm build
 
       # 部署到 GitHub Pages
       - name: Deploy
