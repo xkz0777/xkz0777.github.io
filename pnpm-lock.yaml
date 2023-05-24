@@ -7,7 +7,7 @@ specifiers:
   markdown-it: ^13.0.1
   markdown-it-mathjax3: ^4.3.2
   vite: ^4.2.1
-  vitepress: ^1.0.0-alpha.65
+  vitepress: ^1.0.0-beta.1
   vitepress-plugin-search: 1.0.4-alpha.20
   vue: '3'
 
@@ -18,11 +18,11 @@ dependencies:
   markdown-it: 13.0.1
   markdown-it-mathjax3: 4.3.2
   vite: 4.3.8
-  vitepress-plugin-search: 1.0.4-alpha.20_pv3k6c2cj4k4xm6z4w35li3z2i
+  vitepress-plugin-search: 1.0.4-alpha.20_o72g27as6lz5b6ufyymypd74iq
   vue: 3.3.4
 
 devDependencies:
-  vitepress: 1.0.0-alpha.76_rurrd674gzxmsn4o6mrapg6sje
+  vitepress: 1.0.0-beta.1_rurrd674gzxmsn4o6mrapg6sje
 
 packages:
 
@@ -967,7 +967,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /vitepress-plugin-search/1.0.4-alpha.20_pv3k6c2cj4k4xm6z4w35li3z2i:
+  /vitepress-plugin-search/1.0.4-alpha.20_o72g27as6lz5b6ufyymypd74iq:
     resolution: {integrity: sha512-zG+ev9pw1Mg7htABlFCNXb8XwnKN+qfTKw+vU0Ers6RIrABx+45EAAFBoaL1mEpl1FRFn1o/dQ7F4b8GP6HdGQ==}
     engines: {node: ^14.13.1 || ^16.7.0 || >=18}
     peerDependencies:
@@ -980,12 +980,12 @@ packages:
       flexsearch: 0.7.31
       glob-to-regexp: 0.4.1
       markdown-it: 13.0.1
-      vitepress: 1.0.0-alpha.76_rurrd674gzxmsn4o6mrapg6sje
+      vitepress: 1.0.0-beta.1_rurrd674gzxmsn4o6mrapg6sje
       vue: 3.3.4
     dev: false
 
-  /vitepress/1.0.0-alpha.76_rurrd674gzxmsn4o6mrapg6sje:
-    resolution: {integrity: sha512-fzR1pDpGnSMeCJ+AnDdMe/ETD2G0Go+g6mTxDv9ps7Hmr1JjVqw97nasCyZg3jgfQxi2nt78EJ/bw7hY5n/rlw==}
+  /vitepress/1.0.0-beta.1_rurrd674gzxmsn4o6mrapg6sje:
+    resolution: {integrity: sha512-V2yyCwQ+v9fh7rbnGDLp8M7vHa9sLElexXf/JHtBOsOwv7ed9wt1QI4WUagYgKR3TeoJT9v2s6f0UaQSne0EvQ==}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.3.5

@@ -57,7 +57,11 @@ const config = defineConfig({
             },
             {
               text: "CS61A 学习笔记",
-              link: "notes/cs61a.md",
+              link: "/notes/cs61a.md",
+            },
+            {
+              text: "6.S081 2020 实验笔记",
+              link: "/notes/xv6_labs_2020.md",
             },
           ],
         },
