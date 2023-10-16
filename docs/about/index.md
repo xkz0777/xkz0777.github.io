@@ -10,19 +10,17 @@ GitHub: [xkz0777](https://github.com/xkz0777)
 
 My skills:
 
-- Languages: C/C++/Python/Rust
-- Tools: Proficient Linux user, skilled in using Git, Vim, GNU Make and Docker etc.
+- Languages: C/C++/Python
+- Tools: MacOS/Linux user, skilled in using Git, Vim and Docker etc.
 
 Currently learning:
 
 - Operating System
-- Blockchain
 - Database
+- Web Info Processing
 - AI
-- Digital image processing
 
 Exprerience:
 
 - TA for ICS Fall 2022 USTC.
-
-Goal: Baoyan (working on it), Looking for an internship (failed in Spring 2023)
+- TA for Compiler Principles Fall 2023 USTC.

@@ -82,6 +82,10 @@ const config = defineConfig({
               text: "6.S081 环境配置",
               link: "/env_config/6.s081.md",
             },
+            {
+              text: "服务器上使用 Docker",
+              link: "/env_config/docker.md",
+            }
           ],
         },
       ],
