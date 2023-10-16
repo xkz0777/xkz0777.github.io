@@ -36,3 +36,8 @@
 ```shell
 $ docker cp <container_name>:<source_path> <dest_path>
 ```
+
+## 参考
+
+- https://blog.csdn.net/dwqy11/article/details/109384445
+- https://forums.docker.com/t/error-i-have-no-name-occurs-when-trying-to-run-sudo-docker-run-volume/117963/8
