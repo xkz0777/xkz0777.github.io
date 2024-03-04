@@ -1,26 +1,13 @@
 # About Me
 
-Hi! It's Charles here.
+Hi! I'm Kunzhao Xu.
 
-I am an undergraduate student in USTC, majoring in Computer Science and Technology.
+- A fourth year undergraduate student at USTC, majoring in Computer Science and Technology.
+- Candidate for the joint PhD program between USTC and MSRA, co-advised by [Cheng Li](http://staff.ustc.edu.cn/~chengli7/) and [Mao Yang](https://www.microsoft.com/en-us/research/people/maoyang/).
 
-Email: xkz@mail.ustc.edu.cn
+My research interest includes machine learning systems, databases, etc.
 
-GitHub: [xkz0777](https://github.com/xkz0777)
+## Contact Me
 
-My skills:
-
-- Languages: C/C++/Python
-- Tools: MacOS/Linux user, skilled in using Git, Vim and Docker etc.
-
-Currently learning:
-
-- Operating System
-- Database
-- Web Info Processing
-- AI
-
-Exprerience:
-
-- TA for ICS Fall 2022 USTC.
-- TA for Compiler Principles Fall 2023 USTC.
+- Email: xkz@mail.ustc.edu.cn
+- GitHub: [xkz0777](https://github.com/xkz0777)
